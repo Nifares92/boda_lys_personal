@@ -742,25 +742,133 @@
      - tipo: 'individual_plus'  -> Titular con derecho a 1 acompañante opcional
      - tipo: 'individual'       -> Titular único sin acompañante
      ------------------------------------------------------------- */
-  const INVITADOS = {
-    // === TIPO 1: PAREJAS CONOCIDAS (SERAFÍN) ===
+ const INVITADOS = {
+    // === PAREJAS DE SERAFÍN (Con enlaces directos y alias individuales) ===
     "noe-pablo": { tipo: "pareja", p1: "Noe", p2: "Pablo", nombre: "Noe & Pablo", saludo: "Queridos Noe y Pablo", parte: "Serafín" },
-    "paloma-fer": { tipo: "pareja", p1: "Paloma", p2: "Fernando", nombre: "Paloma & Fer", saludo: "Queridos Paloma y Fer", parte: "Serafín" },
-    "chelo-alex": { tipo: "pareja", p1: "Chelo", p2: "Alex", nombre: "Chelo & Alex", saludo: "Queridos Chelo y Alex", parte: "Serafín" },
-    "celia-alberto": { tipo: "pareja", p1: "Celia", p2: "Alberto", nombre: "Celia & Alberto", saludo: "Queridos Celia y Alberto", parte: "Serafín" },
-    "isa-maik": { tipo: "pareja", p1: "Isa", p2: "Maik", nombre: "Isa & Maik", saludo: "Queridos Isa y Maik", parte: "Serafín" },
-    "javi-loles": { tipo: "pareja", p1: "Javi", p2: "Loles", nombre: "Javi & Loles", saludo: "Queridos Javi y Loles", parte: "Serafín" },
-    "lola-robert": { tipo: "pareja", p1: "Lola", p2: "Robert", nombre: "Lola & Robert", saludo: "Queridos Lola y Robert", parte: "Serafín" },
-    "cari-alex": { tipo: "pareja", p1: "Cari", p2: "Alex", nombre: "Cari & Alex", saludo: "Queridos Cari y Alex", parte: "Serafín" },
-    "ana-antonio": { tipo: "pareja", p1: "Ana", p2: "Antonio", nombre: "Ana & Antonio", saludo: "Queridos Ana y Antonio", parte: "Serafín" },
-    "antonio-auxi": { tipo: "pareja", p1: "Antonio", p2: "Auxi", nombre: "Antonio & Auxi", saludo: "Queridos Antonio y Auxi", parte: "Serafín" },
+    "noe": { tipo: "pareja", p1: "Noe", p2: "Pablo", nombre: "Noe & Pablo", saludo: "Queridos Noe y Pablo", parte: "Serafín" },
+    "pablo-s": { tipo: "pareja", p1: "Noe", p2: "Pablo", nombre: "Noe & Pablo", saludo: "Queridos Noe y Pablo", parte: "Serafín" },
 
-    // === TIPO 1: PAREJAS CONOCIDAS (LESTTER) ===
+    "paloma-fer": { tipo: "pareja", p1: "Paloma", p2: "Fernando", nombre: "Paloma & Fer", saludo: "Queridos Paloma y Fer", parte: "Serafín" },
+    "paloma": { tipo: "pareja", p1: "Paloma", p2: "Fernando", nombre: "Paloma & Fer", saludo: "Queridos Paloma y Fer", parte: "Serafín" },
+    "fernando": { tipo: "pareja", p1: "Paloma", p2: "Fernando", nombre: "Paloma & Fer", saludo: "Queridos Paloma y Fer", parte: "Serafín" },
+
+    "chelo-alex": { tipo: "pareja", p1: "Chelo", p2: "Alex", nombre: "Chelo & Alex", saludo: "Queridos Chelo y Alex", parte: "Serafín" },
+    "chelo": { tipo: "pareja", p1: "Chelo", p2: "Alex", nombre: "Chelo & Alex", saludo: "Queridos Chelo y Alex", parte: "Serafín" },
+    "alex": { tipo: "pareja", p1: "Chelo", p2: "Alex", nombre: "Chelo & Alex", saludo: "Queridos Chelo y Alex", parte: "Serafín" },
+
+    // CELIA & ALBERTO (Funciona con ?inv=celia-alberto, ?inv=celia-s y ?inv=alberto)
+    "celia-alberto": { tipo: "pareja", p1: "Celia", p2: "Alberto", nombre: "Celia & Alberto", saludo: "Queridos Celia y Alberto", parte: "Serafín" },
+    "celia-s": { tipo: "pareja", p1: "Celia", p2: "Alberto", nombre: "Celia & Alberto", saludo: "Queridos Celia y Alberto", parte: "Serafín" },
+    "alberto": { tipo: "pareja", p1: "Celia", p2: "Alberto", nombre: "Celia & Alberto", saludo: "Queridos Celia y Alberto", parte: "Serafín" },
+
+    "isa-maik": { tipo: "pareja", p1: "Isa", p2: "Maik", nombre: "Isa & Maik", saludo: "Queridos Isa y Maik", parte: "Serafín" },
+    "isa": { tipo: "pareja", p1: "Isa", p2: "Maik", nombre: "Isa & Maik", saludo: "Queridos Isa y Maik", parte: "Serafín" },
+    "maik": { tipo: "pareja", p1: "Isa", p2: "Maik", nombre: "Isa & Maik", saludo: "Queridos Isa y Maik", parte: "Serafín" },
+
+    "javi-loles": { tipo: "pareja", p1: "Javi", p2: "Loles", nombre: "Javi & Loles", saludo: "Queridos Javi y Loles", parte: "Serafín" },
+    "javi-s": { tipo: "pareja", p1: "Javi", p2: "Loles", nombre: "Javi & Loles", saludo: "Queridos Javi y Loles", parte: "Serafín" },
+    "loles": { tipo: "pareja", p1: "Javi", p2: "Loles", nombre: "Javi & Loles", saludo: "Queridos Javi y Loles", parte: "Serafín" },
+
+    "lola-robert": { tipo: "pareja", p1: "Lola", p2: "Robert", nombre: "Lola & Robert", saludo: "Queridos Lola y Robert", parte: "Serafín" },
+    "lola": { tipo: "pareja", p1: "Lola", p2: "Robert", nombre: "Lola & Robert", saludo: "Queridos Lola y Robert", parte: "Serafín" },
+    "rober": { tipo: "pareja", p1: "Lola", p2: "Robert", nombre: "Lola & Robert", saludo: "Queridos Lola y Robert", parte: "Serafín" },
+
+    "cari-alex": { tipo: "pareja", p1: "Cari", p2: "Alex", nombre: "Cari & Alex", saludo: "Queridos Cari y Alex", parte: "Serafín" },
+    "cari": { tipo: "pareja", p1: "Cari", p2: "Alex", nombre: "Cari & Alex", saludo: "Queridos Cari y Alex", parte: "Serafín" },
+    "alex-2": { tipo: "pareja", p1: "Cari", p2: "Alex", nombre: "Cari & Alex", saludo: "Queridos Cari y Alex", parte: "Serafín" },
+
+    "ana-antonio": { tipo: "pareja", p1: "Ana", p2: "Antonio", nombre: "Ana & Antonio", saludo: "Queridos Ana y Antonio", parte: "Serafín" },
+    "ana": { tipo: "pareja", p1: "Ana", p2: "Antonio", nombre: "Ana & Antonio", saludo: "Queridos Ana y Antonio", parte: "Serafín" },
+
+    // ANTONIO & AUXI (Funciona con ?inv=antonio-auxi y ?inv=antonio)
+    "antonio-auxi": { tipo: "pareja", p1: "Antonio", p2: "Auxi", nombre: "Antonio & Auxi", saludo: "Queridos Antonio y Auxi", parte: "Serafín" },
+    "antonio": { tipo: "pareja", p1: "Antonio", p2: "Auxi", nombre: "Antonio & Auxi", saludo: "Queridos Antonio y Auxi", parte: "Serafín" },
+
+    // === INDIVIDUAL + ACOMPAÑANTE (SERAFÍN) ===
+    "isa-buendia": { tipo: "individual_plus", nombre: "Isa Buendía", saludo: "Estimada Isa Buendía", parte: "Serafín", acompananteNombre: "Acompañante Isa" },
+    "elena": { tipo: "individual_plus", nombre: "Elena", saludo: "Estimada Elena", parte: "Serafín", acompananteNombre: "Novio Elena" },
+    "inma": { tipo: "individual_plus", nombre: "Inma", saludo: "Estimada Inma", parte: "Serafín", acompananteNombre: "Marido Inma" },
+    "maria-eugenia": { tipo: "individual_plus", nombre: "María Eugenia", saludo: "Estimada María Eugenia", parte: "Serafín", acompananteNombre: "Pepe" },
+    "maria": { tipo: "individual_plus", nombre: "María", saludo: "Estimada María", parte: "Serafín", acompananteNombre: "Marido María" },
+    "aurora": { tipo: "individual_plus", nombre: "Aurora", saludo: "Estimada Aurora", parte: "Serafín", acompananteNombre: "Marido Aurora" },
+    "andrea": { tipo: "individual_plus", nombre: "Andrea", saludo: "Estimada Andrea", parte: "Serafín", acompananteNombre: "Marido Andrea" },
+    "carla": { tipo: "individual_plus", nombre: "Carla", saludo: "Estimada Carla", parte: "Serafín", acompananteNombre: "Acompañante Carla" },
+    "jose-s": { tipo: "individual_plus", nombre: "Jose", saludo: "Estimado Jose", parte: "Serafín", acompananteNombre: "Novio Jose" },
+    "ana-marin": { tipo: "individual_plus", nombre: "Ana Marín", saludo: "Estimada Ana Marín", parte: "Serafín", acompananteNombre: "Acompañante Ana Marín" },
+    "lucia": { tipo: "individual_plus", nombre: "Lucía", saludo: "Estimada Lucía", parte: "Serafín", acompananteNombre: "Novio Lucía" },
+    "eva": { tipo: "individual_plus", nombre: "Eva", saludo: "Estimada Eva", parte: "Serafín", acompananteNombre: "Novio Eva" },
+    "silvia": { tipo: "individual_plus", nombre: "Silvia", saludo: "Estimada Silvia", parte: "Serafín", acompananteNombre: "Novio Silvia" },
+    "juan-victor": { tipo: "individual_plus", nombre: "Juan Víctor", saludo: "Estimado Juan Víctor", parte: "Serafín", acompananteNombre: "Mujer Juan Víctor" },
+    "monica": { tipo: "individual_plus", nombre: "Mónica", saludo: "Estimada Mónica", parte: "Serafín", acompananteNombre: "Novio Mónica" },
+    "padres-elena": { tipo: "individual_plus", nombre: "Padres de Elena", saludo: "Estimados", parte: "Serafín", acompananteNombre: "Madre Elena" },
+    "ester": { tipo: "individual_plus", nombre: "Ester", saludo: "Estimada Ester", parte: "Serafín", acompananteNombre: "Marido Ester" },
+    "angel": { tipo: "individual_plus", nombre: "Ángel", saludo: "Estimado Ángel", parte: "Serafín", acompananteNombre: "Mujer Ángel" },
+    "cristina-dupuy": { tipo: "individual_plus", nombre: "Cristina Dupuy", saludo: "Estimada Cristina", parte: "Serafín", acompananteNombre: "Marido Cristina Dupuy" },
+
+    // === INDIVIDUALES ESTRICTOS (SERAFÍN) ===
+    "cristina-s": { tipo: "individual", nombre: "Cristina", saludo: "Estimada Cristina", parte: "Serafín" },
+    "mcarmen": { tipo: "individual", nombre: "Mª Carmen", saludo: "Estimada Mª Carmen", parte: "Serafín" },
+    "tere": { tipo: "individual", nombre: "Tere", saludo: "Estimada Tere", parte: "Serafín" },
+    "meka": { tipo: "individual", nombre: "Meka", saludo: "Estimada Meka", parte: "Serafín" },
+    "alicia": { tipo: "individual", nombre: "Alicia", saludo: "Estimada Alicia", parte: "Serafín" },
+
+    // === PAREJAS DE LESTTER ===
     "celia-alex": { tipo: "pareja", p1: "Celia", p2: "Alex", nombre: "Celia & Alex", saludo: "Queridos Celia y Alex", parte: "Lestter" },
+    "celia-l": { tipo: "pareja", p1: "Celia", p2: "Alex", nombre: "Celia & Alex", saludo: "Queridos Celia y Alex", parte: "Lestter" },
+    "alex-l": { tipo: "pareja", p1: "Celia", p2: "Alex", nombre: "Celia & Alex", saludo: "Queridos Celia y Alex", parte: "Lestter" },
+
     "annabel-gustavo": { tipo: "pareja", p1: "Annabel", p2: "Gustavo", nombre: "Annabel & Gustavo", saludo: "Queridos Annabel y Gustavo", parte: "Lestter" },
+    "annabel": { tipo: "pareja", p1: "Annabel", p2: "Gustavo", nombre: "Annabel & Gustavo", saludo: "Queridos Annabel y Gustavo", parte: "Lestter" },
+    "gustavo": { tipo: "pareja", p1: "Annabel", p2: "Gustavo", nombre: "Annabel & Gustavo", saludo: "Queridos Annabel y Gustavo", parte: "Lestter" },
+
     "gretchen-jan": { tipo: "pareja", p1: "Gretchen", p2: "Jan", nombre: "Gretchen & Jan", saludo: "Queridos Gretchen y Jan", parte: "Lestter" },
+    "gretchen": { tipo: "pareja", p1: "Gretchen", p2: "Jan", nombre: "Gretchen & Jan", saludo: "Queridos Gretchen y Jan", parte: "Lestter" },
+    "jan": { tipo: "pareja", p1: "Gretchen", p2: "Jan", nombre: "Gretchen & Jan", saludo: "Queridos Gretchen y Jan", parte: "Lestter" },
+
     "cristina-david": { tipo: "pareja", p1: "Cristina", p2: "David", nombre: "Cristina & David", saludo: "Queridos Cristina y David", parte: "Lestter" },
-    "gema-patxi": { tipo: "pareja", p1: "Gema", p2: "Patxi", nombre: "Gema & Patxi", saludo: "Queridos Gema y Patxi", parte: "Lestter" }
+
+    "gema-patxi": { tipo: "pareja", p1: "Gema", p2: "Patxi", nombre: "Gema & Patxi", saludo: "Queridos Gema y Patxi", parte: "Lestter" },
+    "gemma": { tipo: "pareja", p1: "Gema", p2: "Patxi", nombre: "Gema & Patxi", saludo: "Queridos Gema y Patxi", parte: "Lestter" },
+    "pachi": { tipo: "pareja", p1: "Gema", p2: "Patxi", nombre: "Gema & Patxi", saludo: "Queridos Gema y Patxi", parte: "Lestter" },
+
+    // === INDIVIDUAL + ACOMPAÑANTE (LESTTER) ===
+    "billy": { tipo: "individual_plus", nombre: "Billy", saludo: "Estimado Billy", parte: "Lestter", acompananteNombre: "Novio Billy" },
+    "javi-alemania": { tipo: "individual_plus", nombre: "Javi Alemania", saludo: "Estimado Javi", parte: "Lestter", acompananteNombre: "Novio Javi Alemania" },
+    "stefanny": { tipo: "individual_plus", nombre: "Stefanny", saludo: "Estimada Stefanny", parte: "Lestter", acompananteNombre: "Esposo Stefanny" },
+    "andres": { tipo: "individual_plus", nombre: "Andrés", saludo: "Estimado Andrés", parte: "Lestter", acompananteNombre: "Esposa Andrés" },
+    "juan": { tipo: "individual_plus", nombre: "Juan", saludo: "Estimado Juan", parte: "Lestter", acompananteNombre: "Esposa Juan" },
+    "laura-andujar": { tipo: "individual_plus", nombre: "Laura Andújar", saludo: "Estimada Laura", parte: "Lestter", acompananteNombre: "Novia Laura" },
+    "javi-l": { tipo: "individual_plus", nombre: "Javi", saludo: "Estimado Javi", parte: "Lestter", acompananteNombre: "Esposa Javi" },
+    "zuleika": { tipo: "individual_plus", nombre: "Zuleika", saludo: "Estimada Zuleika", parte: "Lestter", acompananteNombre: "Amiga Zuleika" },
+    "nieves": { tipo: "individual_plus", nombre: "Nieves", saludo: "Estimada Nieves", parte: "Lestter", acompananteNombre: "Esposo Nieves" },
+    "alma": { tipo: "individual_plus", nombre: "Alma", saludo: "Estimada Alma", parte: "Lestter", acompananteNombre: "Esposo Alma" },
+    "laura-garcia": { tipo: "individual_plus", nombre: "Laura García", saludo: "Estimada Laura", parte: "Lestter", acompananteNombre: "Pareja Laura García" },
+
+    // === INDIVIDUALES ESTRICTOS (LESTTER) ===
+    "anny": { tipo: "individual", nombre: "Anny", saludo: "Estimada Anny", parte: "Lestter" },
+    "rojeiris": { tipo: "individual", nombre: "Rojeiris", saludo: "Estimado Rojeiris", parte: "Lestter" },
+    "carmen": { tipo: "individual", nombre: "Carmen", saludo: "Estimada Carmen", parte: "Lestter" },
+    "jessica": { tipo: "individual", nombre: "Jessica", saludo: "Estimada Jessica", parte: "Lestter" },
+    "andrey": { tipo: "individual", nombre: "Andrey", saludo: "Estimado Andrey", parte: "Lestter" },
+    "amiga-billy": { tipo: "individual", nombre: "Amiga de Billy", saludo: "Estimada", parte: "Lestter" },
+    "jose-valencia": { tipo: "individual", nombre: "Jose Valencia", saludo: "Estimado Jose", parte: "Lestter" },
+    "marcos": { tipo: "individual", nombre: "Marcos", saludo: "Estimado Marcos", parte: "Lestter" },
+    "rodolfo": { tipo: "individual", nombre: "Rodolfo", saludo: "Estimado Rodolfo", parte: "Lestter" },
+    "bernardo": { tipo: "individual", nombre: "Bernardo", saludo: "Estimado Bernardo", parte: "Lestter" },
+    "kris": { tipo: "individual", nombre: "Kris", saludo: "Estimado/a Kris", parte: "Lestter" },
+    "michael": { tipo: "individual", nombre: "Michael", saludo: "Estimado Michael", parte: "Lestter" },
+    "joel": { tipo: "individual", nombre: "Joel", saludo: "Estimado Joel", parte: "Lestter" },
+    "diego": { tipo: "individual", nombre: "Diego", saludo: "Estimado Diego", parte: "Lestter" },
+    "mariela": { tipo: "individual", nombre: "Mariela", saludo: "Estimada Mariela", parte: "Lestter" },
+    "umberto": { tipo: "individual", nombre: "Umberto", saludo: "Estimado Umberto", parte: "Lestter" },
+    "ramon": { tipo: "individual", nombre: "Ramón", saludo: "Estimado Ramón", parte: "Lestter" },
+    "jean-pierre": { tipo: "individual", nombre: "Jean Pierre", saludo: "Estimado Jean Pierre", parte: "Lestter" },
+    "jose-l": { tipo: "individual", nombre: "Jose", saludo: "Estimado Jose", parte: "Lestter" },
+    "papi": { tipo: "individual", nombre: "Papi", saludo: "Querido Papi", parte: "Lestter" },
+    "diron": { tipo: "individual", nombre: "Diron", saludo: "Estimado Diron", parte: "Lestter" },
+    "delphi": { tipo: "individual", nombre: "Delphi", saludo: "Estimada Delphi", parte: "Lestter" },
+    "gino": { tipo: "individual", nombre: "Gino", saludo: "Estimado Gino", parte: "Lestter" },
+    "pablo-l": { tipo: "individual", nombre: "Pablo", saludo: "Estimado Pablo", parte: "Lestter" }
   };
 
   let currentGuestId = "general";
