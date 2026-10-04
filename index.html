@@ -1490,8 +1490,8 @@
     }
   }
 
-  /* MAPA DE RESTAURANTES */
   const restaurantes = [
+    // --- LISTA ORIGINAL ---
     { nombre: "Restaurante TOCH", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Mediterráneo & Arroces", lat: 38.3688, lng: -0.4208, desc: "Restaurante mediterráneo a pie de playa con arroces a leña y terraza privilegiada.", url: "Restaurante+TOCH+Playa+San+Juan+Alicante" },
     { nombre: "Restaurante Mediterráneo", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Mediterráneo de Paseo", lat: 38.3639, lng: -0.4239, desc: "En plena Avenida de Niza en primera línea de playa. Pescados, salazones y tapeo marinero.", url: "Restaurante+Mediterraneo+Avenida+Niza+San+Juan+Alicante" },
     { nombre: "Cervecería Sento Playa", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Montaditos & Tapas", lat: 38.3719, lng: -0.4285, desc: "Famoso por sus tapas gourmet y montaditos templados de solomillo y foie en Vicente Ramos.", url: "Cerveceria+Sento+Playa+San+Juan+Alicante" },
@@ -1519,65 +1519,94 @@
     { nombre: "Daikichi", cat: "japones", zona: "Centro", tipo: "🍣 Tradicional Nipón", lat: 38.3469, lng: -0.4893, desc: "El decano del sushi clásico y la cocina tradicional japonesa en Alicante.", url: "Restaurant+Japones+Daikichi+Alicante" },
     { nombre: "Sushi Hajimi", cat: "japones", zona: "Centro", tipo: "🍣 Sushi & Makis", lat: 38.3421, lng: -0.4912, desc: "Sushi variado y fresco a precios competitivos cerca de la estación.", url: "Restaurante+Sushi+Hajimi+Alicante" },
     { nombre: "Natsu Ramen", cat: "japones", zona: "Centro", tipo: "🍜 Ramen Bar", lat: 38.3427, lng: -0.4915, desc: "Taberna japonesa experta en caldos Tonkotsu y fideos ramen artesanos.", url: "Natsu+Ramen+Alicante" },
-    { nombre: "Ramen Toyaki", cat: "japones", zona: "Centro", tipo: "🍜 Ramen & Brochetas", lat: 38.3453, lng: -0.4868, desc: "Ramen y brochetas japonesas en la concurrida calle Castaños.", url: "Ramen+Toyaki+Alicante" }
-  ];
+    { nombre: "Ramen Toyaki", cat: "japones", zona: "Centro", tipo: "🍜 Ramen & Brochetas", lat: 38.3453, lng: -0.4868, desc: "Ramen y brochetas japonesas en la concurrida calle Castaños.", url: "Ramen+Toyaki+Alicante" },
+
+    // --- NUEVAS INCORPORACIONES CON POSICIONES Y ZONAS CORREGIDAS ---
+    { nombre: "Metoo Sushi Buffet", cat: "japones", zona: "Princesa Mercedes", tipo: "🍣 Buffet Libre a la Carta", lat: 38.3456, lng: -0.5049, desc: "Buffet asiático a la carta con pedido por tablet en Av. Dr. Jiménez Díaz.", url: "Metoo+Sushi+Buffet+Alicante" },
+    { nombre: "Metoo Sushi Garden", cat: "japones", zona: "Gran Vía", tipo: "🍣 Buffet Libre a la Carta", lat: 38.3619, lng: -0.4744, desc: "Amplio buffet japonés a la carta con terraza en Av. Antonio Ramos Carratalá.", url: "Metoo+Sushi+Garden+Alicante" },
+    { nombre: "Casa Julio", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Arroces & Marisquería", lat: 38.3758, lng: -0.4131, desc: "Arroces a leña y pescados en primera línea de la playa (Av. de Niza).", url: "Restaurante+Casa+Julio+Alicante" },
+    { nombre: "Casa Domingo", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Arrocería & Tapeo Marinero", lat: 38.3745, lng: -0.4140, desc: "Emblemático local en primera línea de playa de San Juan, famoso por sus arroces.", url: "Restaurante+Casa+Domingo+Alicante" },
+    { nombre: "Pizzeria Nonna Nina", cat: "italiano", zona: "Centro", tipo: "🍕 Pizza Napolitana & Pasta", lat: 38.3426, lng: -0.4913, desc: "Pizzas de estilo tradicional en Calle Alemania, junto a la Plaza de Séneca.", url: "Da+Nonna+Nina+Alicante" },
+    { nombre: "Che Ragazzi", cat: "italiano", zona: "Centro", tipo: "🍕 Cocina Italiana & Pasta", lat: 38.3463, lng: -0.4842, desc: "Auténtica comida italiana y pastas caseras en plena Rambla Méndez Núñez 35.", url: "Restaurante+Che+Ragazzi+Alicante" },
+    { nombre: "Asika Alicante", cat: "japones", zona: "Playa San Juan", tipo: "🍣 Buffet Asiático & Sushi", lat: 38.3687, lng: -0.4354, desc: "Buffet asiático a la carta en Av. de Ansaldo junto a la zona Golf de San Juan.", url: "Asika+Alicante" },
+    { nombre: "Kebap Krew", cat: "kebab", zona: "Playa San Juan", tipo: "🥙 Berliner Kebab Gourmet", lat: 38.3644, lng: -0.4287, desc: "Kebab artesanal berlinés con carne de calidad y pan recién horneado en Calle Tridente.", url: "Kebap+Krew+Alicante" },
+    { nombre: "Kebap Master K", cat: "kebab", zona: "Playa San Juan", tipo: "🥙 Döner & Dürüm Artesanal", lat: 38.3662, lng: -0.4298, desc: "Kebab con recetas cuidadas e ingredientes frescos en Calle Periodista Asunción Valdés.", url: "Master+K+Alicante" },
+    { nombre: "El Bodegón", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Taberna & Tapeo", lat: 38.3646, lng: -0.4290, desc: "Tapeo clásico, embutidos y raciones en Calle Tridente, punto de encuentro local.", url: "El+Bodegon+Alicante+Tridente" },
+    { nombre: "Puerto Madero", cat: "carnes", zona: "Centro", tipo: "🥩 Asador Argentino", lat: 38.3444, lng: -0.4840, desc: "Auténtico asador argentino en Calle San Fernando: carnes maduradas y empanadas criollas.", url: "Restaurante+Puerto+Madero+Alicante" },
+    { nombre: "Nou Manolín", cat: "tapas", zona: "Centro", tipo: "🍢 Barra Gourmet & Lonja", lat: 38.3456, lng: -0.4868, desc: "Icono gastronómico nacional en Calle Villegas. Producto insuperable en barra.", url: "Nou+Manolin+Alicante" },
+    { nombre: "Piri Piri", cat: "burger", zona: "Centro", tipo: "🍗 Pollo & Street Food", lat: 38.3455, lng: -0.4850, desc: "Especialidades de pollo a la brasa y street food especiado en el centro de Alicante.", url: "Piri+Piri+Alicante" },
+    { nombre: "Restaurante ConVistas", cat: "tapas", zona: "Centro", tipo: "🍷 Rooftop & Mediterráneo", lat: 38.3438, lng: -0.4839, desc: "Vistas panorámicas a la bahía y al castillo desde la planta 26 del emblemático Hotel Gran Sol.", url: "Restaurante+ConVistas+Alicante" },
+    { nombre: "Cervecería La Gamba", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Marisquería & Tapas", lat: 38.3631, lng: -0.4385, desc: "Pescados, mariscos frescos y montaditos en la Glorieta Sergio Cardell.", url: "Cerveceria+La+Gamba+Alicante" },
+    { nombre: "Restaurante Ru Yi", cat: "asiatico", zona: "Centro", tipo: "🥢 Cocina China Tradicional", lat: 38.3432, lng: -0.4907, desc: "Cocina china tradicional, tallarines caseros y dim sum en Calle Profesor Manuel Sala.", url: "Restaurante+Ru+Yi+Alicante" }
+];
 
   let mapRestaurantes;
   let allMarkers = [];
 
-  function initAlicanteMap() {
-    const mapElement = document.getElementById('alicanteMap');
-    if (!mapElement) return;
+ function initAlicanteMap() {
+  const mapElement = document.getElementById('alicanteMap');
+  if (!mapElement) return;
 
-    mapRestaurantes = L.map('alicanteMap', { scrollWheelZoom: false }).setView([38.3580, -0.4580], 12);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap',
-      maxZoom: 19
-    }).addTo(mapRestaurantes);
+  mapRestaurantes = L.map('alicanteMap', { scrollWheelZoom: false }).setView([38.3580, -0.4580], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap',
+    maxZoom: 19
+  }).addTo(mapRestaurantes);
 
-    restaurantes.forEach(item => {
-      let pinClass = "pin-tapas";
-      let iconEmoji = "🍢";
+  restaurantes.forEach(item => {
+    let pinClass = "pin-tapas";
+    let iconEmoji = "🍢";
 
-      if (item.cat === 'burger') {
-        pinClass = "pin-burger";
-        iconEmoji = "🍔";
-      } else if (item.cat === 'mexicano') {
-        pinClass = "pin-mex";
-        iconEmoji = "🌮";
-      } else if (item.cat === 'japones') {
-        pinClass = "pin-japon";
-        iconEmoji = item.tipo.includes("Ramen") ? "🍜" : "🍣";
-      }
+    if (item.cat === 'burger') {
+      pinClass = "pin-burger";
+      iconEmoji = "🍔";
+    } else if (item.cat === 'mexicano') {
+      pinClass = "pin-mex";
+      iconEmoji = "🌮";
+    } else if (item.cat === 'japones') {
+      pinClass = "pin-japon";
+      iconEmoji = item.tipo.includes("Ramen") ? "🍜" : "🍣";
+    } else if (item.cat === 'italiano') {
+      pinClass = "pin-italiano";
+      iconEmoji = "🍕";
+    } else if (item.cat === 'kebab') {
+      pinClass = "pin-kebab";
+      iconEmoji = "🥙";
+    } else if (item.cat === 'carnes') {
+      pinClass = "pin-carnes";
+      iconEmoji = "🥩";
+    } else if (item.cat === 'asiatico') {
+      pinClass = "pin-asiatico";
+      iconEmoji = "🥢";
+    }
 
-      const customIcon = L.divIcon({
-        className: 'custom-leaflet-marker',
-        html: `<div class="custom-pin ${pinClass}" style="width: 34px; height: 34px;">${iconEmoji}</div>`,
-        iconSize: [34, 34],
-        iconAnchor: [17, 17],
-        popupAnchor: [0, -18]
-      });
-
-      const popupContent = `
-        <div style="font-family: 'Montserrat', sans-serif; padding: 6px 8px; max-width: 230px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-            <span style="font-size: 10px; font-weight: bold; text-transform: uppercase; color: #6a764a; letter-spacing: 0.05em;">${item.tipo}</span>
-            <span style="font-size: 9px; background: #ebede2; color: #383e2b; padding: 2px 6px; border-radius: 6px; font-weight: 600;">${item.zona}</span>
-          </div>
-          <h4 style="font-family: 'Cinzel Decorative', serif; font-size: 14px; font-weight: bold; color: #1d2116; margin: 3px 0 6px 0;">${item.nombre}</h4>
-          <p style="font-family: 'Cormorant Garamond', serif; font-size: 14px; color: #434b31; line-height: 1.25; margin-bottom: 8px;">${item.desc}</p>
-          <a href="https://maps.google.com/?q=${item.url}" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; text-align: center; background: #383e2b; color: #f4e5b8; font-size: 11px; font-weight: 600; padding: 6px 0; border-radius: 8px; text-decoration: none;">
-            Cómo llegar ↗
-          </a>
-        </div>
-      `;
-
-      const marker = L.marker([item.lat, item.lng], { icon: customIcon }).bindPopup(popupContent).addTo(mapRestaurantes);
-      marker.category = item.cat;
-      allMarkers.push(marker);
+    const customIcon = L.divIcon({
+      className: 'custom-leaflet-marker',
+      html: `<div class="custom-pin ${pinClass}" style="width: 34px; height: 34px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-size:16px;">${iconEmoji}</div>`,
+      iconSize: [34, 34],
+      iconAnchor: [17, 17],
+      popupAnchor: [0, -18]
     });
-  }
 
+    const popupContent = `
+      <div style="font-family: 'Montserrat', sans-serif; padding: 6px 8px; max-width: 230px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+          <span style="font-size: 10px; font-weight: bold; text-transform: uppercase; color: #6a764a; letter-spacing: 0.05em;">${item.tipo}</span>
+          <span style="font-size: 9px; background: #ebede2; color: #383e2b; padding: 2px 6px; border-radius: 6px; font-weight: 600;">${item.zona}</span>
+        </div>
+        <h4 style="font-family: 'Cinzel Decorative', serif; font-size: 14px; font-weight: bold; color: #1d2116; margin: 3px 0 6px 0;">${item.nombre}</h4>
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 14px; color: #434b31; line-height: 1.25; margin-bottom: 8px;">${item.desc}</p>
+        <a href="https://maps.google.com/?q=${item.url}" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; text-align: center; background: #383e2b; color: #f4e5b8; font-size: 11px; font-weight: 600; padding: 6px 0; border-radius: 8px; text-decoration: none;">
+          Cómo llegar ↗
+        </a>
+      </div>
+    `;
+
+    const marker = L.marker([item.lat, item.lng], { icon: customIcon }).bindPopup(popupContent).addTo(mapRestaurantes);
+    marker.category = item.cat;
+    allMarkers.push(marker);
+  });
+}
   function filterMap(selectedCategory, clickedBtn) {
     const buttons = document.querySelectorAll('#mapFilters .filter-btn');
     buttons.forEach(btn => {
