@@ -1490,36 +1490,271 @@
     }
   }
 
-  /* MAPA DE RESTAURANTES */
+  /* MAPA DE RESTAURANTES (SOLO TUS SITIOS SELECCIONADOS + EXTRAS RELEVANTES) */
   const restaurantes = [
-    { nombre: "Restaurante TOCH", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Mediterráneo & Arroces", lat: 38.3688, lng: -0.4208, desc: "Restaurante mediterráneo a pie de playa con arroces a leña y terraza privilegiada.", url: "Restaurante+TOCH+Playa+San+Juan+Alicante" },
-    { nombre: "Restaurante Mediterráneo", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Mediterráneo de Paseo", lat: 38.3639, lng: -0.4239, desc: "En plena Avenida de Niza en primera línea de playa. Pescados, salazones y tapeo marinero.", url: "Restaurante+Mediterraneo+Avenida+Niza+San+Juan+Alicante" },
-    { nombre: "Cervecería Sento Playa", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Montaditos & Tapas", lat: 38.3719, lng: -0.4285, desc: "Famoso por sus tapas gourmet y montaditos templados de solomillo y foie en Vicente Ramos.", url: "Cerveceria+Sento+Playa+San+Juan+Alicante" },
-    { nombre: "La Barra de Mauleón", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Gastrobar & Tapas", lat: 38.3711, lng: -0.4302, desc: "Tapeo selecto, producto de lonja y cocina mediterránea en un ambiente cuidado.", url: "La+Barra+de+Mauleon+San+Juan+Alicante" },
-    { nombre: "Mi Casa Tapas", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Tapeo Tradicional", lat: 38.3685, lng: -0.4280, desc: "Raciones caseras abundantes, ensaladillas y montaditos a precios muy asequibles.", url: "Mi+Casa+Tapas+Playa+San+Juan+Alicante" },
-    { nombre: "Bar Tapas LA FABRICA", cat: "tapas", zona: "Centro", tipo: "🍢 Tapas Tradicionales", lat: 38.3473, lng: -0.4831, desc: "Tapas clásicas españolas y raciones para compartir en terraza en el casco antiguo.", url: "Bar+Tapas+LA+FABRICA+Alicante" },
-    { nombre: "Santabar - Alicante Centro", cat: "tapas", zona: "Centro", tipo: "🍢 Gastrobar Moderno", lat: 38.3458, lng: -0.4878, desc: "Cocina de mercado, tostas de autor y raciones de calidad en calle Bazán.", url: "Santabar+Alicante+Centro" },
-    { nombre: "Bar El Cantó", cat: "tapas", zona: "Centro", tipo: "🍢 Clásico de Barra", lat: 38.3437, lng: -0.4883, desc: "Templo del montadito caliente y del tapeo tradicional alicantino.", url: "Bar+El+Canto+Alicante" },
-    { nombre: "Cervecería Sento Rambla", cat: "tapas", zona: "Centro", tipo: "🍢 Montaditos de Autor", lat: 38.3448, lng: -0.4849, desc: "Montaditos templados creativos y marisquito en barra en plena Rambla.", url: "Cerveceria+Sento+Rambla+Alicante" },
-    { nombre: "El Garaje Bar", cat: "tapas", zona: "Centro", tipo: "🍢 Terraza & Tapas", lat: 38.3435, lng: -0.4862, desc: "Tardeo y tapeo bajo los ficus centenarios de la Plaza Gabriel Miró.", url: "El+Garaje+Bar+Alicante" },
-    { nombre: "Circo Burger San Juan", cat: "burger", zona: "Playa San Juan", tipo: "🍔 Smash Burger & Gourmet", lat: 38.3635, lng: -0.4278, desc: "En Av. Costa Blanca a una calle de la playa. Smash burgers de vaca vieja y pan brioche casero.", url: "Circo+Burger+Playa+San+Juan+Alicante" },
-    { nombre: "RedLine Burger San Juan", cat: "burger", zona: "Playa San Juan", tipo: "🍔 Smash Burgers", lat: 38.3670, lng: -0.4255, desc: "Especialistas en smash burgers crujientes, patatas cargadas y salsas de receta propia en C/ Curricán.", url: "RedLine+Burger+San+Juan+Playa+Alicante" },
-    { nombre: "El Rancho de Fontana", cat: "burger", zona: "Playa San Juan", tipo: "🍔 Burgers & Patatas Rellenas", lat: 38.3658, lng: -0.4285, desc: "Un icono desenfadado en el C.C. Fontana con raciones gigantes, hamburguesas y más de 20 salsas.", url: "El+Rancho+de+Fontana+Playa+San+Juan+Alicante" },
-    { nombre: "Circo Burger Centro", cat: "burger", zona: "Centro", tipo: "🍔 Smash Burger Gourmet", lat: 38.3432, lng: -0.4880, desc: "Referente absoluto de hamburguesas en el centro (calle Teatro). Carne madurada y pan brioche.", url: "Circo+Burger+Alicante+Centro" },
-    { nombre: "Tepuy Burger Centro", cat: "burger", zona: "Centro", tipo: "🍔 Burger de Autor", lat: 38.3465, lng: -0.4855, desc: "Hamburguesas premiadas a nivel nacional con combinaciones creativas y carnes de primera.", url: "Tepuy+Burger+Alicante" },
-    { nombre: "AY MAMACITA", cat: "mexicano", zona: "Playa San Juan", tipo: "🌮 Street Food & Birria", lat: 38.3618, lng: -0.4431, desc: "Tacos callejeros al pastor, quesabirrias, nachos bien cargados y margaritas en Av. Condomina.", url: "AY+MAMACITA+Alicante" },
-    { nombre: "Taquería El Chavo Playa", cat: "mexicano", zona: "Playa San Juan", tipo: "🌮 Taquería Mexicana", lat: 38.3690, lng: -0.4310, desc: "Tacos al pastor al corte, gringas y guacamole preparado al momento.", url: "Taqueria+San+Juan+Playa+Alicante" },
-    { nombre: "MEXICAN GRANNY", cat: "mexicano", zona: "Centro", tipo: "🌮 Cocina Casera Mexicana", lat: 38.3562, lng: -0.4875, desc: "Recetas tradicionales de abuela mexicana, tacos al pastor y guisos caseros auténticos.", url: "MEXICAN+GRANNY+Alicante" },
-    { nombre: "Plaza Mexico", cat: "mexicano", zona: "Centro", tipo: "🌮 Taquería & Cócteles", lat: 38.3451, lng: -0.4871, desc: "Taquería en calle Castaños, ideal para cenar tacos y probar cócteles mexicanos.", url: "Plaza+Mexico+Alicante" },
-    { nombre: "Los 3 Carnalitos", cat: "mexicano", zona: "Centro", tipo: "🌮 Taquería Tradicional", lat: 38.3444, lng: -0.4867, desc: "Tacos de birria con su consomé especiado y sazón genuino en Médico Manero Mollà.", url: "Los+3+Carnalitos+Alicante" },
-    { nombre: "Kazoku", cat: "japones", zona: "Playa San Juan", tipo: "🍣 Sushi & Fusión", lat: 38.3625, lng: -0.4442, desc: "Pescado fresco de lonja, uramakis de autor y menús equilibrados en Av. de la Condomina.", url: "Restaurante+Kazoku+Alicante" },
-    { nombre: "Ramen Tatsunoya", cat: "japones", zona: "Playa San Juan", tipo: "🍜 Ramen Tradicional", lat: 38.3698, lng: -0.4320, desc: "Boles reconfortantes de fideos artesanales con caldos caseros en Historiador Vicente Ramos.", url: "Ramen+Tatsunoya+Alicante" },
-    { nombre: "Wasabi San Juan", cat: "japones", zona: "Playa San Juan", tipo: "🍣 Sushi & Rolls", lat: 38.3705, lng: -0.4290, desc: "Rolls fusión, tartares frescos y platos calientes japoneses en zona Fontana.", url: "Wasabi+San+Juan+Alicante" },
-    { nombre: "Restaurante See U", cat: "japones", zona: "Centro", tipo: "🍣 Buffet Libre a la Carta", lat: 38.3389, lng: -0.4935, desc: "Buffet libre a la carta con pedido por tablet y servicio directo a mesa.", url: "Restaurante+See+U+Alicante" },
-    { nombre: "Daikichi", cat: "japones", zona: "Centro", tipo: "🍣 Tradicional Nipón", lat: 38.3469, lng: -0.4893, desc: "El decano del sushi clásico y la cocina tradicional japonesa en Alicante.", url: "Restaurant+Japones+Daikichi+Alicante" },
-    { nombre: "Sushi Hajimi", cat: "japones", zona: "Centro", tipo: "🍣 Sushi & Makis", lat: 38.3421, lng: -0.4912, desc: "Sushi variado y fresco a precios competitivos cerca de la estación.", url: "Restaurante+Sushi+Hajimi+Alicante" },
-    { nombre: "Natsu Ramen", cat: "japones", zona: "Centro", tipo: "🍜 Ramen Bar", lat: 38.3427, lng: -0.4915, desc: "Taberna japonesa experta en caldos Tonkotsu y fideos ramen artesanos.", url: "Natsu+Ramen+Alicante" },
-    { nombre: "Ramen Toyaki", cat: "japones", zona: "Centro", tipo: "🍜 Ramen & Brochetas", lat: 38.3453, lng: -0.4868, desc: "Ramen y brochetas japonesas en la concurrida calle Castaños.", url: "Ramen+Toyaki+Alicante" }
+    // --- TAPAS, ARROCES Y MERCADO ---
+    {
+      nombre: "Cervecería La Gamba",
+      cat: "tapas",
+      zona: "Playa San Juan",
+      tipo: "🍢 Marisquería & Tapas",
+      lat: 38.3682,
+      lng: -0.4228,
+      desc: "Clásico del tapeo marinero, marisco fresco y raciones con excelente ambiente junto a la playa.",
+      url: "Cerveceria+La+Gamba+Playa+San+Juan+Alicante"
+    },
+    {
+      nombre: "Restaurante Villa Bandida",
+      cat: "tapas",
+      zona: "Playa San Juan",
+      tipo: "🥘 Mediterráneo & Vistas",
+      lat: 38.3582,
+      lng: -0.4285,
+      desc: "Cocina mediterránea cuidada y arroces con terraza en primera línea del paseo marítimo.",
+      url: "Villa+Bandida+Alicante"
+    },
+    {
+      nombre: "Cervecería Sento",
+      cat: "tapas",
+      zona: "Centro",
+      tipo: "🍢 Montaditos Gourmet",
+      lat: 38.3448,
+      lng: -0.4849,
+      desc: "Icono absoluto del montadito caliente de autor y barra con solomillo, foie y marisquito.",
+      url: "Cerveceria+Sento+Alicante"
+    },
+    {
+      nombre: "Casa Domingo",
+      cat: "tapas",
+      zona: "Playa San Juan",
+      tipo: "🥘 Arroces & Marisquería",
+      lat: 38.3620,
+      lng: -0.4248,
+      desc: "Referente tradicional de arroces alicantinos a leña y pescado fresco a pie de paseo.",
+      url: "Restaurante+Casa+Domingo+Alicante"
+    },
+    {
+      nombre: "Casa Julio",
+      cat: "tapas",
+      zona: "Playa San Juan",
+      tipo: "🥘 Arroces en la Playa",
+      lat: 38.3695,
+      lng: -0.4201,
+      desc: "Templo del arroz a banda y fideuás frente al mar en plena arena de la playa de San Juan.",
+      url: "Restaurante+Casa+Julio+San+Juan+Playa"
+    },
+    {
+      nombre: "El Bodegón Tapería Arrocería",
+      cat: "tapas",
+      zona: "Playa San Juan",
+      tipo: "🍢 Arroces & Tapeo",
+      lat: 38.3688,
+      lng: -0.4288,
+      desc: "Tapería cercana con arroces por encargo, raciones variadas y tapas tradicionales.",
+      url: "El+Bodegon+Taperia+Arroceria+San+Juan+Alicante"
+    },
+    {
+      nombre: "Mercado Central de Alicante",
+      cat: "tapas",
+      zona: "Centro",
+      tipo: "🍢 Mercado & Tardeo",
+      lat: 38.3475,
+      lng: -0.4856,
+      desc: "Puestos gastronómicos, salazones de la tierra, marisco al momento y epicentro del tapeo alicantino.",
+      url: "Mercado+Central+de+Alicante"
+    },
+    {
+      nombre: "Nou Manolín",
+      cat: "tapas",
+      zona: "Centro",
+      tipo: "🍢 Barra Gastronómica",
+      lat: 38.3452,
+      lng: -0.4879,
+      desc: "Una de las barras más prestigiosas de España. Producto excelso, marisco y guisos.",
+      url: "Nou+Manolin+Alicante"
+    },
+    {
+      nombre: "Piripi",
+      cat: "tapas",
+      zona: "Centro",
+      tipo: "🍢 Alta Cocina de Barra",
+      lat: 38.3438,
+      lng: -0.4908,
+      desc: "Hermano del Nou Manolín, famoso por sus arroces, salazones y montaditos emblemáticos.",
+      url: "Restaurante+Piripi+Alicante"
+    },
+    {
+      nombre: "El Portal",
+      cat: "tapas",
+      zona: "Centro",
+      tipo: "🍢 Taberna Gourmet",
+      lat: 38.3449,
+      lng: -0.4839,
+      desc: "Krug Ambassade, alta cocina de producto alicantino y una ambientación sofisticada.",
+      url: "El+Portal+Alicante"
+    },
+
+    // --- CARNES & BRASAS ---
+    {
+      nombre: "Puerto Madero Grill & Drinks",
+      cat: "carnes",
+      zona: "Playa San Juan",
+      tipo: "🥩 Parrilla Argentina",
+      lat: 38.3675,
+      lng: -0.4292,
+      desc: "Cortes de carne seleccionados a la brasa, empanadas caseras y buena coctelería.",
+      url: "Puerto+Madero+Grill+San+Juan+Alicante"
+    },
+    {
+      nombre: "Asador Los Troncos (Albufereta)",
+      cat: "carnes",
+      zona: "Albufereta",
+      tipo: "🥩 Asador Tradicional",
+      lat: 38.3602,
+      lng: -0.4501,
+      desc: "Asador histórico frente al mar con carnes argentinas, mollejas y ambiente clásico.",
+      url: "Asador+Los+Troncos+Albufereta+Alicante"
+    },
+    {
+      nombre: "Los Troncos Ciudad Jardín",
+      cat: "carnes",
+      zona: "Ciudad Jardín",
+      tipo: "🥩 Asador & Brasas",
+      lat: 38.3755,
+      lng: -0.4925,
+      desc: "Segunda sede con amplios salones, terraza ajardinada y los mismos cortes a la parrilla.",
+      url: "Asador+Los+Troncos+Ciudad+Jardin+Alicante"
+    },
+    {
+      nombre: "Restaurante La Vaca (Centro)",
+      cat: "carnes",
+      zona: "Centro",
+      tipo: "🥩 Asador & Parrilla",
+      lat: 38.3431,
+      lng: -0.4871,
+      desc: "Especialistas en cortes a la brasa al estilo rioplatense en calle San Fernando.",
+      url: "Restaurante+La+Vaca+San+Fernando+Alicante"
+    },
+    {
+      nombre: "La Vaca Restaurante Asador (Playa)",
+      cat: "carnes",
+      zona: "Playa San Juan",
+      tipo: "🥩 Carnes Maduradas",
+      lat: 38.3721,
+      lng: -0.4278,
+      desc: "Parrilla de carbón, carnes seleccionadas y gran terraza en la zona de ocio de San Juan.",
+      url: "Restaurante+La+Vaca+Playa+San+Juan+Alicante"
+    },
+
+    // --- ITALIANO & PIZZERÍAS ---
+    {
+      nombre: "La Nonna Nina",
+      cat: "italiano",
+      zona: "Playa San Juan",
+      tipo: "🍕 Pizzería Napolitana",
+      lat: 38.3692,
+      lng: -0.4265,
+      desc: "Masa fermentada de estilo napolitano, ingredientes de Italia y pastas caseras.",
+      url: "La+Nonna+Nina+Pizzeria+San+Juan+Alicante"
+    },
+    {
+      nombre: "Infraganti Pizzeria",
+      cat: "italiano",
+      zona: "Centro",
+      tipo: "🍕 Pizza Napolitana de Autor",
+      lat: 38.3456,
+      lng: -0.4851,
+      desc: "Pizzas contemporáneas con fermentación lenta, masa muy ligera e ingredientes certificados.",
+      url: "Infraganti+Pizzeria+Alicante"
+    },
+
+    // --- BURGERS ---
+    {
+      nombre: "Circo Burger San Juan",
+      cat: "burger",
+      zona: "Playa San Juan",
+      tipo: "🍔 Smash Burger Gourmet",
+      lat: 38.3635,
+      lng: -0.4278,
+      desc: "Smash burgers de carne madurada de vaca vieja y pan brioche artesano.",
+      url: "Circo+Burger+Playa+San+Juan+Alicante"
+    },
+
+    // --- ASIÁTICO & RAMEN ---
+    {
+      nombre: "Asika Alicante",
+      cat: "asiatico",
+      zona: "Vistahermosa",
+      tipo: "🍣 Buffet Fusión Asiática",
+      lat: 38.3664,
+      lng: -0.4705,
+      desc: "Gran buffet asiático a la carta servido en mesa con amplia variedad de sushi, baos y woks.",
+      url: "Asika+Alicante+Restaurante"
+    },
+    {
+      nombre: "Ramen Natsu",
+      cat: "asiatico",
+      zona: "Centro",
+      tipo: "🍜 Ramen Bar Artesano",
+      lat: 38.3427,
+      lng: -0.4915,
+      desc: "Taberna japonesa experta en caldos concentrados Tonkotsu y fideos ramen artesanos.",
+      url: "Natsu+Ramen+Alicante"
+    },
+
+    // --- EXPERIENCIA TEMÁTICA ---
+    {
+      nombre: "Voltereta Tanzania",
+      cat: "experiencia",
+      zona: "Centro",
+      tipo: "✨ Cocina del Mundo Inmersiva",
+      lat: 38.3468,
+      lng: -0.4842,
+      desc: "Restaurante con espectacular ambientación en la sabana africana, cocina fusión y cócteles.",
+      url: "Voltereta+Tanzania+Alicante"
+    },
+
+    // --- BRUNCH, CAFÉ & DULCES ---
+    {
+      nombre: "Me Too Café (Centro)",
+      cat: "brunch",
+      zona: "Centro",
+      tipo: "☕ Specialty Coffee & Brunch",
+      lat: 38.3435,
+      lng: -0.4892,
+      desc: "Tostas de masa madre, café de especialidad, açai bowls y opciones saludables para desayunar.",
+      url: "Me+Too+Cafe+Alicante+Centro"
+    },
+    {
+      nombre: "Me Too Café (Vistahermosa)",
+      cat: "brunch",
+      zona: "Vistahermosa",
+      tipo: "☕ Brunch & Desayunos",
+      lat: 38.3648,
+      lng: -0.4682,
+      desc: "Espacio moderno para desayunos completos, brunch, pancakes y zumos naturales.",
+      url: "Me+Too+Cafe+Vistahermosa+Alicante"
+    },
+    {
+      nombre: "Dolci Galipier",
+      cat: "brunch",
+      zona: "Playa San Juan",
+      tipo: "🥐 Alta Pastelería & Desayunos",
+      lat: 38.3672,
+      lng: -0.4281,
+      desc: "Bollería francesa artesana, croissants de mantequilla y tartas cuidadas cerca de la playa.",
+      url: "Dolci+Galipier+San+Juan+Playa"
+    },
+    {
+      nombre: "Mazapán Benalúa",
+      cat: "brunch",
+      zona: "Benalúa",
+      tipo: "🥐 Confitería Tradicional",
+      lat: 38.3378,
+      lng: -0.4982,
+      desc: "Confitería mítica alicantina en C/ Foglietti; famosa por sus tostadas, milhojas y bollería de obrador.",
+      url: "Pasteleria+Mazapan+Benalua+Alicante"
+    }
   ];
 
   let mapRestaurantes;
@@ -1539,15 +1774,36 @@
       let pinClass = "pin-tapas";
       let iconEmoji = "🍢";
 
-      if (item.cat === 'burger') {
-        pinClass = "pin-burger";
-        iconEmoji = "🍔";
-      } else if (item.cat === 'mexicano') {
-        pinClass = "pin-mex";
-        iconEmoji = "🌮";
-      } else if (item.cat === 'japones') {
-        pinClass = "pin-japon";
-        iconEmoji = item.tipo.includes("Ramen") ? "🍜" : "🍣";
+      switch (item.cat) {
+        case 'carnes':
+          pinClass = "pin-carne";
+          iconEmoji = "🥩";
+          break;
+        case 'italiano':
+          pinClass = "pin-italiano";
+          iconEmoji = "🍕";
+          break;
+        case 'burger':
+          pinClass = "pin-burger";
+          iconEmoji = "🍔";
+          break;
+        case 'asiatico':
+          pinClass = "pin-asiatico";
+          iconEmoji = item.tipo.includes("Ramen") ? "🍜" : "🍣";
+          break;
+        case 'brunch':
+          pinClass = "pin-brunch";
+          iconEmoji = item.tipo.includes("Café") || item.tipo.includes("Brunch") ? "☕" : "🥐";
+          break;
+        case 'experiencia':
+          pinClass = "pin-experiencia";
+          iconEmoji = "✨";
+          break;
+        case 'tapas':
+        default:
+          pinClass = "pin-tapas";
+          iconEmoji = item.tipo.includes("Arroces") ? "🥘" : "🍢";
+          break;
       }
 
       const customIcon = L.divIcon({
