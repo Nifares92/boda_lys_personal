@@ -88,6 +88,10 @@
     .pin-mex { background: #c5a059; }
     .pin-japon { background: #b43d3d; }
     .pin-burger { background: #b8602b; }
+    .pin-italiano { background: #1b7a43; }
+    .pin-kebab { background: #d97706; }
+    .pin-carnes { background: #7f1d1d; }
+    .pin-asiatico { background: #831843; }
 
     .leaflet-popup-content-wrapper {
       border-radius: 18px !important; background: #fcf8ee !important;
@@ -660,6 +664,15 @@
         <button onclick="filterMap('japones', this)" class="filter-btn px-4 py-1.5 rounded-full bg-[#fdf0f0] hover:bg-[#fbdada] text-[#8e2929] transition border border-[#df9797]">
           🍣 Sushi & Ramen
         </button>
+        <button onclick="filterMap('italiano', this)" class="filter-btn px-4 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition border border-emerald-300">
+  🍕 Italiano
+</button>
+<button onclick="filterMap('kebab', this)" class="filter-btn px-4 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-900 transition border border-amber-300">
+  🥙 Kebab
+</button>
+<button onclick="filterMap('carnes', this)" class="filter-btn px-4 py-1.5 rounded-full bg-red-50 hover:bg-red-100 text-red-900 transition border border-red-300">
+  🥩 Carnes
+</button>
       </div>
 
       <!-- Contenedor del mapa Leaflet -->
