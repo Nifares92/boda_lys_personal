@@ -97,6 +97,51 @@
       padding: 4px !important;
     }
     .leaflet-popup-tip { background: #fcf8ee !important; }
+
+    /* ESTILOS Y ANIMACIONES DE DOBBY PEEKER */
+    #dobbyPeekerWidget {
+      transform: translateY(48px);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    #dobbyPeekerWidget:hover:not(.active) {
+      transform: translateY(32px) rotate(2deg);
+    }
+    #dobbyPeekerWidget.active {
+      transform: translateY(0) rotate(0deg);
+    }
+
+    @keyframes dobbyEarWiggle {
+      0%, 100% { transform: rotate(0deg); }
+      30% { transform: rotate(-4.5deg); }
+      70% { transform: rotate(4.5deg); }
+    }
+
+    /* Movimiento de orejas al hacer HOVER */
+    #dobbyPeekerWidget:hover .dobby-ear-l {
+      animation: dobbyEarWiggle 0.6s ease-in-out infinite;
+      transform-origin: 52px 64px;
+    }
+    #dobbyPeekerWidget:hover .dobby-ear-r {
+      animation: dobbyEarWiggle 0.6s ease-in-out infinite reverse;
+      transform-origin: 108px 64px;
+    }
+
+    /* Movimiento dinámico de orejas al hacer SCROLL (aunque no esté abierto) */
+    .dobby-scrolling .dobby-ear-l {
+      animation: dobbyEarWiggle 0.35s ease-in-out infinite !important;
+      transform-origin: 52px 64px;
+    }
+    .dobby-scrolling .dobby-ear-r {
+      animation: dobbyEarWiggle 0.35s ease-in-out infinite reverse !important;
+      transform-origin: 108px 64px;
+    }
+    .dobby-scrolling:not(.active) {
+      transform: translateY(40px) !important;
+    }
+
+    .dobby-filter-shadow {
+      filter: drop-shadow(0 10px 18px rgba(29, 33, 22, 0.45));
+    }
   </style>
 </head>
 
@@ -130,15 +175,15 @@
           <p id="guestEnvelopeLoc">La alcoba más acogedora de la casa</p>
           <p>Alicante, Comunidad Valenciana</p>
           <span class="mt-4 text-xs tracking-widest text-[#6a764a] uppercase font-sans border-t border-[#b59d72]/40 pt-1">Enlace Lestter & Serafín</span>
-        </div>
       </div>
+    </div>
 
       <div class="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden z-20">
         <div class="absolute bottom-0 w-full h-[65%] bg-gradient-to-t from-[#ded0b1] to-[#e4d7b9] border-t-2 border-[#b59d72]/60 [clip-path:polygon(0_35%,50%_0%,100%_35%,100%_100%,0_100%)] shadow-inner"></div>
-      </div>
+    </div>
 
       <div id="gateFlap" class="envelope-flap absolute top-0 left-0 right-0 h-[58%] bg-[#dfd2b4] rounded-t-2xl [clip-path:polygon(0_0,100%_0,50%_100%)] z-30 shadow-md border-b border-[#b59d72]/50">
-      </div>
+    </div>
 
       <div id="gateWaxSeal" onclick="openHogwartsLetter(event)" class="absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 cursor-pointer transform hover:scale-110 active:scale-95 transition duration-300">
         <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#801818] via-[#a32222] to-[#540d0d] seal-shadow seal-glow border-2 border-amber-300/40 flex flex-col items-center justify-center">
@@ -256,16 +301,6 @@
     <p class="font-serif italic text-xl sm:text-2xl text-olive-200 max-w-xl mx-auto">
       «Hay viajes que merecen ser celebrados con toda la magia del mundo.»
     </p>
-
-    <div class="flex items-center justify-center space-x-3 py-1 opacity-80">
-      <div class="w-12 h-px bg-gold/40"></div>
-      <svg viewBox="0 0 24 24" class="w-5 h-5 text-gold fill-none stroke-current stroke-2" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="12 3 2 21 22 21" />
-        <circle cx="12" cy="15" r="4.5" />
-        <line x1="12" y1="3" x2="12" y2="21" />
-      </svg>
-      <div class="w-12 h-px bg-gold/40"></div>
-    </div>
 
     <div class="pt-4 flex flex-wrap gap-4 justify-center items-center">
       <a href="#rsvp" class="bg-gold hover:bg-gold-light text-olive-950 font-semibold px-7 py-3 rounded-full shadow-lg font-magic text-xs uppercase tracking-wider transition-all transform hover:-translate-y-0.5">
@@ -482,12 +517,12 @@
 
       <form id="rsvpForm" class="space-y-6" onsubmit="handleFormSubmit(event)">
         <!-- Name and Surname -->
-        <div>
+      <div>
           <label for="fullName" class="block font-serif text-base font-semibold text-olive-900 mb-1">
             Nombre / Personas Invitadas <span class="text-red-500">*</span>
           </label>
           <input type="text" id="fullName" required placeholder="Ej. Carlos Martínez García" class="w-full px-4 py-3 rounded-xl border border-olive-300 focus:ring-2 focus:ring-olive-600 focus:border-transparent outline-none transition bg-olive-50/50">
-        </div>
+      </div>
 
         <!-- Attendance Radio Buttons (Se inyectan dinámicamente) -->
         <div id="attendanceSection">
@@ -693,7 +728,7 @@
 
         <div class="mt-5">
           <button onclick="copyToClipboard('ES62 0081 5534 2000 0201 8207', this)" class="w-full bg-olive-800 hover:bg-olive-900 text-gold-light py-2.5 px-4 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center space-x-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            <svg class="w-4 h-4 fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
             <span>Copiar Número de Cuenta</span>
           </button>
         </div>
@@ -715,7 +750,7 @@
 
         <div class="mt-5">
           <button onclick="copyToClipboard('+34 600 00 00 00', this)" class="w-full bg-olive-800 hover:bg-olive-900 text-gold-light py-2.5 px-4 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center space-x-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            <svg class="w-4 h-4 fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
             <span>Copiar Teléfono Bizum</span>
           </button>
         </div>
@@ -744,6 +779,72 @@
     </p>
   </div>
 </footer>
+
+<!-- ELEMENTO FLOTANTE DE DOBBY ASOMANDO EN LA ESQUINA INFERIOR -->
+<div id="dobbyPeekerWidget" class="fixed bottom-0 right-4 sm:right-8 z-40 cursor-pointer select-none" onclick="toggleDobbyMessage(event)">
+  <!-- Bocadillo de diálogo de Dobby -->
+  <div id="dobbySpeechBubble" class="opacity-0 translate-y-3 pointer-events-none transition-all duration-300 absolute -top-32 right-0 w-64 sm:w-72 bg-olive-900 text-gold-light p-4 rounded-2xl shadow-2xl border-2 border-gold font-serif text-xs leading-relaxed z-50">
+    <div class="flex items-center space-x-2 border-b border-gold/30 pb-1.5 mb-1.5 font-magic text-gold font-bold uppercase tracking-wider text-[11px]">
+      <span>🧦 ¡Dobby os saluda!</span>
+    </div>
+    <p class="italic text-olive-100" id="dobbyQuoteText">
+      «¡Dobby es libre! ¡Dobby ha venido a Alicante a celebrar el enlace de Lestter y Serafín!»
+    </p>
+    <div class="absolute -bottom-2 right-12 w-4 h-4 bg-olive-900 border-r-2 border-b-2 border-gold transform rotate-45"></div>
+  </div>
+
+  <!-- Contenedor de Dobby asomando con orejas animadas y subida al hover/scroll -->
+  <div class="relative w-28 sm:w-36 h-28 sm:h-36 flex items-end justify-center dobby-filter-shadow">
+    <svg viewBox="0 0 160 140" class="w-full h-full" fill="none">
+      <!-- Oreja izquierda móvil -->
+      <g class="dobby-ear-l">
+        <path d="M 52 64 C 34 50 10 52 2 68 C -4 78 8 86 28 82 C 40 79 50 72 54 68 Z" fill="#d8be99" stroke="#7e5d32" stroke-width="2"/>
+        <path d="M 44 66 C 30 58 14 60 8 70 C 14 74 24 74 38 72 Z" fill="#e8cfae" opacity="0.7"/>
+      </g>
+
+      <!-- Oreja derecha móvil -->
+      <g class="dobby-ear-r">
+        <path d="M 108 64 C 126 50 150 52 158 68 C 164 78 152 86 132 82 C 120 79 110 72 106 68 Z" fill="#d8be99" stroke="#7e5d32" stroke-width="2"/>
+        <path d="M 116 66 C 130 58 146 60 152 70 C 146 74 136 74 122 72 Z" fill="#e8cfae" opacity="0.7"/>
+      </g>
+
+      <!-- Túnica rústica -->
+      <path d="M 46 95 L 30 140 L 130 140 L 114 95 Z" fill="#a4937a" stroke="#68553d" stroke-width="2"/>
+      <path d="M 55 95 L 75 140 M 105 95 L 85 140" stroke="#7e694e" stroke-width="1.5" opacity="0.5"/>
+
+      <!-- Cabeza con relieve -->
+      <path d="M 52 56 C 54 30 106 30 108 56 C 112 76 102 96 80 98 C 58 96 48 76 52 56 Z" fill="#e2cbb0" stroke="#7e5d32" stroke-width="2.5"/>
+
+      <!-- Arrugas de la frente -->
+      <path d="M 64 42 Q 80 46 96 42" stroke="#9d7a4f" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M 68 48 Q 80 51 92 48" stroke="#9d7a4f" stroke-width="1.5" stroke-linecap="round"/>
+
+      <!-- Ojos grandes expresivos verdes -->
+      <ellipse cx="66" cy="62" rx="9" ry="11" fill="#fcf8ee" stroke="#7e5d32" stroke-width="1.5"/>
+      <circle cx="67" cy="63" r="6" fill="#65a30d"/>
+      <circle cx="66" cy="62" r="3" fill="#142c07"/>
+      <circle cx="69" cy="59" r="1.8" fill="#ffffff"/>
+
+      <ellipse cx="94" cy="62" rx="9" ry="11" fill="#fcf8ee" stroke="#7e5d32" stroke-width="1.5"/>
+      <circle cx="93" cy="63" r="6" fill="#65a30d"/>
+      <circle cx="94" cy="62" r="3" fill="#142c07"/>
+      <circle cx="96" cy="59" r="1.8" fill="#ffffff"/>
+
+      <!-- Nariz y boca -->
+      <path d="M 80 62 L 84 76 L 76 76 Z" fill="#caa982" stroke="#7e5d32" stroke-width="1.2"/>
+      <path d="M 70 85 Q 80 91 90 85" stroke="#68553d" stroke-width="2.2" stroke-linecap="round"/>
+
+      <!-- Manos con el calcetín -->
+      <circle cx="40" cy="118" r="8" fill="#d8be99" stroke="#7e5d32" stroke-width="1.5"/>
+      <circle cx="120" cy="118" r="8" fill="#d8be99" stroke="#7e5d32" stroke-width="1.5"/>
+      <path d="M 122 114 C 132 112 144 116 142 126 C 140 134 132 135 125 128 Z" fill="#c5a059" stroke="#9a752c" stroke-width="2"/>
+    </svg>
+
+    <span class="absolute bottom-1 bg-olive-950 text-gold text-[9px] font-magic px-2.5 py-0.5 rounded-full border border-gold/40 uppercase tracking-widest font-bold shadow-lg">
+      Dobby
+    </span>
+  </div>
+</div>
 
 <script>
   /* -------------------------------------------------------------
@@ -1250,6 +1351,79 @@
     }
   }
 
+  /* LÓGICA DE INTERACCIÓN DE DOBBY (EXPANDIR, MOVER OREJAS AL SCROLL Y ENCOGER AL SCROLL / CLIC FUERA) */
+  const dobbyQuotes = [
+    "«¡Dobby no tiene amo! Dobby es un elfo libre y viene a festejar el amor de Lestter & Serafín.»",
+    "«¡Dobby ha comprobado la lista de invitados cinco veces! ¡Nadie olvidará su varita!»",
+    "«¡Dobby promete no interceptar las cartas de los novios nunca más!»",
+    "«¡Qué día tan glorioso! Dobby bailará hasta que duelan los calcetines.»"
+  ];
+  let quoteIndex = 0;
+  let isDobbyActive = false;
+  let scrollTimeout = null;
+
+  function toggleDobbyMessage(e) {
+    if (e) e.stopPropagation();
+    const bubble = document.getElementById('dobbySpeechBubble');
+    const quoteEl = document.getElementById('dobbyQuoteText');
+    const peeker = document.getElementById('dobbyPeekerWidget');
+
+    if (!isDobbyActive) {
+      quoteIndex = (quoteIndex + 1) % dobbyQuotes.length;
+      quoteEl.textContent = dobbyQuotes[quoteIndex];
+
+      bubble.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+      peeker.classList.add('active');
+      isDobbyActive = true;
+
+      try {
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 25,
+            angle: 70,
+            spread: 55,
+            origin: { x: 0.92, y: 0.94 },
+            colors: ['#c5a059', '#879461', '#f4e5b8']
+          });
+        }
+      } catch (err) {}
+    } else {
+      hideDobbyMessage();
+    }
+  }
+
+  function hideDobbyMessage() {
+    if (!isDobbyActive) return;
+    const bubble = document.getElementById('dobbySpeechBubble');
+    const peeker = document.getElementById('dobbyPeekerWidget');
+
+    bubble.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+    peeker.classList.remove('active');
+    isDobbyActive = false;
+  }
+
+  // Animación reactiva de orejas al hacer scroll y encoger si estaba abierto
+  window.addEventListener('scroll', () => {
+    hideDobbyMessage();
+
+    const peeker = document.getElementById('dobbyPeekerWidget');
+    if (peeker) {
+      peeker.classList.add('dobby-scrolling');
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        peeker.classList.remove('dobby-scrolling');
+      }, 160);
+    }
+  }, { passive: true });
+
+  // Cerrar al pulsar en cualquier otro punto de la pantalla
+  document.addEventListener('click', (e) => {
+    const peeker = document.getElementById('dobbyPeekerWidget');
+    if (peeker && !peeker.contains(e.target)) {
+      hideDobbyMessage();
+    }
+  });
+
   // Envío del Formulario a Google Sheets
   async function handleFormSubmit(event) {
     event.preventDefault();
@@ -1356,7 +1530,7 @@
             spread: 70,
             origin: { y: 0.6 },
             colors: ['#c5a059', '#879461', '#f4e5b8', '#a32222']
-          });
+        });
         }
       } else {
         successText.textContent = `Muchas gracias por avisarnos. Sentiremos mucho no teneros con nosotros ese día, pero brindaremos por vosotros.`;
@@ -1381,7 +1555,7 @@
     { nombre: "Hotel Leuka (3★)", zona: "Centro", cat: "centro", tipo: "🏛 Económico & Tranquilo", lat: 38.3475, lng: -0.4930, precio: "Desde ~55-70€ / noche", desc: "Hotel tranquilo en zona céntrica residencial, muy cómodo para descansar a buen precio.", url: "Hotel+Leuka+Alicante" },
     { nombre: "Hotel Serawa Alicante (4★)", zona: "Centro Histórico", cat: "centro", tipo: "🏛️ Eco Boutique", lat: 38.3449, lng: -0.4828, precio: "Desde ~95-115€ / noche", desc: "Hotel boutique ecológico y sostenible a 2 minutos andando del Ayuntamiento de Alicante.", url: "Hotel+Serawa+Alicante" },
     { nombre: "Hotel Castilla Alicante (3★)", zona: "Playa San Juan", cat: "playa", tipo: "🏖️ Playa & Calidad-Precio", lat: 38.3695, lng: -0.4262, precio: "Desde ~60-80€ / noche", desc: "A solo 200m de la playa. Cuenta con piscina, parking y habitaciones confortables ideales para el fin de semana.", url: "Hotel+Castilla+Alicante" },
-    { nombre: "Port Alicante City & Beach (4★)", zona: "Playa San Juan", cat: "playa", tipo: "🏖️ 4★ Confort & Relax", lat: 38.3662, lng: -0.4305, precio: "Desde ~75-95€ / noche", desc: "Totalmente renovado, con piscinas, gimnasio y situado a escasos minutos de Finca Santa Luzia.", url: "Port+Hotel+Alicante+City+%26+Beach" },
+    { nombre: "Port Alicante City & Beach (4★)", zona: "Playa San Juan", cat: "playa", tipo: "🏖 4★ Confort & Relax", lat: 38.3662, lng: -0.4305, precio: "Desde ~75-95€ / noche", desc: "Totalmente renovado, con piscinas, gimnasio y situado a escasos minutos de Finca Santa Luzia.", url: "Port+Hotel+Alicante+City+%26+Beach" },
     { nombre: "Hotel Alicante Golf (4★)", zona: "Playa San Juan", cat: "playa", tipo: "🏖 Jardines & Confort", lat: 38.3693, lng: -0.4365, precio: "Desde ~85-105€ / noche", desc: "Rodeado de jardines y campo de golf, tranquilidad total muy cerca del convite.", url: "Hotel+Alicante+Golf" },
     { nombre: "Hotel Albahía Alicante (3★)", zona: "Albufereta / Costa", cat: "playa", tipo: "🏖️ Frente al Mar", lat: 38.3601, lng: -0.4571, precio: "Desde ~55-75€ / noche", desc: "En primera línea de cala entre el centro y San Juan. Vistas al Mediterráneo y TRAM a pie de hotel.", url: "Hotel+Albahia+Alicante" },
     { nombre: "Hotel Santa Faz (2★)", zona: "Santa Faz / San Juan", cat: "playa", tipo: "🏖️ Tradicional & Económico", lat: 38.3888, lng: -0.4431, precio: "Desde ~50-65€ / noche", desc: "Alojamiento acogedor y económico con excelentes opiniones en la histórica y tranquila pedanía de Santa Faz.", url: "Hotel+Santa+Faz+Alicante" }
@@ -1522,10 +1696,11 @@
             <span style="font-size: 10px; font-weight: bold; text-transform: uppercase; color: #6a764a; letter-spacing: 0.05em;">${item.tipo}</span>
             <span style="font-size: 9px; background: #ebede2; color: #383e2b; padding: 2px 6px; border-radius: 6px; font-weight: 600;">${item.zona}</span>
           </div>
-          <h4 style="font-family: 'Cinzel Decorative', serif; font-size: 14px; font-weight: bold; color: #1d2116; margin: 3px 0 6px 0;">${item.nombre}</h4>
+          <h4 style="font-family: 'Cinzel Decorative', serif; font-size: 14px; font-weight: bold; color: #1d2116; margin: 3px 0 2px 0;">${item.nombre}</h4>
+          <span style="display: block; font-size: 11px; font-weight: 700; color: #9a752c; margin-bottom: 6px;">${item.precio}</span>
           <p style="font-family: 'Cormorant Garamond', serif; font-size: 14px; color: #434b31; line-height: 1.25; margin-bottom: 8px;">${item.desc}</p>
           <a href="https://maps.google.com/?q=${item.url}" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; text-align: center; background: #383e2b; color: #f4e5b8; font-size: 11px; font-weight: 600; padding: 6px 0; border-radius: 8px; text-decoration: none;">
-            Cómo llegar ↗
+            Ver en Google Maps ↗
           </a>
         </div>
       `;
