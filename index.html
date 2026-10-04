@@ -266,7 +266,7 @@
       </svg>
       <div class="w-12 h-px bg-gold/40"></div>
     </div>
-    
+
     <div class="pt-4 flex flex-wrap gap-4 justify-center items-center">
       <a href="#rsvp" class="bg-gold hover:bg-gold-light text-olive-950 font-semibold px-7 py-3 rounded-full shadow-lg font-magic text-xs uppercase tracking-wider transition-all transform hover:-translate-y-0.5">
         Confirmar Asistencia
@@ -628,7 +628,7 @@
         <div>
           <div class="flex items-center space-x-3 mb-4 pb-3 border-b border-olive-200">
             <div class="w-10 h-10 rounded-full bg-olive-900 text-gold flex items-center justify-center font-bold text-lg">
-              🍽️️
+              🍽
             </div>
             <div>
               <h3 class="font-magic text-xl text-olive-900">Dónde Cenar y Tapear</h3>
@@ -715,7 +715,7 @@
 
         <div class="mt-5">
           <button onclick="copyToClipboard('+34 600 00 00 00', this)" class="w-full bg-olive-800 hover:bg-olive-900 text-gold-light py-2.5 px-4 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center space-x-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
             <span>Copiar Teléfono Bizum</span>
           </button>
         </div>
@@ -752,7 +752,7 @@
      - tipo: 'individual_plus'  -> Titular con derecho a 1 acompañante opcional
      - tipo: 'individual'       -> Titular único sin acompañante
      ------------------------------------------------------------- */
- const INVITADOS = {
+  const INVITADOS = {
     // === PAREJAS DE SERAFÍN (Con enlaces directos y alias individuales) ===
     "noe-pablo": { tipo: "pareja", p1: "Noe", p2: "Pablo", nombre: "Noe & Pablo", saludo: "Queridos Noe y Pablo", parte: "Serafín" },
     "noe": { tipo: "pareja", p1: "Noe", p2: "Pablo", nombre: "Noe & Pablo", saludo: "Queridos Noe y Pablo", parte: "Serafín" },
@@ -766,7 +766,7 @@
     "chelo": { tipo: "pareja", p1: "Chelo", p2: "Alex", nombre: "Chelo & Alex", saludo: "Queridos Chelo y Alex", parte: "Serafín" },
     "alex": { tipo: "pareja", p1: "Chelo", p2: "Alex", nombre: "Chelo & Alex", saludo: "Queridos Chelo y Alex", parte: "Serafín" },
 
-    // CELIA & ALBERTO (Funciona con ?inv=celia-alberto, ?inv=celia-s y ?inv=alberto)
+    // CELIA & ALBERTO
     "celia-alberto": { tipo: "pareja", p1: "Celia", p2: "Alberto", nombre: "Celia & Alberto", saludo: "Queridos Celia y Alberto", parte: "Serafín" },
     "celia-s": { tipo: "pareja", p1: "Celia", p2: "Alberto", nombre: "Celia & Alberto", saludo: "Queridos Celia y Alberto", parte: "Serafín" },
     "alberto": { tipo: "pareja", p1: "Celia", p2: "Alberto", nombre: "Celia & Alberto", saludo: "Queridos Celia y Alberto", parte: "Serafín" },
@@ -787,12 +787,21 @@
     "cari": { tipo: "pareja", p1: "Cari", p2: "Alex", nombre: "Cari & Alex", saludo: "Queridos Cari y Alex", parte: "Serafín" },
     "alex-2": { tipo: "pareja", p1: "Cari", p2: "Alex", nombre: "Cari & Alex", saludo: "Queridos Cari y Alex", parte: "Serafín" },
 
+    // ANA & ANTONIO
     "ana-antonio": { tipo: "pareja", p1: "Ana", p2: "Antonio", nombre: "Ana & Antonio", saludo: "Queridos Ana y Antonio", parte: "Serafín" },
     "ana": { tipo: "pareja", p1: "Ana", p2: "Antonio", nombre: "Ana & Antonio", saludo: "Queridos Ana y Antonio", parte: "Serafín" },
 
-    // ANTONIO & AUXI (Funciona con ?inv=antonio-auxi y ?inv=antonio)
+    // ANTONIO & AUXI
     "antonio-auxi": { tipo: "pareja", p1: "Antonio", p2: "Auxi", nombre: "Antonio & Auxi", saludo: "Queridos Antonio y Auxi", parte: "Serafín" },
     "antonio": { tipo: "pareja", p1: "Antonio", p2: "Auxi", nombre: "Antonio & Auxi", saludo: "Queridos Antonio y Auxi", parte: "Serafín" },
+
+    // EVA & PABLO (Novio de Eva)
+    "eva-pablo": { tipo: "pareja", p1: "Eva", p2: "Pablo", nombre: "Eva & Pablo", saludo: "Queridos Eva y Pablo", parte: "Serafín" },
+    "eva": { tipo: "pareja", p1: "Eva", p2: "Pablo", nombre: "Eva & Pablo", saludo: "Queridos Eva y Pablo", parte: "Serafín" },
+
+    // JUAN VÍCTOR Y FAMILIA (Mujer de Juan Víctor)
+    "juan-victor": { tipo: "pareja", p1: "Juan Víctor", p2: "Familia", nombre: "Juan Víctor y Familia", saludo: "Queridos Juan Víctor y familia", parte: "Serafín" },
+    "juan-victor-familia": { tipo: "pareja", p1: "Juan Víctor", p2: "Familia", nombre: "Juan Víctor y Familia", saludo: "Queridos Juan Víctor y familia", parte: "Serafín" },
 
     // === INDIVIDUAL + ACOMPAÑANTE (SERAFÍN) ===
     "isa-buendia": { tipo: "individual_plus", nombre: "Isa Buendía", saludo: "Estimada Isa Buendía", parte: "Serafín", acompananteNombre: "Acompañante Isa" },
@@ -806,9 +815,7 @@
     "jose-s": { tipo: "individual_plus", nombre: "Jose", saludo: "Estimado Jose", parte: "Serafín", acompananteNombre: "Novio Jose" },
     "ana-marin": { tipo: "individual_plus", nombre: "Ana Marín", saludo: "Estimada Ana Marín", parte: "Serafín", acompananteNombre: "Acompañante Ana Marín" },
     "lucia": { tipo: "individual_plus", nombre: "Lucía", saludo: "Estimada Lucía", parte: "Serafín", acompananteNombre: "Novio Lucía" },
-    "eva": { tipo: "individual_plus", nombre: "Eva", saludo: "Estimada Eva", parte: "Serafín", acompananteNombre: "Novio Eva" },
     "silvia": { tipo: "individual_plus", nombre: "Silvia", saludo: "Estimada Silvia", parte: "Serafín", acompananteNombre: "Novio Silvia" },
-    "juan-victor": { tipo: "individual_plus", nombre: "Juan Víctor", saludo: "Estimado Juan Víctor", parte: "Serafín", acompananteNombre: "Mujer Juan Víctor" },
     "monica": { tipo: "individual_plus", nombre: "Mónica", saludo: "Estimada Mónica", parte: "Serafín", acompananteNombre: "Novio Mónica" },
     "padres-elena": { tipo: "individual_plus", nombre: "Padres de Elena", saludo: "Estimados", parte: "Serafín", acompananteNombre: "Madre Elena" },
     "ester": { tipo: "individual_plus", nombre: "Ester", saludo: "Estimada Ester", parte: "Serafín", acompananteNombre: "Marido Ester" },
@@ -841,26 +848,35 @@
     "gemma": { tipo: "pareja", p1: "Gema", p2: "Patxi", nombre: "Gema & Patxi", saludo: "Queridos Gema y Patxi", parte: "Lestter" },
     "pachi": { tipo: "pareja", p1: "Gema", p2: "Patxi", nombre: "Gema & Patxi", saludo: "Queridos Gema y Patxi", parte: "Lestter" },
 
+    // JAVI & RAQUEL (Mujer de Javi)
+    "javi-raquel": { tipo: "pareja", p1: "Javi", p2: "Raquel", nombre: "Javi & Raquel", saludo: "Queridos Javi y Raquel", parte: "Lestter" },
+    "javi-l": { tipo: "pareja", p1: "Javi", p2: "Raquel", nombre: "Javi & Raquel", saludo: "Queridos Javi y Raquel", parte: "Lestter" },
+
+    // BILLY Y MANU (Novio de Billy)
+    "billy-manu": { tipo: "pareja", p1: "Billy", p2: "Manu", nombre: "Billy & Manu", saludo: "Queridos Billy y Manu", parte: "Lestter" },
+    "billy": { tipo: "pareja", p1: "Billy", p2: "Manu", nombre: "Billy & Manu", saludo: "Queridos Billy y Manu", parte: "Lestter" },
+
     // === INDIVIDUAL + ACOMPAÑANTE (LESTTER) ===
-    "billy": { tipo: "individual_plus", nombre: "Billy", saludo: "Estimado Billy", parte: "Lestter", acompananteNombre: "Novio Billy" },
     "javi-alemania": { tipo: "individual_plus", nombre: "Javi Alemania", saludo: "Estimado Javi", parte: "Lestter", acompananteNombre: "Novio Javi Alemania" },
     "stefanny": { tipo: "individual_plus", nombre: "Stefanny", saludo: "Estimada Stefanny", parte: "Lestter", acompananteNombre: "Esposo Stefanny" },
     "andres": { tipo: "individual_plus", nombre: "Andrés", saludo: "Estimado Andrés", parte: "Lestter", acompananteNombre: "Esposa Andrés" },
     "juan": { tipo: "individual_plus", nombre: "Juan", saludo: "Estimado Juan", parte: "Lestter", acompananteNombre: "Esposa Juan" },
     "laura-andujar": { tipo: "individual_plus", nombre: "Laura Andújar", saludo: "Estimada Laura", parte: "Lestter", acompananteNombre: "Novia Laura" },
-    "javi-l": { tipo: "individual_plus", nombre: "Javi", saludo: "Estimado Javi", parte: "Lestter", acompananteNombre: "Esposa Javi" },
     "zuleika": { tipo: "individual_plus", nombre: "Zuleika", saludo: "Estimada Zuleika", parte: "Lestter", acompananteNombre: "Amiga Zuleika" },
     "nieves": { tipo: "individual_plus", nombre: "Nieves", saludo: "Estimada Nieves", parte: "Lestter", acompananteNombre: "Esposo Nieves" },
     "alma": { tipo: "individual_plus", nombre: "Alma", saludo: "Estimada Alma", parte: "Lestter", acompananteNombre: "Esposo Alma" },
     "laura-garcia": { tipo: "individual_plus", nombre: "Laura García", saludo: "Estimada Laura", parte: "Lestter", acompananteNombre: "Pareja Laura García" },
 
     // === INDIVIDUALES ESTRICTOS (LESTTER) ===
+    // MAMEN (Amiga de Billy)
+    "mamen": { tipo: "individual", nombre: "Mamen", saludo: "Estimada Mamen", parte: "Lestter" },
+    "amiga-billy": { tipo: "individual", nombre: "Mamen", saludo: "Estimada Mamen", parte: "Lestter" },
+
     "anny": { tipo: "individual", nombre: "Anny", saludo: "Estimada Anny", parte: "Lestter" },
     "rojeiris": { tipo: "individual", nombre: "Rojeiris", saludo: "Estimado Rojeiris", parte: "Lestter" },
     "carmen": { tipo: "individual", nombre: "Carmen", saludo: "Estimada Carmen", parte: "Lestter" },
     "jessica": { tipo: "individual", nombre: "Jessica", saludo: "Estimada Jessica", parte: "Lestter" },
     "andrey": { tipo: "individual", nombre: "Andrey", saludo: "Estimado Andrey", parte: "Lestter" },
-    "amiga-billy": { tipo: "individual", nombre: "Amiga de Billy", saludo: "Estimada", parte: "Lestter" },
     "jose-valencia": { tipo: "individual", nombre: "Jose Valencia", saludo: "Estimado Jose", parte: "Lestter" },
     "marcos": { tipo: "individual", nombre: "Marcos", saludo: "Estimado Marcos", parte: "Lestter" },
     "rodolfo": { tipo: "individual", nombre: "Rodolfo", saludo: "Estimado Rodolfo", parte: "Lestter" },
@@ -957,7 +973,7 @@
       detailsWrapper.innerHTML = `
         <div id="whoAttendsBox" class="bg-olive-100/70 p-4 rounded-2xl border border-olive-300">
           <span class="block font-serif text-sm font-semibold text-olive-900 mb-2">
-            ¿Quién de los dos asistirá a la celebración? <span class="text-red-500">*</span>
+            ¿Quién asistirá a la celebración? <span class="text-red-500">*</span>
           </span>
           <div class="grid grid-cols-2 gap-3">
             <label class="flex items-center space-x-2.5 p-3 rounded-xl border border-olive-300 bg-white cursor-pointer hover:bg-olive-50 transition has-[:checked]:border-olive-700 has-[:checked]:bg-olive-200/60">
