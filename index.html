@@ -976,12 +976,21 @@
   let currentGuestData = null;
 
   // Lector de parámetros URL universal
-  function obtenerParametroInvitado() {
+function obtenerParametroInvitado() {
     try {
-      const decodedHref = decodeURIComponent(window.location.href);
-      const match = decodedHref.match(/[?&]inv=([^&#/\s]+)/i);
-      if (match && match[1]) {
-        return match[1].toLowerCase().trim();
+      // 1. Probar en los parámetros de búsqueda estándar (?inv=...)
+      let urlParams = new URLSearchParams(window.location.search);
+      let inv = urlParams.get('inv');
+      
+      // 2. Si no está ahí, buscar si se coló detrás de un hash (#...?...inv=...)
+      if (!inv && window.location.hash.includes('?')) {
+        const hashQuery = window.location.hash.split('?')[1];
+        urlParams = new URLSearchParams(hashQuery);
+        inv = urlParams.get('inv');
+      }
+
+      if (inv) {
+        return inv.toLowerCase().trim();
       }
     } catch (e) {
       console.error("Error al leer URL:", e);
