@@ -176,7 +176,7 @@
           <p>Alicante, Comunidad Valenciana</p>
           <span class="mt-4 text-xs tracking-widest text-[#6a764a] uppercase font-sans border-t border-[#b59d72]/40 pt-1">Enlace Lestter & Serafín</span>
         </div>
-    </div>
+      </div>
 
       <div class="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden z-20">
         <div class="absolute bottom-0 w-full h-[65%] bg-gradient-to-t from-[#ded0b1] to-[#e4d7b9] border-t-2 border-[#b59d72]/60 [clip-path:polygon(0_35%,50%_0%,100%_35%,100%_100%,0_100%)] shadow-inner"></div>
@@ -268,6 +268,7 @@
       <a href="#itinerario" class="hover:text-gold transition-colors">Itinerario</a>
       <a href="#rsvp" class="bg-gold/90 hover:bg-gold text-olive-950 px-3.5 py-1.5 rounded-full font-semibold transition-all shadow-sm">Confirmar Asistencia</a>
       <a href="#guia" class="hover:text-gold transition-colors">Dónde Comer</a>
+      <a href="#faq" class="hover:text-gold transition-colors">Dudas</a>
       <a href="#regalo" class="hover:text-gold transition-colors">Regalo</a>
     </div>
 
@@ -284,6 +285,7 @@
     <a href="#itinerario" class="nav-mobile-link py-1 hover:text-gold">Itinerario</a>
     <a href="#rsvp" class="nav-mobile-link py-1 text-gold font-bold">Confirmar Asistencia (RSVP)</a>
     <a href="#guia" class="nav-mobile-link py-1 hover:text-gold">Dónde Comer en Alicante</a>
+    <a href="#faq" class="nav-mobile-link py-1 hover:text-gold">Preguntas y Dudas</a>
     <a href="#regalo" class="nav-mobile-link py-1 hover:text-gold">Regalo de Boda</a>
   </div>
 </nav>
@@ -450,7 +452,7 @@
             <a href="https://maps.google.com/?q=Finca+Santa+Luzia+Alicante" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 text-xs font-semibold text-gold-light hover:text-white bg-olive-700/60 hover:bg-olive-700 px-3.5 py-1.5 rounded-lg border border-gold/30 transition">
               <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               <span>Ubicación Finca Santa Luzia</span>
-          </a>
+            </a>
           </div>
         </div>
       </div>
@@ -665,14 +667,14 @@
           🍣 Sushi & Ramen
         </button>
         <button onclick="filterMap('italiano', this)" class="filter-btn px-4 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition border border-emerald-300">
-  🍕 Italiano
-</button>
-<button onclick="filterMap('kebab', this)" class="filter-btn px-4 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-900 transition border border-amber-300">
-  🥙 Kebab
-</button>
-<button onclick="filterMap('carnes', this)" class="filter-btn px-4 py-1.5 rounded-full bg-red-50 hover:bg-red-100 text-red-900 transition border border-red-300">
-  🥩 Carnes
-</button>
+          🍕 Italiano
+        </button>
+        <button onclick="filterMap('kebab', this)" class="filter-btn px-4 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-900 transition border border-amber-300">
+          🥙 Kebab
+        </button>
+        <button onclick="filterMap('carnes', this)" class="filter-btn px-4 py-1.5 rounded-full bg-red-50 hover:bg-red-100 text-red-900 transition border border-red-300">
+          🥩 Carnes
+        </button>
       </div>
 
       <!-- Contenedor del mapa Leaflet -->
@@ -681,6 +683,140 @@
       <p class="text-xs text-olive-600 font-serif italic mt-4 pt-3 border-t border-olive-150 text-center">
         Toca cualquier icono para ver los detalles del local y abrir la ruta directa en Google Maps.
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN: PREGUNTAS FRECUENTES Y DUDAS (TRASLADADA TRAS EL MAPA) -->
+<section id="faq" class="py-24 px-4 md:px-8 bg-parchment-pattern border-b border-olive-200 relative">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-16">
+      <span class="uppercase tracking-widest text-xs font-semibold text-gold-dark block mb-2">Todo lo que necesitas saber</span>
+      <h2 class="font-magic text-3xl sm:text-4xl md:text-5xl text-olive-950">Preguntas Frecuentes</h2>
+      <div class="w-20 h-1 bg-gold mx-auto mt-4 rounded-full"></div>
+      <p class="font-serif text-olive-800 text-lg mt-3 max-w-xl mx-auto">
+        Respuestas y detalles prácticos para que solo os preocupéis de disfrutar al máximo de la celebración.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+      <!-- FAQ 1: Traslados y Taxis -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-lg border border-olive-200 flex flex-col justify-between hover:shadow-xl transition-all">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-olive-100 text-olive-800 flex items-center justify-center font-bold text-lg mb-3">
+            🚕
+          </div>
+          <h3 class="font-magic text-lg font-bold text-olive-900 mb-2">¿Cómo nos desplazamos? (No hay buses)</h3>
+          <p class="font-serif text-olive-800 text-base leading-relaxed">
+            No disponemos de servicio de autobuses, por lo que los trayectos se realizarán en vehículo propio o taxi/VTC. El trayecto entre el Ayuntamiento y Finca Santa Luzia son solo unos <strong>15–18 minutos</strong>.
+          </p>
+          <div class="mt-3 bg-olive-50 p-3 rounded-xl border border-olive-200 font-sans text-xs text-olive-900 space-y-1">
+            <p><strong>Radio Tele Taxi Alicante:</strong> <a href="tel:965252511" class="text-olive-700 underline font-semibold">965 25 25 11</a></p>
+            <p><strong>Apps disponibles en Alicante:</strong> Uber, Cabify, Bolt y Free Now.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 2: Aparcamiento -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-lg border border-olive-200 flex flex-col justify-between hover:shadow-xl transition-all">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-olive-100 text-olive-800 flex items-center justify-center font-bold text-lg mb-3">
+            🅿️
+          </div>
+          <h3 class="font-magic text-lg font-bold text-olive-900 mb-2">¿Dónde podemos aparcar?</h3>
+          <p class="font-serif text-olive-800 text-base leading-relaxed">
+            <strong>En el Ayuntamiento:</strong> Recomendamos parkings públicos cercanos (como Puerto, San Cristóbal o Alfonso el Sabio).<br><br>
+            <strong>En Finca Santa Luzia:</strong> El parking propio de la finca es <em>bastante limitado</em>. Aunque hay alguna calle aledaña donde se puede estacionar, no suele ser fácil encontrar sitio, por lo que recomendamos compartir coche o venir en taxi si es posible.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 3: Cóctel en Césped y Tacones -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-lg border border-olive-200 flex flex-col justify-between hover:shadow-xl transition-all">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-olive-100 text-olive-800 flex items-center justify-center font-bold text-lg mb-3">
+            👠
+          </div>
+          <h3 class="font-magic text-lg font-bold text-olive-900 mb-2">¿Qué calzado llevar? (Aviso Césped)</h3>
+          <p class="font-serif text-olive-800 text-base leading-relaxed">
+            El cóctel de bienvenida se llevará a cabo en el jardín sobre césped. Para quienes llevéis <strong>tacón fino</strong>, pondremos a vuestra disposición <strong>cubretacones protectores</strong> para que no os clavéis. Con tacón ancho, cuña o plano no tendréis ningún problema.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 4: ¿Y después de las 00:00? -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-lg border border-olive-200 flex flex-col justify-between hover:shadow-xl transition-all">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-olive-100 text-olive-800 flex items-center justify-center font-bold text-lg mb-3">
+            🌙
+          </div>
+          <h3 class="font-magic text-lg font-bold text-olive-900 mb-2">¿Qué pasa a partir de las 00:00 h?</h3>
+          <p class="font-serif text-olive-800 text-base leading-relaxed">
+            La fiesta en Santa Luzia finaliza a medianoche, pero a quien le apetezca seguir bailando y bebiendo, ¡Alicante ofrece mil planes! Nos podemos mover a locales cercanos de fiesta como <strong>Texaco</strong>, <strong>Copity</strong>, <strong>Magma</strong> o <strong>Marmarela</strong>. ¡Hay opciones para todos los que quieran alargar la noche!
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 5: Código de Vestimenta -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-lg border border-olive-200 flex flex-col justify-between hover:shadow-xl transition-all">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-olive-100 text-olive-800 flex items-center justify-center font-bold text-lg mb-3">
+            👔
+          </div>
+          <h3 class="font-magic text-lg font-bold text-olive-900 mb-2">Código de Vestimenta (Dress Code)</h3>
+          <p class="font-serif text-olive-800 text-base leading-relaxed">
+            Formal / Traje de fiesta y cóctel. No hay normas estrictas de color; venid elegantes pero sobre todo cómodos para reír, brindar y darlo todo en la pista de baile.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 6: Menús Especiales y Alergias -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-lg border border-olive-200 flex flex-col justify-between hover:shadow-xl transition-all">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-olive-100 text-olive-800 flex items-center justify-center font-bold text-lg mb-3">
+            🥗
+          </div>
+          <h3 class="font-magic text-lg font-bold text-olive-900 mb-2">Alergias o Menús Especiales</h3>
+          <p class="font-serif text-olive-800 text-base leading-relaxed">
+            Todo el menú estará perfectamente adaptado a celiacos, vegetarianos, veganos, sin lactosa o cualquier otra alergia. Solo os pedimos indicarlo en el formulario de confirmación antes del <strong>5 de diciembre de 2026</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TARJETA: ¿TIENES OTRA DUDA? (ENVÍO DIRECTO A SERABOHE@GMAIL.COM) -->
+    <div class="mt-12 bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-olive-200 text-left">
+      <div class="flex items-center space-x-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-olive-900 text-gold flex items-center justify-center font-bold text-lg shadow-sm">
+          ✉️
+        </div>
+        <div>
+          <h3 class="font-magic text-xl text-olive-900">¿Tienes alguna otra duda o consulta?</h3>
+          <p class="text-xs text-olive-600 font-sans">Escríbenos directamente y te responderemos lo antes posible</p>
+        </div>
+      </div>
+
+      <form onsubmit="handleSendQuestion(event)" class="space-y-4 font-serif">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="questionSenderName" class="block text-sm font-semibold text-olive-900 mb-1">Tu nombre <span class="text-red-500">*</span></label>
+            <input type="text" id="questionSenderName" required placeholder="Nombre completo" class="w-full px-4 py-2.5 rounded-xl border border-olive-300 focus:ring-2 focus:ring-olive-600 outline-none text-sm bg-olive-50/40">
+          </div>
+          <div>
+            <label for="questionSenderEmail" class="block text-sm font-semibold text-olive-900 mb-1">Tu correo electrónico <span class="text-red-500">*</span></label>
+            <input type="email" id="questionSenderEmail" required placeholder="tu@email.com" class="w-full px-4 py-2.5 rounded-xl border border-olive-300 focus:ring-2 focus:ring-olive-600 outline-none text-sm bg-olive-50/40">
+          </div>
+        </div>
+
+        <div>
+          <label for="questionSenderMessage" class="block text-sm font-semibold text-olive-900 mb-1">¿Qué duda o pregunta tienes? <span class="text-red-500">*</span></label>
+          <textarea id="questionSenderMessage" required rows="3" placeholder="Escribe aquí tu duda sobre el transporte, horarios, hotel..." class="w-full px-4 py-2.5 rounded-xl border border-olive-300 focus:ring-2 focus:ring-olive-600 outline-none text-sm bg-olive-50/40"></textarea>
+        </div>
+
+        <button type="submit" class="w-full sm:w-auto bg-olive-800 hover:bg-olive-900 text-gold-light py-3 px-6 rounded-xl font-magic text-xs uppercase tracking-wider transition-all flex items-center justify-center space-x-2 shadow-md">
+          <span>Enviar Consulta a los Novios ✉️</span>
+        </button>
+      </form>
     </div>
   </div>
 </section>
@@ -953,13 +1089,11 @@
   let currentGuestData = null;
 
   // Lector de parámetros URL universal
-function obtenerParametroInvitado() {
+  function obtenerParametroInvitado() {
     try {
-      // 1. Probar en los parámetros de búsqueda estándar (?inv=...)
       let urlParams = new URLSearchParams(window.location.search);
       let inv = urlParams.get('inv');
       
-      // 2. Si no está ahí, buscar si se coló detrás de un hash (#...?...inv=...)
       if (!inv && window.location.hash.includes('?')) {
         const hashQuery = window.location.hash.split('?')[1];
         urlParams = new URLSearchParams(hashQuery);
@@ -1238,7 +1372,7 @@ function obtenerParametroInvitado() {
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
-    });
+      });
     });
   }
 
@@ -1295,6 +1429,19 @@ function obtenerParametroInvitado() {
         buttonElement.innerHTML = originalText;
       }, 2000);
     }
+  }
+
+  /* ENVÍO DIRECTO DE DUDA A SERABOHE@GMAIL.COM */
+  function handleSendQuestion(e) {
+    e.preventDefault();
+    const name = document.getElementById('questionSenderName').value.trim();
+    const email = document.getElementById('questionSenderEmail').value.trim();
+    const msg = document.getElementById('questionSenderMessage').value.trim();
+
+    const subject = encodeURIComponent(`Consulta Boda Lestter & Serafín - De: ${name}`);
+    const body = encodeURIComponent(`Hola Lestter y Serafín,\n\nSoy ${name} (${email}) y tengo la siguiente duda sobre vuestra boda:\n\n${msg}\n\n¡Un abrazo!`);
+
+    window.location.href = `mailto:serabohe@gmail.com?subject=${subject}&body=${body}`;
   }
 
   /* DOBBY PEEKER */
@@ -1473,8 +1620,8 @@ function obtenerParametroInvitado() {
             spread: 70,
             origin: { y: 0.6 },
             colors: ['#c5a059', '#879461', '#f4e5b8', '#a32222']
-        });
-      }
+          });
+        }
       } else {
         successText.textContent = `Muchas gracias por avisarnos. Sentiremos mucho no teneros con nosotros ese día, pero brindaremos por vosotros.`;
       }
@@ -1491,7 +1638,6 @@ function obtenerParametroInvitado() {
   }
 
   const restaurantes = [
-    // --- LISTA ORIGINAL ---
     { nombre: "Restaurante TOCH", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Mediterráneo & Arroces", lat: 38.3688, lng: -0.4208, desc: "Restaurante mediterráneo a pie de playa con arroces a leña y terraza privilegiada.", url: "Restaurante+TOCH+Playa+San+Juan+Alicante" },
     { nombre: "Restaurante Mediterráneo", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Mediterráneo de Paseo", lat: 38.3639, lng: -0.4239, desc: "En plena Avenida de Niza en primera línea de playa. Pescados, salazones y tapeo marinero.", url: "Restaurante+Mediterraneo+Avenida+Niza+San+Juan+Alicante" },
     { nombre: "Cervecería Sento Playa", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Montaditos & Tapas", lat: 38.3719, lng: -0.4285, desc: "Famoso por sus tapas gourmet y montaditos templados de solomillo y foie en Vicente Ramos.", url: "Cerveceria+Sento+Playa+San+Juan+Alicante" },
@@ -1520,8 +1666,6 @@ function obtenerParametroInvitado() {
     { nombre: "Sushi Hajimi", cat: "japones", zona: "Centro", tipo: "🍣 Sushi & Makis", lat: 38.3421, lng: -0.4912, desc: "Sushi variado y fresco a precios competitivos cerca de la estación.", url: "Restaurante+Sushi+Hajimi+Alicante" },
     { nombre: "Natsu Ramen", cat: "japones", zona: "Centro", tipo: "🍜 Ramen Bar", lat: 38.3427, lng: -0.4915, desc: "Taberna japonesa experta en caldos Tonkotsu y fideos ramen artesanos.", url: "Natsu+Ramen+Alicante" },
     { nombre: "Ramen Toyaki", cat: "japones", zona: "Centro", tipo: "🍜 Ramen & Brochetas", lat: 38.3453, lng: -0.4868, desc: "Ramen y brochetas japonesas en la concurrida calle Castaños.", url: "Ramen+Toyaki+Alicante" },
-
-    // --- NUEVAS INCORPORACIONES CON POSICIONES Y ZONAS CORREGIDAS ---
     { nombre: "Metoo Sushi Buffet", cat: "japones", zona: "Princesa Mercedes", tipo: "🍣 Buffet Libre a la Carta", lat: 38.3456, lng: -0.5049, desc: "Buffet asiático a la carta con pedido por tablet en Av. Dr. Jiménez Díaz.", url: "Metoo+Sushi+Buffet+Alicante" },
     { nombre: "Metoo Sushi Garden", cat: "japones", zona: "Gran Vía", tipo: "🍣 Buffet Libre a la Carta", lat: 38.3619, lng: -0.4744, desc: "Amplio buffet japonés a la carta con terraza en Av. Antonio Ramos Carratalá.", url: "Metoo+Sushi+Garden+Alicante" },
     { nombre: "Casa Julio", cat: "tapas", zona: "Playa San Juan", tipo: "🍢 Arroces & Marisquería", lat: 38.3758, lng: -0.4131, desc: "Arroces a leña y pescados en primera línea de la playa (Av. de Niza).", url: "Restaurante+Casa+Julio+Alicante" },
@@ -1545,70 +1689,71 @@ function obtenerParametroInvitado() {
   let mapRestaurantes;
   let allMarkers = [];
 
- function initAlicanteMap() {
-  const mapElement = document.getElementById('alicanteMap');
-  if (!mapElement) return;
+  function initAlicanteMap() {
+    const mapElement = document.getElementById('alicanteMap');
+    if (!mapElement) return;
 
-  mapRestaurantes = L.map('alicanteMap', { scrollWheelZoom: false }).setView([38.3580, -0.4580], 12);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap',
-    maxZoom: 19
-  }).addTo(mapRestaurantes);
+    mapRestaurantes = L.map('alicanteMap', { scrollWheelZoom: false }).setView([38.3580, -0.4580], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap',
+      maxZoom: 19
+    }).addTo(mapRestaurantes);
 
-  restaurantes.forEach(item => {
-    let pinClass = "pin-tapas";
-    let iconEmoji = "🍢";
+    restaurantes.forEach(item => {
+      let pinClass = "pin-tapas";
+      let iconEmoji = "🍢";
 
-    if (item.cat === 'burger') {
-      pinClass = "pin-burger";
-      iconEmoji = "🍔";
-    } else if (item.cat === 'mexicano') {
-      pinClass = "pin-mex";
-      iconEmoji = "🌮";
-    } else if (item.cat === 'japones') {
-      pinClass = "pin-japon";
-      iconEmoji = item.tipo.includes("Ramen") ? "🍜" : "🍣";
-    } else if (item.cat === 'italiano') {
-      pinClass = "pin-italiano";
-      iconEmoji = "🍕";
-    } else if (item.cat === 'kebab') {
-      pinClass = "pin-kebab";
-      iconEmoji = "🥙";
-    } else if (item.cat === 'carnes') {
-      pinClass = "pin-carnes";
-      iconEmoji = "🥩";
-    } else if (item.cat === 'asiatico') {
-      pinClass = "pin-asiatico";
-      iconEmoji = "🥢";
-    }
+      if (item.cat === 'burger') {
+        pinClass = "pin-burger";
+        iconEmoji = "🍔";
+      } else if (item.cat === 'mexicano') {
+        pinClass = "pin-mex";
+        iconEmoji = "🌮";
+      } else if (item.cat === 'japones') {
+        pinClass = "pin-japon";
+        iconEmoji = item.tipo.includes("Ramen") ? "🍜" : "🍣";
+      } else if (item.cat === 'italiano') {
+        pinClass = "pin-italiano";
+        iconEmoji = "🍕";
+      } else if (item.cat === 'kebab') {
+        pinClass = "pin-kebab";
+        iconEmoji = "🥙";
+      } else if (item.cat === 'carnes') {
+        pinClass = "pin-carnes";
+        iconEmoji = "🥩";
+      } else if (item.cat === 'asiatico') {
+        pinClass = "pin-asiatico";
+        iconEmoji = "🥢";
+      }
 
-    const customIcon = L.divIcon({
-      className: 'custom-leaflet-marker',
-      html: `<div class="custom-pin ${pinClass}" style="width: 34px; height: 34px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-size:16px;">${iconEmoji}</div>`,
-      iconSize: [34, 34],
-      iconAnchor: [17, 17],
-      popupAnchor: [0, -18]
-    });
+      const customIcon = L.divIcon({
+        className: 'custom-leaflet-marker',
+        html: `<div class="custom-pin ${pinClass}" style="width: 34px; height: 34px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-size:16px;">${iconEmoji}</div>`,
+        iconSize: [34, 34],
+        iconAnchor: [17, 17],
+        popupAnchor: [0, -18]
+      });
 
-    const popupContent = `
-      <div style="font-family: 'Montserrat', sans-serif; padding: 6px 8px; max-width: 230px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-          <span style="font-size: 10px; font-weight: bold; text-transform: uppercase; color: #6a764a; letter-spacing: 0.05em;">${item.tipo}</span>
-          <span style="font-size: 9px; background: #ebede2; color: #383e2b; padding: 2px 6px; border-radius: 6px; font-weight: 600;">${item.zona}</span>
+      const popupContent = `
+        <div style="font-family: 'Montserrat', sans-serif; padding: 6px 8px; max-width: 230px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+            <span style="font-size: 10px; font-weight: bold; text-transform: uppercase; color: #6a764a; letter-spacing: 0.05em;">${item.tipo}</span>
+            <span style="font-size: 9px; background: #ebede2; color: #383e2b; padding: 2px 6px; border-radius: 6px; font-weight: 600;">${item.zona}</span>
+          </div>
+          <h4 style="font-family: 'Cinzel Decorative', serif; font-size: 14px; font-weight: bold; color: #1d2116; margin: 3px 0 6px 0;">${item.nombre}</h4>
+          <p style="font-family: 'Cormorant Garamond', serif; font-size: 14px; color: #434b31; line-height: 1.25; margin-bottom: 8px;">${item.desc}</p>
+          <a href="https://maps.google.com/?q=${item.url}" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; text-align: center; background: #383e2b; color: #f4e5b8; font-size: 11px; font-weight: 600; padding: 6px 0; border-radius: 8px; text-decoration: none;">
+            Cómo llegar ↗
+          </a>
         </div>
-        <h4 style="font-family: 'Cinzel Decorative', serif; font-size: 14px; font-weight: bold; color: #1d2116; margin: 3px 0 6px 0;">${item.nombre}</h4>
-        <p style="font-family: 'Cormorant Garamond', serif; font-size: 14px; color: #434b31; line-height: 1.25; margin-bottom: 8px;">${item.desc}</p>
-        <a href="https://maps.google.com/?q=${item.url}" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; text-align: center; background: #383e2b; color: #f4e5b8; font-size: 11px; font-weight: 600; padding: 6px 0; border-radius: 8px; text-decoration: none;">
-          Cómo llegar ↗
-        </a>
-      </div>
-    `;
+      `;
 
-    const marker = L.marker([item.lat, item.lng], { icon: customIcon }).bindPopup(popupContent).addTo(mapRestaurantes);
-    marker.category = item.cat;
-    allMarkers.push(marker);
-  });
-}
+      const marker = L.marker([item.lat, item.lng], { icon: customIcon }).bindPopup(popupContent).addTo(mapRestaurantes);
+      marker.category = item.cat;
+      allMarkers.push(marker);
+    });
+  }
+
   function filterMap(selectedCategory, clickedBtn) {
     const buttons = document.querySelectorAll('#mapFilters .filter-btn');
     buttons.forEach(btn => {
