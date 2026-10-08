@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding of Lestter & Serafín | February 27, 2027</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&family=MedievalSharp&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Leaflet.js -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            olive: {
+              50: '#f6f7f2',
+              100: '#ebede2',
+              200: '#d7dbc5',
+              300: '#bec5a2',
+              400: '#a3ad7f',
+              500: '#879461',
+              600: '#6a764a',
+              700: '#545d3b',
+              800: '#434b31',
+              900: '#383e2b',
+              950: '#1d2116',
+            },
+            gold: {
+              light: '#f4e5b8',
+              DEFAULT: '#c5a059',
+              dark: '#9a752c',
+            },
+            parchment: '#fcf8ee',
+            parchmentDark: '#f3ebd4',
+          },
+          fontFamily: {
+            magic: ['"Cinzel Decorative"', 'serif'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Montserrat"', 'sans-serif'],
+            letter: ['"MedievalSharp"', 'cursive'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .bg-parchment-pattern {
+      background-color: #fcf8ee;
+      background-image: radial-gradient(#d3c7a9 0.75px, transparent 0.75px), radial-gradient(#d3c7a9 0.75px, #fcf8ee 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+
+    .seal-shadow {
+      box-shadow: 0 8px 24px rgba(67, 75, 49, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4), inset 0 -3px 6px rgba(0, 0, 0, 0.6);
+    }
+
+    .envelope-perspective { perspective: 1400px; }
+    .envelope-flap { transform-origin: top; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+    .envelope-unfolded .envelope-flap { transform: rotateX(180deg); z-index: 10; }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(197, 160, 89, 0.6); transform: scale(1); }
+      50% { box-shadow: 0 0 35px rgba(229, 200, 139, 0.95); transform: scale(1.04); }
+    }
+    .seal-glow { animation: pulseGlow 2s infinite ease-in-out; }
+    .ink-emerald { color: #174228; }
+
+    .custom-pin {
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; color: white; font-size: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35); border: 2px solid #fcf8ee;
+      transition: transform 0.2s ease; cursor: pointer;
+    }
+    .custom-pin:hover { transform: scale(1.25); }
+
+    .pin-tapas { background: #545d3b; }
+    .pin-mex { background: #c5a059; }
+    .pin-japon { background: #b43d3d; }
+    .pin-burger { background: #b8602b; }
+    .pin-italiano { background: #1b7a43; }
+    .pin-kebab { background: #d97706; }
+    .pin-carnes { background: #7f1d1d; }
+    .pin-asiatico { background: #831843; }
+
+    .leaflet-popup-content-wrapper {
+      border-radius: 18px !important; background: #fcf8ee !important;
+      border: 1px solid #d7dbc5 !important; box-shadow: 0 12px 28px rgba(0,0,0,0.18) !important;
+      padding: 4px !important;
+    }
+    .leaflet-popup-tip { background: #fcf8ee !important; }
+
+    /* DOBBY PEEKER STYLES AND ANIMATIONS */
+    #dobbyPeekerWidget {
+      transform: translateY(48px);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    #dobbyPeekerWidget:hover:not(.active) {
+      transform: translateY(32px) rotate(2deg);
+    }
+    #dobbyPeekerWidget.active {
+      transform: translateY(0) rotate(0deg);
+    }
+
+    @keyframes dobbyEarWiggle {
+      0%, 100% { transform: rotate(0deg); }
+      30% { transform: rotate(-4.5deg); }
+      70% { transform: rotate(4.5deg); }
+    }
+
+    #dobbyPeekerWidget:hover .dobby-ear-l {
+      animation: dobbyEarWiggle 0.6s ease-in-out infinite;
+      transform-origin: 52px 64px;
+    }
+    #dobbyPeekerWidget:hover .dobby-ear-r {
+      animation: dobbyEarWiggle 0.6s ease-in-out infinite reverse;
+      transform-origin: 108px 64px;
+    }
+
+    .dobby-scrolling .dobby-ear-l {
+      animation: dobbyEarWiggle 0.35s ease-in-out infinite !important;
+      transform-origin: 52px 64px;
+    }
+    .dobby-scrolling .dobby-ear-r {
+      animation: dobbyEarWiggle 0.35s ease-in-out infinite reverse !important;
+      transform-origin: 108px 64px;
+    }
+    .dobby-scrolling:not(.active) {
+      transform: translateY(40px) !important;
+    }
+
+    .dobby-filter-shadow {
+      filter: drop-shadow(0 10px 18px rgba(29, 33, 22, 0.45));
+    }
+  </style>
+</head>
+
+<body class="bg-olive-50 text-olive-950 font-sans antialiased overflow-x-hidden selection:bg-olive-300 selection:text-olive-950 overflow-hidden" id="bodyRoot">
+
+<!-- FULLSCREEN HOGWARTS INVITATION OVERLAY GATEWAY -->
+<div id="magicEntranceGate" class="fixed inset-0 z-50 flex items-center justify-center bg-olive-950/95 backdrop-blur-md px-4 py-6 transition-all duration-1000">
+  <div class="absolute inset-0 opacity-30 pointer-events-none bg-[radial-gradient(#e5c88b_1.5px,transparent_1.5px)] [background-size:28px_28px]"></div>
+
+  <div class="relative w-full max-w-xl mx-auto flex flex-col items-center justify-center">
+
+    <div id="gatePrompt" class="text-center mb-6 transition-opacity duration-500">
+      <span class="inline-block uppercase tracking-[0.3em] text-xs font-semibold text-gold px-4 py-1.5 rounded-full border border-gold/40 bg-olive-900/80 mb-2">
+        ⚡ Special Owl Post Delivery
+      </span>
+      <h2 class="font-magic text-2xl sm:text-4xl text-gold-light tracking-wide">
+        A solemn invitation has arrived
+      </h2>
+      <p class="font-serif italic text-olive-300 text-sm sm:text-base mt-1">
+        Tap the wax seal to break the enchantment and open your invitation
+      </p>
+    </div>
+
+    <!-- ENVELOPE -->
+    <div id="gateEnvelope" class="relative w-full max-w-[480px] h-[300px] sm:h-[320px] envelope-perspective cursor-pointer transition-all duration-700">
+
+      <div class="absolute inset-0 bg-[#e7ddc4] rounded-2xl shadow-2xl border-2 border-[#b59d72] overflow-hidden">
+        <div id="envelopeAddress" class="absolute inset-0 p-6 sm:p-8 flex flex-col justify-center items-end text-right font-letter text-sm sm:text-base leading-relaxed ink-emerald select-none transition-opacity duration-500">
+          <p class="italic text-xs font-sans text-olive-700 tracking-wider uppercase mb-1">To:</p>
+          <p id="guestEnvelopeName" class="font-bold text-base sm:text-lg">Our Guests of Honor</p>
+          <p id="guestEnvelopeLoc">The coziest room of the house</p>
+          <p>Alicante, Valencian Community</p>
+          <span class="mt-4 text-xs tracking-widest text-[#6a764a] uppercase font-sans border-t border-[#b59d72]/40 pt-1">Wedding of Lestter & Serafín</span>
+        </div>
+      </div>
+
+      <div class="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden z-20">
+        <div class="absolute bottom-0 w-full h-[65%] bg-gradient-to-t from-[#ded0b1] to-[#e4d7b9] border-t-2 border-[#b59d72]/60 [clip-path:polygon(0_35%,50%_0%,100%_35%,100%_100%,0_100%)] shadow-inner"></div>
+      </div>
+
+      <div id="gateFlap" class="envelope-flap absolute top-0 left-0 right-0 h-[58%] bg-[#dfd2b4] rounded-t-2xl [clip-path:polygon(0_0,100%_0,50%_100%)] z-30 shadow-md border-b border-[#b59d72]/50">
+      </div>
+
+      <div id="gateWaxSeal" onclick="openHogwartsLetter(event)" class="absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 cursor-pointer transform hover:scale-110 active:scale-95 transition duration-300">
+        <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#801818] via-[#a32222] to-[#540d0d] seal-shadow seal-glow border-2 border-amber-300/40 flex flex-col items-center justify-center">
+          <span class="font-magic text-gold-light text-lg sm:text-xl font-black drop-shadow tracking-tight">L & S</span>
+          <span class="text-[9px] uppercase tracking-widest text-amber-200/90 font-serif font-bold">Open</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- HOGWARTS ACCEPTANCE LETTER -->
+    <div id="revealedLetterModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-md animate-fade-in overflow-y-auto">
+      <div class="relative bg-[#fcf6e8] text-olive-950 w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-10 shadow-2xl border-4 border-[#b59d72] text-center my-auto">
+
+        <div class="border-b-2 border-dashed border-[#b59d72]/60 pb-5 mb-5">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-olive-900 border-2 border-gold flex items-center justify-center shadow-lg text-gold font-magic text-2xl font-bold mb-2">
+            L&S
+          </div>
+          <p class="font-magic text-xs uppercase tracking-[0.25em] text-olive-800 font-bold">
+            Solemn Marriage Decree
+          </p>
+          <p class="font-serif italic text-xs text-olive-600">
+            «School of Alliances and Eternal Love»
+          </p>
+        </div>
+
+        <div class="text-left font-serif text-olive-900 space-y-4 leading-relaxed text-base sm:text-lg">
+          <p id="guestLetterGreeting" class="font-bold ink-emerald font-letter text-lg sm:text-xl">
+            Dear Guests of Honor,
+          </p>
+          <p>
+            We take immense pleasure and joy in informing you that you have been formally invited to the solemn celebration of the marriage of:
+          </p>
+
+          <div class="bg-olive-100/70 border border-gold/50 rounded-2xl py-3 px-4 text-center my-2 shadow-inner">
+            <span class="font-magic text-2xl sm:text-3xl text-olive-950 font-bold tracking-wider block">
+              Lestter & Serafín
+            </span>
+            <span class="text-xs uppercase tracking-widest text-olive-700 font-sans font-semibold">
+              Saturday, February 27, 2027
+            </span>
+          </div>
+
+          <p class="text-sm sm:text-base">
+            The ceremony will commence at the <strong>Alicante Town Hall (Ayuntamiento de Alicante)</strong> at <strong>12:00 PM</strong>, followed by the cocktail reception and banquet at <strong>Finca Santa Luzia</strong> starting at <strong>1:30 PM</strong>.
+          </p>
+
+          <p class="text-xs sm:text-sm text-olive-800 bg-amber-50 p-3 rounded-xl border border-amber-200">
+            ⚡ <strong>Important:</strong> Please kindly confirm your attendance (RSVP) before <strong>December 5, 2026</strong>.
+          </p>
+
+          <p class="font-serif italic text-right text-sm text-olive-700 pt-2">
+            Warmest regards,<br>
+            <strong class="font-magic text-base text-olive-900">Lestter & Serafín</strong>
+          </p>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-[#b59d72]/40">
+          <button onclick="enterCelebrationWebsite()" class="w-full bg-olive-900 hover:bg-olive-800 text-gold-light py-4 px-6 rounded-2xl font-magic text-sm sm:text-base font-bold tracking-wider uppercase shadow-xl transition-all transform hover:scale-[1.02] active:scale-95 flex items-center justify-center space-x-2 border border-gold/40">
+            <span>✨ Enter Lestter & Serafín's Wedding Website ✨</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-olive-900/90 backdrop-blur-md text-olive-100 border-b border-gold/30 py-3 px-4 md:px-8">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <a href="#inicio" class="flex items-center space-x-2 group">
+      <span class="font-magic text-xl md:text-2xl text-gold group-hover:scale-105 transition-transform duration-300">L & S</span>
+      <span class="hidden sm:inline-block font-serif text-sm tracking-widest uppercase border-l border-gold/40 pl-3 text-olive-200">02 · 27 · 2027</span>
+    </a>
+
+    <div class="hidden md:flex items-center space-x-5 text-xs uppercase tracking-widest font-medium">
+      <button onclick="showInvitationAgain()" class="text-gold-light hover:text-white flex items-center space-x-1 border border-gold/40 px-2.5 py-1 rounded-full text-[11px] transition">
+        <span>📜 Magic Letter</span>
+      </button>
+      <a href="#bienvenida" class="hover:text-gold transition-colors">Welcome</a>
+      <a href="#itinerario" class="hover:text-gold transition-colors">Schedule</a>
+      <a href="#rsvp" class="bg-gold/90 hover:bg-gold text-olive-950 px-3.5 py-1.5 rounded-full font-semibold transition-all shadow-sm">RSVP</a>
+      <a href="#guia" class="hover:text-gold transition-colors">Where to Eat</a>
+      <a href="#faq" class="hover:text-gold transition-colors">FAQ</a>
+      <a href="#regalo" class="hover:text-gold transition-colors">Gift</a>
+    </div>
+
+    <button id="mobileMenuBtn" aria-label="Open menu" class="md:hidden text-gold focus:outline-none p-2">
+      <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden md:hidden border-t border-olive-800 mt-3 pt-3 flex flex-col space-y-3 pb-2 text-center text-sm font-medium tracking-wide">
+    <button onclick="showInvitationAgain()" class="nav-mobile-link py-1 text-gold font-bold">📜 View Magic Letter</button>
+    <a href="#bienvenida" class="nav-mobile-link py-1 hover:text-gold">Welcome</a>
+    <a href="#itinerario" class="nav-mobile-link py-1 hover:text-gold">Schedule</a>
+    <a href="#rsvp" class="nav-mobile-link py-1 text-gold font-bold">RSVP</a>
+    <a href="#guia" class="nav-mobile-link py-1 hover:text-gold">Where to Eat in Alicante</a>
+    <a href="#faq" class="nav-mobile-link py-1 hover:text-gold">Questions & FAQ</a>
+    <a href="#regalo" class="nav-mobile-link py-1 hover:text-gold">Wedding Gift</a>
+  </div>
+</nav>
+
+<header id="inicio" class="min-h-[70vh] sm:min-h-[85vh] relative flex flex-col items-center justify-center pt-28 pb-16 px-4 bg-gradient-to-b from-olive-950 via-olive-900 to-olive-800 text-olive-50 text-center overflow-hidden">
+  <div class="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#e5c88b_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+  <div class="relative z-10 max-w-3xl mx-auto space-y-6">
+    <span class="inline-block uppercase tracking-[0.35em] text-xs font-semibold text-gold px-4 py-1.5 rounded-full border border-gold/30 bg-olive-900/60 backdrop-blur-sm">
+      Saturday, February 27, 2027 · Alicante
+    </span>
+    <h1 class="font-magic text-4xl sm:text-6xl md:text-7xl text-gold-light tracking-wider drop-shadow-md">
+      Lestter & Serafín
+    </h1>
+    <p class="font-serif italic text-xl sm:text-2xl text-olive-200 max-w-xl mx-auto">
+      «There are journeys worth celebrating with all the magic in the world.»
+    </p>
+
+    <div class="flex items-center justify-center space-x-3 py-1 opacity-80">
+      <div class="w-12 h-px bg-gold/40"></div>
+      <svg viewBox="0 0 24 24" class="w-5 h-5 text-gold fill-none stroke-current stroke-2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 3 2 21 22 21" />
+        <circle cx="12" cy="15" r="4.5" />
+        <line x1="12" y1="3" x2="12" y2="21" />
+      </svg>
+      <div class="w-12 h-px bg-gold/40"></div>
+    </div>
+    
+    <div class="pt-4 flex flex-wrap gap-4 justify-center items-center">
+      <a href="#rsvp" class="bg-gold hover:bg-gold-light text-olive-950 font-semibold px-7 py-3 rounded-full shadow-lg font-magic text-xs uppercase tracking-wider transition-all transform hover:-translate-y-0.5">
+        Confirm Attendance
+      </a>
+      <a href="#itinerario" class="bg-olive-800/80 hover:bg-olive-800 text-olive-100 border border-gold/40 px-6 py-3 rounded-full font-serif text-sm tracking-wide transition-all">
+        View Schedule ↓
+      </a>
+    </div>
+  </div>
+</header>
+
+<section id="bienvenida" class="py-20 px-4 md:px-8 bg-parchment-pattern border-b border-olive-200 relative">
+  <div class="max-w-5xl mx-auto text-center">
+    <span class="font-serif italic text-gold-dark text-lg md:text-xl block mb-2">
+      «The most magical moments are those shared with the people we love»
+    </span>
+    <h2 class="font-magic text-3xl sm:text-4xl md:text-5xl text-olive-900 tracking-wide mb-4">
+      Welcome to Our Wedding
+    </h2>
+    <div class="w-24 h-1 bg-gold mx-auto mb-10 rounded-full"></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center text-left my-8">
+      <div class="md:col-span-5 flex justify-center">
+        <div class="relative p-2 rounded-3xl bg-gradient-to-tr from-gold-dark via-gold to-gold-light shadow-2xl max-w-xs sm:max-w-sm w-full group">
+        <div class="overflow-hidden rounded-[20px] bg-olive-950 aspect-[4/5] relative">
+            <img
+              src="FOTO1A.jpg"
+              alt="Lestter and Serafín"
+              class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out filter contrast-[1.02]"
+              loading="lazy"
+            />
+            <div class="absolute -bottom-3 -right-3 w-10 h-10 rounded-full bg-olive-900 border-2 border-gold flex items-center justify-center shadow-lg text-gold font-magic text-xs">
+              ✦
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-7 font-serif text-lg md:text-xl text-olive-800 leading-relaxed space-y-4">
+        <p>
+          Dear family and dear friends: after a journey filled with adventures, complicity, and unforgettable moments, the time has come to seal our vows.
+        </p>
+        <p>
+          We are deeply thrilled to have you celebrate with us on <strong>February 27, 2027</strong> in Alicante. We have created this digital space so you can easily find all details, schedules, and dining recommendations to make the most of this celebration together.
+        </p>
+      </div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="mt-14 bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl border border-olive-200 max-w-2xl mx-auto">
+      <h3 class="font-magic text-sm uppercase tracking-widest text-olive-700 mb-6">
+        Countdown to the big day
+      </h3>
+      <div class="grid grid-cols-4 gap-2 sm:gap-4 text-center">
+        <div class="bg-olive-900 text-gold-light p-3 sm:p-4 rounded-xl shadow">
+          <span id="countdownDays" class="block font-magic text-2xl sm:text-4xl font-bold">---</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-wider text-olive-200">Days</span>
+        </div>
+        <div class="bg-olive-900 text-gold-light p-3 sm:p-4 rounded-xl shadow">
+          <span id="countdownHours" class="block font-magic text-2xl sm:text-4xl font-bold">--</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-wider text-olive-200">Hours</span>
+        </div>
+        <div class="bg-olive-900 text-gold-light p-3 sm:p-4 rounded-xl shadow">
+          <span id="countdownMinutes" class="block font-magic text-2xl sm:text-4xl font-bold">--</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-wider text-olive-200">Minutes</span>
+        </div>
+        <div class="bg-olive-900 text-gold-light p-3 sm:p-4 rounded-xl shadow">
+          <span id="countdownSeconds" class="block font-magic text-2xl sm:text-4xl font-bold">--</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-wider text-olive-200">Seconds</span>
+        </div>
+      </div>
+      <p class="text-xs text-olive-600 mt-4 italic">
+        Saturday, February 27, 2027 · 12:00 PM · Alicante, Spain
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="itinerario" class="py-24 px-4 md:px-8 bg-olive-900 text-olive-50 relative">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-16">
+      <span class="uppercase tracking-widest text-xs font-semibold text-gold block mb-2">Schedule for February 27, 2027</span>
+      <h2 class="font-magic text-3xl sm:text-4xl md:text-5xl text-gold-light">The Wedding Schedule</h2>
+      <div class="w-20 h-1 bg-gold mx-auto mt-4 rounded-full"></div>
+      <p class="font-serif text-olive-300 text-lg mt-3 max-w-xl mx-auto">
+        Every moment was designed to share laughter, emotion, exquisite food, and dancing until midnight.
+      </p>
+    </div>
+
+    <div class="relative border-l-2 border-gold/40 ml-4 sm:ml-32 md:ml-40 space-y-12 pb-4">
+
+      <!-- Step 1: Ceremony -->
+      <div class="relative pl-8 sm:pl-10 group">
+        <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-gold border-4 border-olive-900 flex items-center justify-center shadow-lg group-hover:scale-125 transition-transform duration-300">
+          <span class="w-2 h-2 rounded-full bg-olive-950"></span>
+        </div>
+        <div class="hidden sm:block absolute -left-36 top-1 text-right w-24">
+          <span class="font-magic text-lg font-bold text-gold">12:00 PM</span>
+          <span class="block text-[11px] text-olive-300 uppercase tracking-widest">Platform 9 ¾</span>
+        </div>
+
+        <div class="bg-olive-800/80 backdrop-blur rounded-2xl p-6 border border-gold/20 shadow-md hover:border-gold/50 transition">
+          <span class="sm:hidden inline-block px-2.5 py-0.5 rounded bg-gold text-olive-950 text-xs font-bold font-magic mb-2">12:00 PM</span>
+          <h3 class="font-magic text-xl md:text-2xl text-gold-light">Civil Ceremony</h3>
+          <p class="text-gold text-sm font-medium mt-1">Alicante Town Hall (Ayuntamiento de Alicante)</p>
+          <p class="font-serif text-olive-200 mt-2 text-base">
+            We will say "I do" in the historic hall of the Alicante Town Hall (Plaza del Ayuntamiento, 1). Please arrive 15 minutes prior to be comfortably seated. The room capacity is 56 people; if full, you may follow the ceremony from the adjacent gallery rooms (Galería de los Alcaldes, 34 guests, or the 1st Floor Foyer, 50 guests), or head directly to the reception venue, as you prefer.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-3 items-center">
+            <a href="https://maps.google.com/?q=Ayuntamiento+de+Alicante" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 text-xs font-semibold text-gold-light hover:text-white bg-olive-700/60 hover:bg-olive-700 px-3.5 py-1.5 rounded-lg border border-gold/30 transition">
+              <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <span>View on Google Maps</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Cocktail -->
+      <div class="relative pl-8 sm:pl-10 group">
+        <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-gold border-4 border-olive-900 flex items-center justify-center shadow-lg group-hover:scale-125 transition-transform duration-300">
+          <span class="w-2 h-2 rounded-full bg-olive-950"></span>
+        </div>
+        <div class="hidden sm:block absolute -left-36 top-1 text-right w-24">
+          <span class="font-magic text-lg font-bold text-gold">1:30 PM</span>
+          <span class="block text-[11px] text-olive-300 uppercase tracking-widest">Appetizers</span>
+        </div>
+
+        <div class="bg-olive-800/80 backdrop-blur rounded-2xl p-6 border border-gold/20 shadow-md hover:border-gold/50 transition">
+          <span class="sm:hidden inline-block px-2.5 py-0.5 rounded bg-gold text-olive-950 text-xs font-bold font-magic mb-2">1:30 PM</span>
+          <h3 class="font-magic text-xl md:text-2xl text-gold-light">Welcome Cocktail</h3>
+          <p class="text-gold text-sm font-medium mt-1">Finca Santa Luzia</p>
+          <p class="font-serif text-olive-200 mt-2 text-base">
+            We will move to the beautiful gardens of Finca Santa Luzia to toast, savor culinary bites, enjoy live music, and begin the celebration together.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-3 items-center">
+            <a href="https://maps.google.com/?q=Finca+Santa+Luzia+Alicante" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 text-xs font-semibold text-gold-light hover:text-white bg-olive-700/60 hover:bg-olive-700 px-3.5 py-1.5 rounded-lg border border-gold/30 transition">
+              <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <span>Finca Santa Luzia Location</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Banquet -->
+      <div class="relative pl-8 sm:pl-10 group">
+        <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-gold border-4 border-olive-900 flex items-center justify-center shadow-lg group-hover:scale-125 transition-transform duration-300">
+          <span class="w-2 h-2 rounded-full bg-olive-950"></span>
+        </div>
+        <div class="hidden sm:block absolute -left-36 top-1 text-right w-24">
+          <span class="font-magic text-lg font-bold text-gold">3:00 PM</span>
+          <span class="block text-[11px] text-olive-300 uppercase tracking-widest">Banquet</span>
+        </div>
+
+        <div class="bg-olive-800/80 backdrop-blur rounded-2xl p-6 border border-gold/20 shadow-md hover:border-gold/50 transition">
+          <span class="sm:hidden inline-block px-2.5 py-0.5 rounded bg-gold text-olive-950 text-xs font-bold font-magic mb-2">3:00 PM</span>
+          <h3 class="font-magic text-xl md:text-2xl text-gold-light">Wedding Banquet</h3>
+          <p class="text-gold text-sm font-medium mt-1">Main Hall · Finca Santa Luzia</p>
+          <p class="font-serif text-olive-200 mt-2 text-base">
+            A full gourmet meal tailored to all our guests' dietary requirements, wine pairing, and special moments.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 4: Party & Open Bar -->
+      <div class="relative pl-8 sm:pl-10 group">
+        <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-gold border-4 border-olive-900 flex items-center justify-center shadow-lg group-hover:scale-125 transition-transform duration-300">
+          <span class="w-2 h-2 rounded-full bg-olive-950"></span>
+        </div>
+        <div class="hidden sm:block absolute -left-36 top-1 text-right w-24">
+          <span class="font-magic text-lg font-bold text-gold">6:00 PM</span>
+          <span class="block text-[11px] text-olive-300 uppercase tracking-widest">Until 12:00 AM</span>
+        </div>
+
+        <div class="bg-olive-800/80 backdrop-blur rounded-2xl p-6 border border-gold/20 shadow-md hover:border-gold/50 transition">
+          <span class="sm:hidden inline-block px-2.5 py-0.5 rounded bg-gold text-olive-950 text-xs font-bold font-magic mb-2">6:00 PM - Midnight</span>
+          <h3 class="font-magic text-xl md:text-2xl text-gold-light">Party & Open Bar</h3>
+          <p class="text-gold text-sm font-medium mt-1">Music, Dancing & Surprises</p>
+          <p class="font-serif text-olive-200 mt-2 text-base">
+            First dance, DJ, open bar with cocktails, and late-night sweet and savory snacks to keep dancing until midnight.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="rsvp" class="py-24 px-4 md:px-8 bg-parchment-pattern relative">
+  <div class="max-w-3xl mx-auto">
+
+    <!-- Deadline Notification Card -->
+    <div class="bg-olive-900 text-gold-light rounded-2xl p-5 md:p-6 mb-10 text-center shadow-lg border border-gold/40">
+      <div class="inline-flex items-center space-x-2 text-gold font-bold uppercase tracking-wider text-xs mb-1">
+        <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span>Important RSVP Deadline</span>
+      </div>
+      <h3 class="font-magic text-xl md:text-2xl mt-1">
+        Please confirm your attendance before <span class="text-white underline decoration-gold">December 5, 2026</span>
+      </h3>
+      <p class="font-serif text-olive-200 text-sm mt-1">
+        It helps us coordinate table arrangements, catering, and venue logistics well in advance.
+      </p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-olive-200 relative overflow-hidden">
+
+      <div class="text-center mb-8">
+        <span class="font-serif italic text-gold-dark text-lg">Your presence is our greatest gift</span>
+        <h2 class="font-magic text-3xl sm:text-4xl text-olive-950 mt-1">Confirm Attendance (RSVP)</h2>
+        <div class="w-16 h-1 bg-gold mx-auto mt-3 rounded-full"></div>
+      </div>
+
+      <form id="rsvpForm" class="space-y-6" onsubmit="handleFormSubmit(event)">
+        <!-- Name and Surname -->
+        <div>
+          <label for="fullName" class="block font-serif text-base font-semibold text-olive-900 mb-1">
+            Name / Invited Guest(s) <span class="text-red-500">*</span>
+          </label>
+          <input type="text" id="fullName" required placeholder="e.g. John Doe" class="w-full px-4 py-3 rounded-xl border border-olive-300 focus:ring-2 focus:ring-olive-600 focus:border-transparent outline-none transition bg-olive-50/50">
+        </div>
+
+        <!-- Attendance Radio Buttons -->
+        <div id="attendanceSection">
+          <span class="block font-serif text-base font-semibold text-olive-900 mb-2">
+            Will you be joining us on February 27, 2027? <span class="text-red-500">*</span>
+          </span>
+          <div class="grid grid-cols-1 gap-2.5" id="attendanceOptionsContainer">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- Custom details container if only one attends -->
+        <div id="customDetailsWrapper" class="hidden"></div>
+
+        <!-- Dietary Restrictions & Allergies Section -->
+        <div id="dietSection" class="bg-olive-50/80 p-5 rounded-2xl border border-olive-200">
+          <label class="block font-serif text-base font-semibold text-olive-900 mb-2">
+            Allergies, Intolerances, or Dietary Preferences
+          </label>
+          <p class="text-xs text-olive-700 mb-3">
+            We want everyone to enjoy 100% of the menu. Select all that apply or describe them below (please specify whose allergy/preference it is):
+          </p>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-3 text-xs font-medium">
+            <label class="inline-flex items-center space-x-2">
+              <input type="checkbox" name="diet" value="Celiaquía / Sin gluten" class="rounded text-olive-700 focus:ring-olive-500">
+              <span>Gluten-Free / Celiac</span>
+            </label>
+            <label class="inline-flex items-center space-x-2">
+              <input type="checkbox" name="diet" value="Intolerancia a la Lactosa" class="rounded text-olive-700 focus:ring-olive-500">
+              <span>Lactose-Free</span>
+            </label>
+            <label class="inline-flex items-center space-x-2">
+              <input type="checkbox" name="diet" value="Vegetariano" class="rounded text-olive-700 focus:ring-olive-500">
+              <span>Vegetarian</span>
+            </label>
+            <label class="inline-flex items-center space-x-2">
+              <input type="checkbox" name="diet" value="Vegano" class="rounded text-olive-700 focus:ring-olive-500">
+              <span>Vegan</span>
+            </label>
+            <label class="inline-flex items-center space-x-2">
+              <input type="checkbox" name="diet" value="Frutos secos" class="rounded text-olive-700 focus:ring-olive-500">
+              <span>Tree Nuts / Peanuts</span>
+            </label>
+            <label class="inline-flex items-center space-x-2">
+              <input type="checkbox" name="diet" value="Marisco / Pescado" class="rounded text-olive-700 focus:ring-olive-500">
+              <span>Seafood / Fish</span>
+            </label>
+          </div>
+          <textarea id="dietDetails" rows="2" placeholder="Any further dietary specifications, allergies, or individual details..." class="w-full px-3 py-2 text-sm rounded-xl border border-olive-300 focus:ring-2 focus:ring-olive-600 outline-none bg-white"></textarea>
+        </div>
+
+        <!-- Song recommendation -->
+        <div id="songSection">
+          <label for="favoriteSong" class="block font-serif text-base font-semibold text-olive-900 mb-1">
+            What song shouldn't be missed on the dance floor? 🎶
+          </label>
+          <input type="text" id="favoriteSong" placeholder="Song title and artist" class="w-full px-4 py-3 rounded-xl border border-olive-300 focus:ring-2 focus:ring-olive-600 outline-none bg-olive-50/50">
+        </div>
+
+        <!-- Special dedication -->
+        <div>
+          <label for="dedication" class="block font-serif text-base font-semibold text-olive-900 mb-1">
+            Dedication or message for Lestter & Serafín
+          </label>
+          <textarea id="dedication" rows="3" placeholder="Leave a few words for the grooms..." class="w-full px-4 py-3 rounded-xl border border-olive-300 focus:ring-2 focus:ring-olive-600 outline-none bg-olive-50/50"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-2">
+          <button type="submit" id="submitBtn" class="w-full bg-olive-800 hover:bg-olive-900 text-gold-light py-4 px-6 rounded-2xl font-magic text-sm tracking-wider uppercase shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center space-x-2">
+            <span>Send Confirmation</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Feedback Success Box -->
+      <div id="rsvpSuccessBox" class="hidden mt-6 p-6 bg-olive-100/90 border-2 border-olive-600 rounded-2xl text-center text-olive-950 animate-fade-in">
+        <div class="w-14 h-14 bg-olive-700 text-gold rounded-full flex items-center justify-center mx-auto mb-3 shadow">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <h3 class="font-magic text-xl font-bold text-olive-900">Confirmation Received Successfully!</h3>
+        <p id="rsvpSuccessText" class="font-serif text-base text-olive-800 mt-2">
+          Thank you so much for responding. We have saved your preferences and cannot wait to celebrate with you on February 27, 2027.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHERE TO EAT SECTION -->
+<section id="guia" class="py-24 px-4 md:px-8 bg-olive-100/50 border-t border-b border-olive-200">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="uppercase tracking-widest text-xs font-semibold text-olive-700 block mb-2">Taste the best culinary spots in town</span>
+      <h2 class="font-magic text-3xl sm:text-4xl md:text-5xl text-olive-950">Where to Eat in Alicante</h2>
+      <div class="w-24 h-1 bg-gold mx-auto mt-4 rounded-full"></div>
+      <p class="font-serif text-olive-800 text-lg mt-3 max-w-2xl mx-auto">
+        We have prepared this interactive map featuring our favorite places for dinner, tapas, and drinks both in downtown Alicante and San Juan Beach.
+      </p>
+    </div>
+
+    <!-- MAP CONTAINER -->
+    <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-olive-200">
+      <div class="flex items-center space-x-3 mb-5 pb-3 border-b border-olive-200">
+        <div class="w-10 h-10 rounded-full bg-olive-900 text-gold flex items-center justify-center font-bold text-lg shadow-sm">
+          🍽️
+        </div>
+        <div>
+          <h3 class="font-magic text-xl text-olive-900">Our Favorite Spots</h3>
+          <p class="text-xs text-olive-600 font-sans">Alicante Downtown & San Juan Beach</p>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="flex flex-wrap gap-2 mb-5 text-xs font-serif" id="mapFilters">
+        <button onclick="filterMap('todos', this)" class="filter-btn px-4 py-1.5 rounded-full bg-olive-900 text-gold font-bold transition shadow-sm border border-gold/40">
+          All
+        </button>
+        <button onclick="filterMap('tapas', this)" class="filter-btn px-4 py-1.5 rounded-full bg-olive-100 hover:bg-olive-200 text-olive-900 transition border border-olive-300">
+          🍢 Tapas & Evening Drinks
+        </button>
+        <button onclick="filterMap('burger', this)" class="filter-btn px-4 py-1.5 rounded-full bg-[#fdf2e9] hover:bg-[#fae5d3] text-[#a04000] transition border border-[#edbb99]">
+          🍔 Burgers
+        </button>
+        <button onclick="filterMap('mexicano', this)" class="filter-btn px-4 py-1.5 rounded-full bg-[#fdf5e6] hover:bg-[#faebd0] text-[#8a6416] transition border border-[#d9ba77]">
+          🌮 Mexican
+        </button>
+        <button onclick="filterMap('japones', this)" class="filter-btn px-4 py-1.5 rounded-full bg-[#fdf0f0] hover:bg-[#fbdada] text-[#8e2929] transition border border-[#df9797]">
+          🍣 Sushi & Ramen
+        </button>
+        <button onclick="filterMap('italiano', this)" class="filter-btn px-4 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition border border-emerald-300">
+          🍕 Italian
+        </button>
+        <button onclick="filterMap('kebab', this)" class="filter-btn px-4 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-900 transition border border-amber-300">
+          🥙 Kebab
+        </button>
+        <button onclick="filterMap('carnes', this)" class="filter-btn px-4 py-1.5 rounded-full bg-red-50 hover:bg-red-100 text-red-900 transition border border-red-300">
+          🥩 Steaks & Grill
+        </button>
+      </div>
+
+      <!-- Leaflet map -->
+      <div id="alicanteMap" class="w-full h-[460px] sm:h-[500px] rounded-2xl overflow-hidden border-2 border-gold/40 shadow-inner z-0"></div>
+
+      <p class="text-xs text-olive-600 font-serif italic mt-4 pt-3 border-t border-olive-150 text-center">
+        Click any pin to view details and open direct directions on Google Maps.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FREQUENTLY ASKED QUESTIONS (FAQ) -->
+<section id="faq" class="py-24 px-4 md:px-8 bg-parchment-pattern border-b border-olive-200 relative">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-16">
+      <span class="uppercase tracking-widest text-xs font-semibold text-gold-dark block mb-2">Everything you need to know</span>
+      <h2 class="font-magic text-3xl sm:text-4xl md:text-5xl text-olive-950">Frequently Asked Questions</h2>
+      <div class="w-20 h-1 bg-gold mx-auto mt-4 rounded-full"></div>
+      <p class="font-serif text-olive-800 text-lg mt-3 max-w-xl mx-auto">
+        Practical information so you can simply focus on enjoying the celebration to the fullest.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+      <!-- FAQ 1: Transportation -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-lg border border-olive-200 flex flex-col justify-between hover:shadow-xl transition-all">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-olive-100 text-olive-800 flex items-center justify-center font-bold text-lg mb-3">
+            🚕
+          </div>
+          <h3 class="font-magic text-lg font-bold text-olive-900 mb-2">How do we get around? (No shuttle buses)</h3>
+          <p class="font-serif text-olive-800 text-base leading-relaxed">
+            There is no private shuttle bus service, so transfers should be done by private vehicle or taxi/rideshare. The drive between Alicante Town Hall and Finca Santa Luzia takes just <strong>15–18 minutes</strong>.
+          </p>
+          <div class="mt-3 bg-olive-50 p-3 rounded-xl border border-olive-200 font-sans text-xs text-olive-900 space-y-1">
+            <p><strong>Radio Tele Taxi Alicante:</strong> <a href="tel:965252511" class="text-olive-700 underline font-semibold">+34 965 25 25 11</a></p>
+            <p><strong>Rideshare apps available in Alicante:</strong> Uber, Cabify, Bolt, and Free Now.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 2: Parking -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-lg border border-olive-200 flex flex-col justify-between hover:shadow-xl transition-all">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-olive-100 text-olive-800 flex items-center justify-center font-bold text-lg mb-3">
+            🅿️
+          </div>
+          <h3 class="font-magic text-lg font-bold text-olive-900 mb-2">Where can we park?</h3>
+          <p class="font-serif text-olive-800 text-base leading-relaxed">
+            <strong>At the Town Hall:</strong> We recommend nearby public parking garages (such as Parking Puerto, San Cristóbal, or Alfonso el Sabio).<br><br>
+            <strong>At Finca Santa Luzia:</strong> The venue's on-site parking is <em>somewhat limited</em> (about 25 to 40 cars). There is street parking nearby, but we warmly suggest carpooling or using a taxi where possible.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 3: Shoes / Grass -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-lg border border-olive-200 flex flex-col justify-between hover:shadow-xl transition-all">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-olive-100 text-olive-800 flex items-center justify-center font-bold text-lg mb-3">
+            👠
+          </div>
+          <h3 class="font-magic text-lg font-bold text-olive-900 mb-2">What footwear should we wear? (Lawn notice)</h3>
+          <p class="font-serif text-olive-800 text-base leading-relaxed">
+            The welcome cocktail will take place outdoors on lawn grass. For those wearing <strong>stiletto/thin heels</strong>, we will have <strong>heel protector stoppers</strong> available so you don't sink in. Block heels, wedges, or flats will have no trouble at all.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 4: After Midnight -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-lg border border-olive-200 flex flex-col justify-between hover:shadow-xl transition-all">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-olive-100 text-olive-800 flex items-center justify-center font-bold text-lg mb-3">
+            🌙
+          </div>
+          <h3 class="font-magic text-lg font-bold text-olive-900 mb-2">What happens after midnight (00:00)?</h3>
+          <p class="font-serif text-olive-800 text-base leading-relaxed">
+            The party at Finca Santa Luzia concludes at midnight, but for those who feel like continuing to dance and drink, Alicante has plenty of great nightlife! We can move together to nearby clubs like <strong>Texaco</strong>, <strong>Copity</strong>, <strong>Magma</strong>, or <strong>Marmarela</strong>. Options for everyone wanting to extend the night!
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 5: Dress code -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-lg border border-olive-200 flex flex-col justify-between hover:shadow-xl transition-all">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-olive-100 text-olive-800 flex items-center justify-center font-bold text-lg mb-3">
+            👔
+          </div>
+          <h3 class="font-magic text-lg font-bold text-olive-900 mb-2">Dress Code</h3>
+          <p class="font-serif text-olive-800 text-base leading-relaxed">
+            Formal / Cocktail & party attire. You have full freedom with colors (the grooms are still deciding whether to wear olive green or not!). The only essential rule is to come elegant, comfortable, and ready to celebrate.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 6: Special Diets & Allergies -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-lg border border-olive-200 flex flex-col justify-between hover:shadow-xl transition-all">
+        <div>
+          <div class="w-10 h-10 rounded-full bg-olive-100 text-olive-800 flex items-center justify-center font-bold text-lg mb-3">
+            🥗
+          </div>
+          <h3 class="font-magic text-lg font-bold text-olive-900 mb-2">Allergies or Special Menus</h3>
+          <p class="font-serif text-olive-800 text-base leading-relaxed">
+            The entire menu will be fully catered to celiacs, vegetarians, vegans, lactose-intolerant, or any other allergies. We just kindly ask you to specify it in the RSVP form before <strong>December 5, 2026</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS CONTACT CARD -->
+    <div class="mt-12 bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-olive-200 text-left">
+      <div class="flex items-center space-x-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-olive-900 text-gold flex items-center justify-center font-bold text-lg shadow-sm">
+          ✉️
+        </div>
+        <div>
+          <h3 class="font-magic text-xl text-olive-900">Have any other questions or need assistance?</h3>
+          <p class="text-xs text-olive-600 font-sans">Send us a direct note and we will reply as soon as possible</p>
+        </div>
+      </div>
+
+      <form onsubmit="handleSendQuestion(event)" class="space-y-4 font-serif">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="questionSenderName" class="block text-sm font-semibold text-olive-900 mb-1">Your name <span class="text-red-500">*</span></label>
+            <input type="text" id="questionSenderName" required placeholder="Full name" class="w-full px-4 py-2.5 rounded-xl border border-olive-300 focus:ring-2 focus:ring-olive-600 outline-none text-sm bg-olive-50/40">
+          </div>
+          <div>
+            <label for="questionSenderEmail" class="block text-sm font-semibold text-olive-900 mb-1">Your email address <span class="text-red-500">*</span></label>
+            <input type="email" id="questionSenderEmail" required placeholder="your@email.com" class="w-full px-4 py-2.5 rounded-xl border border-olive-300 focus:ring-2 focus:ring-olive-600 outline-none text-sm bg-olive-50/40">
+          </div>
+        </div>
+
+        <div>
+          <label for="questionSenderMessage" class="block text-sm font-semibold text-olive-900 mb-1">What is your question? <span class="text-red-500">*</span></label>
+          <textarea id="questionSenderMessage" required rows="3" placeholder="Write here any questions about transportation, timing, accommodations..." class="w-full px-4 py-2.5 rounded-xl border border-olive-300 focus:ring-2 focus:ring-olive-600 outline-none text-sm bg-olive-50/40"></textarea>
+        </div>
+
+        <button type="submit" class="w-full sm:w-auto bg-olive-800 hover:bg-olive-900 text-gold-light py-3 px-6 rounded-xl font-magic text-xs uppercase tracking-wider transition-all flex items-center justify-center space-x-2 shadow-md">
+          <span>Send Message to the Grooms ✉️</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="regalo" class="py-24 px-4 md:px-8 bg-parchment-pattern relative">
+  <div class="max-w-3xl mx-auto text-center">
+    <span class="font-serif italic text-gold-dark text-lg md:text-xl block mb-2">A gift for our new chapter</span>
+    <h2 class="font-magic text-3xl sm:text-4xl md:text-5xl text-olive-950">Wedding Gift</h2>
+    <div class="w-20 h-1 bg-gold mx-auto mt-4 rounded-full"></div>
+
+    <p class="font-serif text-olive-800 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl mx-auto">
+      Your presence and companionship on this milestone day is, above all, our greatest treasure.
+      However, if you would like to honor us with a gift, our bank account details are provided below. Thank you very much!
+    </p>
+
+    <div class="max-w-md mx-auto mt-10 text-left">
+      <!-- IBAN Card -->
+      <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-xl border border-olive-300 relative group flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-magic text-xs uppercase tracking-widest text-olive-700 font-bold">Bank Transfer (IBAN)</span>
+            <span class="text-xl">🏦</span>
+          </div>
+          <p class="text-xs text-olive-600 mb-1">Account Holders: Lestter & Serafín</p>
+          <div class="bg-olive-50 p-3.5 rounded-xl border border-olive-200 font-mono text-sm sm:text-base font-semibold text-olive-900 break-all select-all">
+            ES62 0081 5534 2000 0201 8207
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <button onclick="copyToClipboard('ES62 0081 5534 2000 0201 8207', this)" class="w-full bg-olive-800 hover:bg-olive-900 text-gold-light py-2.5 px-4 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center space-x-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            <span>Copy Account Number</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="copyToast" class="fixed bottom-6 right-6 z-50 bg-olive-950 text-gold-light px-5 py-3 rounded-2xl shadow-2xl border border-gold/40 flex items-center space-x-3 transition-opacity duration-300 opacity-0 pointer-events-none">
+      <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+      <span class="text-sm font-medium">Successfully copied to clipboard!</span>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-olive-950 text-olive-200 py-16 px-4 border-t border-gold/20 text-center">
+  <div class="max-w-4xl mx-auto space-y-6">
+    <div class="font-magic text-3xl text-gold font-bold">Lestter & Serafín</div>
+    <p class="font-serif italic text-lg text-olive-300 max-w-md mx-auto">
+      «Love is the most powerful magic in the world.»
+    </p>
+    <div class="w-16 h-0.5 bg-gold/40 mx-auto"></div>
+    <p class="text-xs text-olive-400 font-sans tracking-widest uppercase">
+      February 27, 2027 · Alicante, Spain
+    </p>
+    <p class="text-[11px] text-olive-500 pt-4">
+      With all our love for our families and friends.
+    </p>
+  </div>
+</footer>
+
+<!-- DOBBY FLOATING PEEKER -->
+<div id="dobbyPeekerWidget" class="fixed bottom-0 right-4 sm:right-8 z-40 cursor-pointer select-none" onclick="toggleDobbyMessage(event)">
+  <!-- Speech Bubble -->
+  <div id="dobbySpeechBubble" class="opacity-0 translate-y-3 pointer-events-none transition-all duration-300 absolute -top-32 right-0 w-64 sm:w-72 bg-olive-900 text-gold-light p-4 rounded-2xl shadow-2xl border-2 border-gold font-serif text-xs leading-relaxed z-50">
+    <div class="flex items-center space-x-2 border-b border-gold/30 pb-1.5 mb-1.5 font-magic text-gold font-bold uppercase tracking-wider text-[11px]">
+      <span>🧦 Dobby greets you!</span>
+    </div>
+    <p class="italic text-olive-100" id="dobbyQuoteText">
+      «Dobby is free! Dobby has come to Alicante to celebrate the wedding of Lestter & Serafín!»
+    </p>
+    <div class="absolute -bottom-2 right-12 w-4 h-4 bg-olive-900 border-r-2 border-b-2 border-gold transform rotate-45"></div>
+  </div>
+
+  <div class="relative w-28 sm:w-36 h-28 sm:h-36 flex items-end justify-center dobby-filter-shadow">
+    <svg viewBox="0 0 160 140" class="w-full h-full" fill="none">
+      <g class="dobby-ear-l">
+        <path d="M 52 64 C 34 50 10 52 2 68 C -4 78 8 86 28 82 C 40 79 50 72 54 68 Z" fill="#d8be99" stroke="#7e5d32" stroke-width="2"/>
+        <path d="M 44 66 C 30 58 14 60 8 70 C 14 74 24 74 38 72 Z" fill="#e8cfae" opacity="0.7"/>
+      </g>
+      <g class="dobby-ear-r">
+        <path d="M 108 64 C 126 50 150 52 158 68 C 164 78 152 86 132 82 C 120 79 110 72 106 68 Z" fill="#d8be99" stroke="#7e5d32" stroke-width="2"/>
+        <path d="M 116 66 C 130 58 146 60 152 70 C 146 74 136 74 122 72 Z" fill="#e8cfae" opacity="0.7"/>
+      </g>
+      <path d="M 46 95 L 30 140 L 130 140 L 114 95 Z" fill="#a4937a" stroke="#68553d" stroke-width="2"/>
+      <path d="M 55 95 L 75 140 M 105 95 L 85 140" stroke="#7e694e" stroke-width="1.5" opacity="0.5"/>
+      <path d="M 52 56 C 54 30 106 30 108 56 C 112 76 102 96 80 98 C 58 96 48 76 52 56 Z" fill="#e2cbb0" stroke="#7e5d32" stroke-width="2.5"/>
+      <path d="M 64 42 Q 80 46 96 42" stroke="#9d7a4f" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M 68 48 Q 80 51 92 48" stroke="#9d7a4f" stroke-width="1.5" stroke-linecap="round"/>
+      <ellipse cx="66" cy="62" rx="9" ry="11" fill="#fcf8ee" stroke="#7e5d32" stroke-width="1.5"/>
+      <circle cx="67" cy="63" r="6" fill="#65a30d"/>
+      <circle cx="66" cy="62" r="3" fill="#142c07"/>
+      <circle cx="69" cy="59" r="1.8" fill="#ffffff"/>
+      <ellipse cx="94" cy="62" rx="9" ry="11" fill="#fcf8ee" stroke="#7e5d32" stroke-width="1.5"/>
+      <circle cx="93" cy="63" r="6" fill="#65a30d"/>
+      <circle cx="94" cy="62" r="3" fill="#142c07"/>
+      <circle cx="96" cy="59" r="1.8" fill="#ffffff"/>
+      <path d="M 80 62 L 84 76 L 76 76 Z" fill="#caa982" stroke="#7e5d32" stroke-width="1.2"/>
+      <path d="M 70 85 Q 80 91 90 85" stroke="#68553d" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="40" cy="118" r="8" fill="#d8be99" stroke="#7e5d32" stroke-width="1.5"/>
+      <circle cx="120" cy="118" r="8" fill="#d8be99" stroke="#7e5d32" stroke-width="1.5"/>
+      <path d="M 122 114 C 132 112 144 116 142 126 C 140 134 132 135 125 128 Z" fill="#c5a059" stroke="#9a752c" stroke-width="2"/>
+    </svg>
+    <span class="absolute bottom-1 bg-olive-950 text-gold text-[9px] font-magic px-2.5 py-0.5 rounded-full border border-gold/40 uppercase tracking-widest font-bold shadow-lg">
+      Dobby
+    </span>
+  </div>
+</div>
+
+<script>
+  /* -------------------------------------------------------------
+     GUEST DATABASE
+     ------------------------------------------------------------- */
+  const INVITADOS = {
+    // === GRETCHEN & JAN (ENGLISH) ===
+    "gretchen-jan": { tipo: "pareja", p1: "Gretchen", p2: "Jan", nombre: "Gretchen & Jan", saludo: "Dear Gretchen and Jan", parte: "Lestter" },
+    "gretchen": { tipo: "pareja", p1: "Gretchen", p2: "Jan", nombre: "Gretchen & Jan", saludo: "Dear Gretchen and Jan", parte: "Lestter" },
+    "jan": { tipo: "pareja", p1: "Gretchen", p2: "Jan", nombre: "Gretchen & Jan", saludo: "Dear Gretchen and Jan", parte: "Lestter" }
+  };
+  
+  let currentGuestId = "gretchen-jan";
+  let currentGuestData = INVITADOS["gretchen-jan"];
+
+  function obtenerParametroInvitado() {
+    try {
+      let urlParams = new URLSearchParams(window.location.search);
+      let inv = urlParams.get('inv');
+      
+      if (!inv && window.location.hash.includes('?')) {
+        const hashQuery = window.location.hash.split('?')[1];
+        urlParams = new URLSearchParams(hashQuery);
+        inv = urlParams.get('inv');
+      }
+
+      if (inv) {
+        return inv.toLowerCase().trim();
+      }
+    } catch (e) {
+      console.error("Error reading URL:", e);
+    }
+    return null;
+  }
+
+  function personalizarInvitacion() {
+    const guestKey = obtenerParametroInvitado();
+
+    if (guestKey && INVITADOS[guestKey]) {
+      currentGuestId = guestKey;
+      currentGuestData = INVITADOS[guestKey];
+    }
+
+    // 1. Outer envelope
+    const envelopeNameEl = document.getElementById('guestEnvelopeName');
+    if (envelopeNameEl) envelopeNameEl.textContent = currentGuestData.nombre;
+
+    // 2. Inner letter
+    const letterGreetingEl = document.getElementById('guestLetterGreeting');
+    if (letterGreetingEl) letterGreetingEl.textContent = `${currentGuestData.saludo},`;
+
+    // 3. Form input
+    const fullNameInput = document.getElementById('fullName');
+    if (fullNameInput) {
+      fullNameInput.value = currentGuestData.nombre;
+      fullNameInput.readOnly = true;
+      fullNameInput.classList.add('bg-olive-200/50', 'text-olive-900', 'cursor-not-allowed');
+    }
+
+    renderAttendanceOptions(currentGuestData);
+  }
+
+  function renderAttendanceOptions(gData) {
+    const container = document.getElementById('attendanceOptionsContainer');
+    const detailsWrapper = document.getElementById('customDetailsWrapper');
+    if (!container) return;
+
+    detailsWrapper.innerHTML = '';
+    detailsWrapper.classList.add('hidden');
+
+    if (gData.tipo === "pareja") {
+      container.innerHTML = `
+        <label class="flex items-center space-x-3 p-3.5 rounded-xl border-2 border-olive-200 cursor-pointer hover:bg-olive-50 transition has-[:checked]:border-olive-700 has-[:checked]:bg-olive-100/60">
+          <input type="radio" name="attendanceChoice" value="ambos" checked onchange="handleCoupleToggle()" class="text-olive-700 focus:ring-olive-600 w-4 h-4">
+          <span class="font-medium text-olive-900 text-sm">👥 Both of us are coming! ✨ (2 people)</span>
+        </label>
+        <label class="flex items-center space-x-3 p-3.5 rounded-xl border-2 border-olive-200 cursor-pointer hover:bg-olive-50 transition has-[:checked]:border-olive-700 has-[:checked]:bg-olive-100/60">
+          <input type="radio" name="attendanceChoice" value="solo_uno" onchange="handleCoupleToggle()" class="text-olive-700 focus:ring-olive-600 w-4 h-4">
+          <span class="font-medium text-olive-900 text-sm">👤 Only one of us will attend (1 person)</span>
+        </label>
+        <label class="flex items-center space-x-3 p-3.5 rounded-xl border-2 border-olive-200 cursor-pointer hover:bg-olive-50 transition has-[:checked]:border-olive-700 has-[:checked]:bg-olive-100/60">
+          <input type="radio" name="attendanceChoice" value="ninguno" onchange="handleCoupleToggle()" class="text-olive-700 focus:ring-olive-600 w-4 h-4">
+          <span class="font-medium text-olive-900 text-sm">Sadly, we will not be able to attend</span>
+        </label>
+      `;
+
+      detailsWrapper.innerHTML = `
+        <div id="whoAttendsBox" class="bg-olive-100/70 p-4 rounded-2xl border border-olive-300">
+          <span class="block font-serif text-sm font-semibold text-olive-900 mb-2">
+            Who will attend the celebration? <span class="text-red-500">*</span>
+          </span>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="flex items-center space-x-2.5 p-3 rounded-xl border border-olive-300 bg-white cursor-pointer hover:bg-olive-50 transition has-[:checked]:border-olive-700 has-[:checked]:bg-olive-200/60">
+              <input type="radio" name="whoAttends" value="${gData.p1}" checked class="text-olive-700 focus:ring-olive-600 w-4 h-4">
+              <span class="text-sm font-medium text-olive-900">${gData.p1}</span>
+            </label>
+            <label class="flex items-center space-x-2.5 p-3 rounded-xl border border-olive-300 bg-white cursor-pointer hover:bg-olive-50 transition has-[:checked]:border-olive-700 has-[:checked]:bg-olive-200/60">
+              <input type="radio" name="whoAttends" value="${gData.p2}" class="text-olive-700 focus:ring-olive-600 w-4 h-4">
+              <span class="text-sm font-medium text-olive-900">${gData.p2}</span>
+            </label>
+          </div>
+        </div>
+      `;
+
+    } else if (gData.tipo === "individual_plus") {
+      container.innerHTML = `
+        <label class="flex items-center space-x-3 p-3.5 rounded-xl border-2 border-olive-200 cursor-pointer hover:bg-olive-50 transition has-[:checked]:border-olive-700 has-[:checked]:bg-olive-100/60">
+          <input type="radio" name="attendanceChoice" value="solo" checked onchange="handlePlusToggle()" class="text-olive-700 focus:ring-olive-600 w-4 h-4">
+          <span class="font-medium text-olive-900 text-sm">👤 Attending solo (1 person)</span>
+        </label>
+        <label class="flex items-center space-x-3 p-3.5 rounded-xl border-2 border-olive-200 cursor-pointer hover:bg-olive-50 transition has-[:checked]:border-olive-700 has-[:checked]:bg-olive-100/60">
+          <input type="radio" name="attendanceChoice" value="con_acomp" onchange="handlePlusToggle()" class="text-olive-700 focus:ring-olive-600 w-4 h-4">
+          <span class="font-medium text-olive-900 text-sm">👥 Coming with a plus one (2 people)</span>
+        </label>
+        <label class="flex items-center space-x-3 p-3.5 rounded-xl border-2 border-olive-200 cursor-pointer hover:bg-olive-50 transition has-[:checked]:border-olive-700 has-[:checked]:bg-olive-100/60">
+          <input type="radio" name="attendanceChoice" value="ninguno" onchange="handlePlusToggle()" class="text-olive-700 focus:ring-olive-600 w-4 h-4">
+          <span class="font-medium text-olive-900 text-sm">Sadly, I cannot attend</span>
+        </label>
+      `;
+
+      detailsWrapper.innerHTML = `
+        <div id="plusAcompBox" class="bg-olive-50/70 p-4 rounded-2xl border border-olive-300">
+          <label for="companionNameInput" class="block font-serif text-sm font-semibold text-olive-900 mb-1">
+            Name of your plus one <span class="text-red-500">*</span>
+          </label>
+          <input type="text" id="companionNameInput" placeholder="Enter their full name" class="w-full px-4 py-2.5 rounded-xl border border-olive-300 focus:ring-2 focus:ring-olive-600 outline-none bg-white text-sm transition">
+        </div>
+      `;
+
+    } else {
+      container.innerHTML = `
+        <label class="flex items-center space-x-3 p-3.5 rounded-xl border-2 border-olive-200 cursor-pointer hover:bg-olive-50 transition has-[:checked]:border-olive-700 has-[:checked]:bg-olive-100/60">
+          <input type="radio" name="attendanceChoice" value="solo" checked onchange="handleSingleToggle()" class="text-olive-700 focus:ring-olive-600 w-4 h-4">
+          <span class="font-medium text-olive-900 text-sm">👤 Yes, I will be there! ✨ (1 person)</span>
+        </label>
+        <label class="flex items-center space-x-3 p-3.5 rounded-xl border-2 border-olive-200 cursor-pointer hover:bg-olive-50 transition has-[:checked]:border-olive-700 has-[:checked]:bg-olive-100/60">
+          <input type="radio" name="attendanceChoice" value="ninguno" onchange="handleSingleToggle()" class="text-olive-700 focus:ring-olive-600 w-4 h-4">
+          <span class="font-medium text-olive-900 text-sm">Sadly, I cannot attend</span>
+        </label>
+      `;
+    }
+  }
+
+  function handleCoupleToggle() {
+    const val = document.querySelector('input[name="attendanceChoice"]:checked').value;
+    const detailsWrapper = document.getElementById('customDetailsWrapper');
+    const dietSection = document.getElementById('dietSection');
+    const songSection = document.getElementById('songSection');
+
+    if (val === 'solo_uno') {
+      detailsWrapper.classList.remove('hidden');
+      dietSection.classList.remove('hidden');
+      songSection.classList.remove('hidden');
+    } else if (val === 'ninguno') {
+      detailsWrapper.classList.add('hidden');
+      dietSection.classList.add('hidden');
+      songSection.classList.add('hidden');
+    } else {
+      detailsWrapper.classList.add('hidden');
+      dietSection.classList.remove('hidden');
+      songSection.classList.remove('hidden');
+    }
+  }
+
+  function handlePlusToggle() {
+    const val = document.querySelector('input[name="attendanceChoice"]:checked').value;
+    const detailsWrapper = document.getElementById('customDetailsWrapper');
+    const dietSection = document.getElementById('dietSection');
+    const songSection = document.getElementById('songSection');
+
+    if (val === 'con_acomp') {
+      detailsWrapper.classList.remove('hidden');
+      dietSection.classList.remove('hidden');
+      songSection.classList.remove('hidden');
+    } else if (val === 'ninguno') {
+      detailsWrapper.classList.add('hidden');
+      dietSection.classList.add('hidden');
+      songSection.classList.add('hidden');
+    } else {
+      detailsWrapper.classList.add('hidden');
+      dietSection.classList.remove('hidden');
+      songSection.classList.remove('hidden');
+    }
+  }
+
+  function handleSingleToggle() {
+    const val = document.querySelector('input[name="attendanceChoice"]:checked').value;
+    const dietSection = document.getElementById('dietSection');
+    const songSection = document.getElementById('songSection');
+
+    if (val === 'ninguno') {
+      dietSection.classList.add('hidden');
+      songSection.classList.add('hidden');
+    } else {
+      dietSection.classList.remove('hidden');
+      songSection.classList.remove('hidden');
+    }
+  }
+
+  /* Fullscreen Hogwarts Invitation Entry Logic */
+  const magicEntranceGate = document.getElementById('magicEntranceGate');
+  const revealedLetterModal = document.getElementById('revealedLetterModal');
+  const gateFlap = document.getElementById('gateFlap');
+  const gateWaxSeal = document.getElementById('gateWaxSeal');
+  const gateEnvelope = document.getElementById('gateEnvelope');
+  const envelopeAddress = document.getElementById('envelopeAddress');
+  const gatePrompt = document.getElementById('gatePrompt');
+  const bodyRoot = document.getElementById('bodyRoot');
+
+  function openHogwartsLetter(event) {
+    if (event) event.stopPropagation();
+
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.3);
+      gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+      osc.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.6);
+    } catch (err) {}
+
+    try {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 50,
+          spread: 70,
+          origin: { y: 0.5 },
+          colors: ['#c5a059', '#879461', '#f4e5b8', '#a32222']
+        });
+      }
+    } catch (e) {}
+
+    gateWaxSeal.style.transform = 'translate(-50%, -50%) scale(1.4)';
+    gateWaxSeal.style.opacity = '0';
+    gateFlap.style.transform = 'rotateX(180deg)';
+    gateFlap.style.zIndex = '5';
+    if (envelopeAddress) envelopeAddress.style.opacity = '0';
+    if (gatePrompt) gatePrompt.style.opacity = '0';
+
+    setTimeout(() => {
+      revealedLetterModal.classList.remove('hidden');
+    }, 450);
+  }
+
+  if (gateEnvelope) {
+    gateEnvelope.addEventListener('click', openHogwartsLetter);
+  }
+
+  function enterCelebrationWebsite() {
+    revealedLetterModal.classList.add('hidden');
+    magicEntranceGate.classList.add('opacity-0', 'pointer-events-none');
+    bodyRoot.classList.remove('overflow-hidden');
+
+    try {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 80,
+          spread: 90,
+          origin: { y: 0.3 },
+          colors: ['#c5a059', '#879461', '#d7dbc5']
+        });
+      }
+    } catch (e) {}
+
+    setTimeout(() => {
+      magicEntranceGate.style.display = 'none';
+      if (mapRestaurantes) mapRestaurantes.invalidateSize();
+    }, 1000);
+  }
+
+  function showInvitationAgain() {
+    magicEntranceGate.style.display = 'flex';
+    magicEntranceGate.classList.remove('opacity-0', 'pointer-events-none');
+    revealedLetterModal.classList.remove('hidden');
+    bodyRoot.classList.add('overflow-hidden');
+  }
+
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const navLinks = document.querySelectorAll('.nav-mobile-link');
+
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+  }
+
+  function updateCountdown() {
+    const weddingDate = new Date('2027-02-27T12:30:00+01:00').getTime();
+    const now = new Date().getTime();
+    const difference = weddingDate - now;
+
+    if (difference > 0) {
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      const dEl = document.getElementById('countdownDays');
+      const hEl = document.getElementById('countdownHours');
+      const mEl = document.getElementById('countdownMinutes');
+      const sEl = document.getElementById('countdownSeconds');
+
+      if (dEl) dEl.textContent = days;
+      if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+      if (mEl) mEl.textContent = String(minutes).padStart(2, '0');
+      if (sEl) sEl.textContent = String(seconds).padStart(2, '0');
+    }
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  function copyToClipboard(text, buttonElement) {
+    const tempInput = document.createElement('textarea');
+    tempInput.value = text;
+    tempInput.style.position = 'fixed';
+    tempInput.style.opacity = '0';
+    document.body.appendChild(tempInput);
+    tempInput.select();
+
+    try {
+      document.execCommand('copy');
+    } catch (err) {}
+    document.body.removeChild(tempInput);
+
+    const toast = document.getElementById('copyToast');
+    if (toast) {
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2600);
+    }
+
+    if (buttonElement) {
+      const originalText = buttonElement.innerHTML;
+      buttonElement.innerHTML = `<span>✓ Copied!</span>`;
+      setTimeout(() => {
+        buttonElement.innerHTML = originalText;
+      }, 2000);
+    }
+  }
+
+  /* SEND QUESTION DIRECTLY TO EMAIL */
+  function handleSendQuestion(e) {
+    e.preventDefault();
+    const name = document.getElementById('questionSenderName').value.trim();
+    const email = document.getElementById('questionSenderEmail').value.trim();
+    const msg = document.getElementById('questionSenderMessage').value.trim();
+
+    const subject = encodeURIComponent(`Lestter & Serafín Wedding Inquiry - From: ${name}`);
+    const body = encodeURIComponent(`Hi Lestter and Serafín,\n\nI am ${name} (${email}) and I have the following question regarding your wedding:\n\n${msg}\n\nWarm regards!`);
+
+    window.location.href = `mailto:serabohe@gmail.com?subject=${subject}&body=${body}`;
+  }
+
+  /* DOBBY PEEKER */
+  const dobbyQuotes = [
+    "«Dobby has no master! Dobby is a free elf and comes to celebrate the love of Lestter & Serafín!»",
+    "«Dobby has checked the guest list five times! Nobody will forget their wand!»",
+    "«Dobby promises never to intercept the grooms' letters ever again!»",
+    "«What a glorious day! Dobby will dance until socks wear through!»"
+  ];
+  let quoteIndex = 0;
+  let isDobbyActive = false;
+  let scrollTimeout = null;
+
+  function toggleDobbyMessage(e) {
+    if (e) e.stopPropagation();
+    const bubble = document.getElementById('dobbySpeechBubble');
+    const quoteEl = document.getElementById('dobbyQuoteText');
+    const peeker = document.getElementById('dobbyPeekerWidget');
+
+    if (!isDobbyActive) {
+      quoteIndex = (quoteIndex + 1) % dobbyQuotes.length;
+      quoteEl.textContent = dobbyQuotes[quoteIndex];
+
+      bubble.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+      peeker.classList.add('active');
+      isDobbyActive = true;
+
+      try {
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 25,
+            angle: 70,
+            spread: 55,
+            origin: { x: 0.92, y: 0.94 },
+            colors: ['#c5a059', '#879461', '#f4e5b8']
+          });
+        }
+      } catch (err) {}
+    } else {
+      hideDobbyMessage();
+    }
+  }
+
+  function hideDobbyMessage() {
+    if (!isDobbyActive) return;
+    const bubble = document.getElementById('dobbySpeechBubble');
+    const peeker = document.getElementById('dobbyPeekerWidget');
+
+    bubble.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+    peeker.classList.remove('active');
+    isDobbyActive = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    hideDobbyMessage();
+
+    const peeker = document.getElementById('dobbyPeekerWidget');
+    if (peeker) {
+      peeker.classList.add('dobby-scrolling');
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        peeker.classList.remove('dobby-scrolling');
+      }, 160);
+    }
+  }, { passive: true });
+
+  document.addEventListener('click', (e) => {
+    const peeker = document.getElementById('dobbyPeekerWidget');
+    if (peeker && !peeker.contains(e.target)) {
+      hideDobbyMessage();
+    }
+  });
+
+  // RSVP Form submission to Google Sheets
+  async function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const choice = document.querySelector('input[name="attendanceChoice"]:checked').value;
+    let isAttending = (choice !== 'ninguno');
+    let personas = 0;
+    let modalidad = '';
+    let acompanante = '';
+
+    if (currentGuestData && currentGuestData.tipo === 'pareja') {
+      if (choice === 'ambos') {
+        personas = 2;
+        modalidad = 'Both attend';
+        acompanante = `${currentGuestData.p1} & ${currentGuestData.p2}`;
+      } else if (choice === 'solo_uno') {
+        personas = 1;
+        const whoSelected = document.querySelector('input[name="whoAttends"]:checked').value;
+        modalidad = 'Only one attends';
+        acompanante = `Attending: ${whoSelected}`;
+      } else {
+        personas = 0;
+        modalidad = 'Cannot attend';
+      }
+    } else if (currentGuestData && currentGuestData.tipo === 'individual_plus') {
+      if (choice === 'con_acomp') {
+        const acompInput = document.getElementById('companionNameInput');
+        const acompVal = acompInput ? acompInput.value.trim() : '';
+        if (!acompVal) {
+          alert('Please provide your companion’s name.');
+          acompInput.focus();
+          return;
+        }
+        personas = 2;
+        modalidad = 'With companion';
+        acompanante = acompVal;
+      } else if (choice === 'solo') {
+        personas = 1;
+        modalidad = 'Solo';
+      } else {
+        personas = 0;
+        modalidad = 'Cannot attend';
+      }
+    } else {
+      if (choice === 'solo') {
+        personas = 1;
+        modalidad = 'Solo (1 person)';
+      } else {
+        personas = 0;
+        modalidad = 'Cannot attend';
+      }
+    }
+
+    const submitBtn = document.getElementById('submitBtn');
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span>Sending owl post... ⏳</span>`;
+
+    const name = document.getElementById('fullName').value.trim();
+    const selectedDiets = Array.from(document.querySelectorAll('input[name="diet"]:checked'))
+      .map(cb => cb.value)
+      .join(', ');
+    const dietDetails = document.getElementById('dietDetails').value.trim();
+    const favoriteSong = document.getElementById('favoriteSong').value.trim();
+    const dedication = document.getElementById('dedication').value.trim();
+
+    const payload = {
+      idInvitado: currentGuestId,
+      parte: currentGuestData ? currentGuestData.parte : "General",
+      nombre: name,
+      asistencia: isAttending ? 'Sí' : 'No',
+      personas: personas,
+      modalidad: modalidad,
+      acompanante: acompanante,
+      alergias: selectedDiets || 'None indicated',
+      detallesAlergias: dietDetails,
+      cancion: favoriteSong,
+      dedicatoria: dedication
+    };
+
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxxgGQI8w6y2faKIASrklHAlTFnrCUDA1t8xn4haextaVEnVHoPJAR1qZMQjQQ4GANB/exec";
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const form = document.getElementById('rsvpForm');
+      const successBox = document.getElementById('rsvpSuccessBox');
+      const successText = document.getElementById('rsvpSuccessText');
+
+      if (isAttending) {
+        successText.textContent = personas === 2
+          ? `Wonderful news! We have registered your attendance for 2 people (${name}). We cannot wait to celebrate together on February 27, 2027!`
+          : `Wonderful news! We have registered your attendance for 1 person (${name}). We cannot wait to see you on February 27, 2027!`;
+
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#c5a059', '#879461', '#f4e5b8', '#a32222']
+          });
+        }
+      } else {
+        successText.textContent = `Thank you so much for letting us know. We will deeply miss having you there, but we will raise a glass to you!`;
+      }
+
+      form.classList.add('hidden');
+      successBox.classList.remove('hidden');
+      successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      alert('There was an issue sending your confirmation. Please try again.');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+    }
+  }
+
+  const restaurantes = [
+    { nombre: "Restaurante TOCH", cat: "tapas", zona: "San Juan Beach", tipo: "🍢 Mediterranean & Rice", lat: 38.3688, lng: -0.4208, desc: "Beachfront Mediterranean dining featuring firewood rice dishes and a privileged terrace.", url: "Restaurante+TOCH+Playa+San+Juan+Alicante" },
+    { nombre: "Restaurante Mediterráneo", cat: "tapas", zona: "San Juan Beach", tipo: "🍢 Seaside Mediterranean", lat: 38.3639, lng: -0.4239, desc: "Located directly on Avenida de Niza boardwalk. Fresh fish, salted cuts, and seafood tapas.", url: "Restaurante+Mediterraneo+Avenida+Niza+San+Juan+Alicante" },
+    { nombre: "Cervecería Sento Playa", cat: "tapas", zona: "San Juan Beach", tipo: "🍢 Gourmet Tapas & Montaditos", lat: 38.3719, lng: -0.4285, desc: "Renowned for warm tenderloin & foie montaditos and gourmet tapas along Vicente Ramos.", url: "Cerveceria+Sento+Playa+San+Juan+Alicante" },
+    { nombre: "La Barra de Mauleón", cat: "tapas", zona: "San Juan Beach", tipo: "🍢 Gastrobar & Tapas", lat: 38.3711, lng: -0.4302, desc: "Select tapas, freshly sourced fish, and refined Mediterranean cuisine in a cozy atmosphere.", url: "La+Barra+de+Mauleon+San+Juan+Alicante" },
+    { nombre: "Mi Casa Tapas", cat: "tapas", zona: "San Juan Beach", tipo: "🍢 Traditional Tapas", lat: 38.3685, lng: -0.4280, desc: "Generous homemade tapas, salads, and montaditos at very friendly prices.", url: "Mi+Casa+Tapas+Playa+San+Juan+Alicante" },
+    { nombre: "Bar Tapas LA FABRICA", cat: "tapas", zona: "Downtown", tipo: "🍢 Classic Spanish Tapas", lat: 38.3473, lng: -0.4831, desc: "Traditional Spanish tapas and sharing platters on an outdoor terrace in the old town.", url: "Bar+Tapas+LA+FABRICA+Alicante" },
+    { nombre: "Santabar - Alicante Centro", cat: "tapas", zona: "Downtown", tipo: "🍢 Modern Gastrobar", lat: 38.3458, lng: -0.4878, desc: "Market-fresh ingredients, signature toasts, and quality tapas on Calle Bazán.", url: "Santabar+Alicante+Centro" },
+    { nombre: "Bar El Cantó", cat: "tapas", zona: "Downtown", tipo: "🍢 Classic Tapas Counter", lat: 38.3437, lng: -0.4883, desc: "A temple for hot montaditos and Alicante's authentic bar culture.", url: "Bar+El+Canto+Alicante" },
+    { nombre: "Cervecería Sento Rambla", cat: "tapas", zona: "Downtown", tipo: "🍢 Signature Montaditos", lat: 38.3448, lng: -0.4849, desc: "Creative warm montaditos and fresh seafood at the counter right on La Rambla.", url: "Cerveceria+Sento+Rambla+Alicante" },
+    { nombre: "El Garaje Bar", cat: "tapas", zona: "Downtown", tipo: "🍢 Terrace & Tapas", lat: 38.3435, lng: -0.4862, desc: "Tapas and afternoon drinks under century-old ficus trees in Plaza Gabriel Miró.", url: "El+Garaje+Bar+Alicante" },
+    { nombre: "Circo Burger San Juan", cat: "burger", zona: "San Juan Beach", tipo: "🍔 Gourmet Smash Burger", lat: 38.3635, lng: -0.4278, desc: "One block from the beach on Av. Costa Blanca. Aged beef smash burgers and homemade brioche.", url: "Circo+Burger+Playa+San+Juan+Alicante" },
+    { nombre: "RedLine Burger San Juan", cat: "burger", zona: "San Juan Beach", tipo: "🍔 Smash Burgers", lat: 38.3670, lng: -0.4255, desc: "Crispy smash burgers, loaded fries, and proprietary sauce recipes on C/ Curricán.", url: "RedLine+Burger+San+Juan+Playa+Alicante" },
+    { nombre: "El Rancho de Fontana", cat: "burger", zona: "San Juan Beach", tipo: "🍔 Burgers & Stuffed Potatoes", lat: 38.3658, lng: -0.4285, desc: "Casual local favorite in Fontana mall with huge portions, burgers, and 20+ signature sauces.", url: "El+Rancho+de+Fontana+Playa+San+Juan+Alicante" },
+    { nombre: "Circo Burger Centro", cat: "burger", zona: "Downtown", tipo: "🍔 Gourmet Smash Burger", lat: 38.3432, lng: -0.4880, desc: "Downtown Alicante's top burger hotspot (Calle Teatro) with dry-aged beef.", url: "Circo+Burger+Alicante+Centro" },
+    { nombre: "Tepuy Burger Centro", cat: "burger", zona: "Downtown", tipo: "🍔 Award-Winning Burgers", lat: 38.3465, lng: -0.4855, desc: "Nationally awarded gourmet burgers featuring innovative combinations and premium meat.", url: "Tepuy+Burger+Alicante" },
+    { nombre: "AY MAMACITA", cat: "mexicano", zona: "San Juan Beach", tipo: "🌮 Street Food & Birria", lat: 38.3618, lng: -0.4431, desc: "Al pastor street tacos, quesabirrias, loaded nachos, and margaritas on Av. Condomina.", url: "AY+MAMACITA+Alicante" },
+    { nombre: "Taquería El Chavo Playa", cat: "mexicano", zona: "San Juan Beach", tipo: "🌮 Authentic Taquería", lat: 38.3690, lng: -0.4310, desc: "Authentic al pastor carved to order, gringas, and fresh guacamole.", url: "Taqueria+San+Juan+Playa+Alicante" },
+    { nombre: "MEXICAN GRANNY", cat: "mexicano", zona: "Downtown", tipo: "🌮 Homemade Mexican", lat: 38.3562, lng: -0.4875, desc: "Traditional home recipes, tacos al pastor, and authentic comfort dishes.", url: "MEXICAN+GRANNY+Alicante" },
+    { nombre: "Plaza Mexico", cat: "mexicano", zona: "Downtown", tipo: "🌮 Taquería & Cocktails", lat: 38.3451, lng: -0.4871, desc: "Taquería on Calle Castaños, ideal for lively taco dinners and Mexican cocktails.", url: "Plaza+Mexico+Alicante" },
+    { nombre: "Los 3 Carnalitos", cat: "mexicano", zona: "Downtown", tipo: "🌮 Traditional Taquería", lat: 38.3444, lng: -0.4867, desc: "Juicy birria tacos with spiced dipping broth and authentic flavors.", url: "Los+3+Carnalitos+Alicante" },
+    { nombre: "Kazoku", cat: "japones", zona: "San Juan Beach", tipo: "🍣 Sushi & Fusion", lat: 38.3625, lng: -0.4442, desc: "Fresh catch, specialty rolls, and balanced menus on Av. de la Condomina.", url: "Restaurante+Kazoku+Alicante" },
+    { nombre: "Ramen Tatsunoya", cat: "japones", zona: "San Juan Beach", tipo: "🍜 Traditional Ramen", lat: 38.3698, lng: -0.4320, desc: "Comforting noodle bowls with rich homemade broths on Historiador Vicente Ramos.", url: "Ramen+Tatsunoya+Alicante" },
+    { nombre: "Wasabi San Juan", cat: "japones", zona: "San Juan Beach", tipo: "🍣 Sushi & Rolls", lat: 38.3705, lng: -0.4290, desc: "Fusion rolls, fresh tartares, and hot Japanese dishes in the Fontana district.", url: "Wasabi+San+Juan+Alicante" },
+    { nombre: "Restaurante See U", cat: "japones", zona: "Downtown", tipo: "🍣 À la Carte Buffet", lat: 38.3389, lng: -0.4935, desc: "Modern Japanese buffet ordered via tablet with fresh table service.", url: "Restaurante+See+U+Alicante" },
+    { nombre: "Daikichi", cat: "japones", zona: "Downtown", tipo: "🍣 Classic Japanese", lat: 38.3469, lng: -0.4893, desc: "The pioneer of traditional sushi and classic Japanese dining in Alicante.", url: "Restaurant+Japones+Daikichi+Alicante" },
+    { nombre: "Sushi Hajimi", cat: "japones", zona: "Downtown", tipo: "🍣 Sushi & Makis", lat: 38.3421, lng: -0.4912, desc: "Fresh sushi varieties at great prices near Alicante railway station.", url: "Restaurante+Sushi+Hajimi+Alicante" },
+    { nombre: "Natsu Ramen", cat: "japones", zona: "Downtown", tipo: "🍜 Ramen Bar", lat: 38.3427, lng: -0.4915, desc: "Japanese tavern specializing in authentic Tonkotsu broth and artisan noodles.", url: "Natsu+Ramen+Alicante" },
+    { nombre: "Ramen Toyaki", cat: "japones", zona: "Downtown", tipo: "🍜 Ramen & Skewers", lat: 38.3453, lng: -0.4868, desc: "Ramen and yakitori skewers located on vibrant Calle Castaños.", url: "Ramen+Toyaki+Alicante" },
+    { nombre: "Metoo Sushi Buffet", cat: "japones", zona: "Princesa Mercedes", tipo: "🍣 À la Carte Buffet", lat: 38.3456, lng: -0.5049, desc: "Spacious Asian buffet ordered via tablet on Av. Dr. Jiménez Díaz.", url: "Metoo+Sushi+Buffet+Alicante" },
+    { nombre: "Metoo Sushi Garden", cat: "japones", zona: "Gran Vía", tipo: "🍣 À la Carte Buffet", lat: 38.3619, lng: -0.4744, desc: "Generous Japanese buffet with outdoor garden terrace on Av. Antonio Ramos Carratalá.", url: "Metoo+Sushi+Garden+Alicante" },
+    { nombre: "Casa Julio", cat: "tapas", zona: "San Juan Beach", tipo: "🍢 Paella & Seafood", lat: 38.3758, lng: -0.4131, desc: "Firewood paellas and fresh seafood directly on the beach promenade.", url: "Restaurante+Casa+Julio+Alicante" },
+    { nombre: "Casa Domingo", cat: "tapas", zona: "San Juan Beach", tipo: "🍢 Rice Dishes & Tapas", lat: 38.3745, lng: -0.4140, desc: "Iconic restaurant right by the beach, renowned for traditional paellas.", url: "Restaurante+Casa+Domingo+Alicante" },
+    { nombre: "Pizzeria Nonna Nina", cat: "italiano", zona: "Downtown", tipo: "🍕 Neapolitan Pizza & Pasta", lat: 38.3426, lng: -0.4913, desc: "Authentic Neapolitan pizza and fresh pasta next to Plaza de Séneca.", url: "Da+Nonna+Nina+Alicante" },
+    { nombre: "Che Ragazzi", cat: "italiano", zona: "Downtown", tipo: "🍕 Italian Cuisine & Pasta", lat: 38.3463, lng: -0.4842, desc: "Genuine Italian specialties and homemade pasta in central Rambla Méndez Núñez.", url: "Restaurante+Che+Ragazzi+Alicante" },
+    { nombre: "Asika Alicante", cat: "japones", zona: "San Juan Beach", tipo: "🍣 Asian Buffet & Sushi", lat: 38.3687, lng: -0.4354, desc: "À la carte Asian buffet next to Alicante Golf course.", url: "Asika+Alicante" },
+    { nombre: "Kebap Krew", cat: "kebab", zona: "San Juan Beach", tipo: "🥙 Berlin Gourmet Kebab", lat: 38.3644, lng: -0.4287, desc: "Artisan Berlin-style kebab with premium meat and freshly baked bread on Calle Tridente.", url: "Kebap+Krew+Alicante" },
+    { nombre: "Kebap Master K", cat: "kebab", zona: "San Juan Beach", tipo: "🥙 Artisan Döner & Dürüm", lat: 38.3662, lng: -0.4298, desc: "Carefully seasoned kebabs and fresh vegetables on Calle Periodista Asunción Valdés.", url: "Master+K+Alicante" },
+    { nombre: "El Bodegón", cat: "tapas", zona: "San Juan Beach", tipo: "🍢 Tavern & Local Tapas", lat: 38.3646, lng: -0.4290, desc: "Classic tapas, cured meats, and neighborhood atmosphere on Calle Tridente.", url: "El+Bodegon+Alicante+Tridente" },
+    { nombre: "Puerto Madero Grill & Drinks", cat: "carnes", zona: "Albufereta", tipo: "🥩 Argentine Steakhouse", lat: 38.3662, lng: -0.4419, desc: "Authentic grilled meats, aged steaks, and homemade empanadas on Calle del Olimpo.", url: "Puerto+Madero+Grill+Drinks+Alicante" },
+    { nombre: "Nou Manolín", cat: "tapas", zona: "Downtown", tipo: "🍢 Iconic Gourmet Tapas", lat: 38.3456, lng: -0.4868, desc: "A national culinary landmark in Spain. Extraordinary seafood and gourmet bar.", url: "Nou+Manolin+Alicante" },
+    { nombre: "Piri Piri", cat: "burger", zona: "Downtown", tipo: "🍗 Grilled Chicken & Street Food", lat: 38.3455, lng: -0.4850, desc: "Spiced chargrilled chicken and tasty street food in downtown Alicante.", url: "Piri+Piri+Alicante" },
+    { nombre: "Restaurante ConVistas", cat: "tapas", zona: "Downtown", tipo: "🍷 Rooftop & Mediterranean", lat: 38.3438, lng: -0.4839, desc: "Panoramic bay views from the 26th floor of iconic Hotel Gran Sol.", url: "Restaurante+ConVistas+Alicante" },
+    { nombre: "Cervecería La Gamba", cat: "tapas", zona: "San Juan Beach", tipo: "🍢 Seafood & Tapas", lat: 38.3631, lng: -0.4385, desc: "Fresh seafood, cold beer, and montaditos at Glorieta Sergio Cardell.", url: "Cerveceria+La+Gamba+Alicante" },
+    { nombre: "Restaurante Ru Yi", cat: "asiatico", zona: "Downtown", tipo: "🥢 Traditional Chinese", lat: 38.3432, lng: -0.4907, desc: "Handmade noodles and authentic dim sum on Calle Profesor Manuel Sala.", url: "Restaurante+Ru+Yi+Alicante" },
+    { nombre: "Los Troncos Albufereta", cat: "carnes", zona: "Albufereta", tipo: "🥩 Argentine Steakhouse", lat: 38.3659, lng: -0.4431, desc: "Seaside Argentine grill: wood-fired cuts and dedicated gluten-free options.", url: "Restaurante+Asador+Los+Troncos+Alicante" },
+    { nombre: "Los Troncos Playa San Juan", cat: "carnes", zona: "San Juan Beach", tipo: "🥩 Argentine Steakhouse", lat: 38.3753, lng: -0.4168, desc: "Modern grill in PAU 5: grilled steaks, empanadas, and a lovely terrace.", url: "Restaurante+Los+Troncos+Playa+Alicante" }
+  ];
+
+  let mapRestaurantes;
+  let allMarkers = [];
+
+  function initAlicanteMap() {
+    const mapElement = document.getElementById('alicanteMap');
+    if (!mapElement) return;
+
+    mapRestaurantes = L.map('alicanteMap', { scrollWheelZoom: false }).setView([38.3580, -0.4580], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap',
+      maxZoom: 19
+    }).addTo(mapRestaurantes);
+
+    restaurantes.forEach(item => {
+      let pinClass = "pin-tapas";
+      let iconEmoji = "🍢";
+
+      if (item.cat === 'burger') {
+        pinClass = "pin-burger";
+        iconEmoji = "🍔";
+      } else if (item.cat === 'mexicano') {
+        pinClass = "pin-mex";
+        iconEmoji = "🌮";
+      } else if (item.cat === 'japones') {
+        pinClass = "pin-japon";
+        iconEmoji = item.tipo.includes("Ramen") ? "🍜" : "🍣";
+      } else if (item.cat === 'italiano') {
+        pinClass = "pin-italiano";
+        iconEmoji = "🍕";
+      } else if (item.cat === 'kebab') {
+        pinClass = "pin-kebab";
+        iconEmoji = "🥙";
+      } else if (item.cat === 'carnes') {
+        pinClass = "pin-carnes";
+        iconEmoji = "🥩";
+      } else if (item.cat === 'asiatico') {
+        pinClass = "pin-asiatico";
+        iconEmoji = "🥢";
+      }
+
+      const customIcon = L.divIcon({
+        className: 'custom-leaflet-marker',
+        html: `<div class="custom-pin ${pinClass}" style="width: 34px; height: 34px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-size:16px;">${iconEmoji}</div>`,
+        iconSize: [34, 34],
+        iconAnchor: [17, 17],
+        popupAnchor: [0, -18]
+      });
+
+      const popupContent = `
+        <div style="font-family: 'Montserrat', sans-serif; padding: 6px 8px; max-width: 230px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+            <span style="font-size: 10px; font-weight: bold; text-transform: uppercase; color: #6a764a; letter-spacing: 0.05em;">${item.tipo}</span>
+            <span style="font-size: 9px; background: #ebede2; color: #383e2b; padding: 2px 6px; border-radius: 6px; font-weight: 600;">${item.zona}</span>
+          </div>
+          <h4 style="font-family: 'Cinzel Decorative', serif; font-size: 14px; font-weight: bold; color: #1d2116; margin: 3px 0 6px 0;">${item.nombre}</h4>
+          <p style="font-family: 'Cormorant Garamond', serif; font-size: 14px; color: #434b31; line-height: 1.25; margin-bottom: 8px;">${item.desc}</p>
+          <a href="https://maps.google.com/?q=${item.url}" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; text-align: center; background: #383e2b; color: #f4e5b8; font-size: 11px; font-weight: 600; padding: 6px 0; border-radius: 8px; text-decoration: none;">
+            Get Directions ↗
+          </a>
+        </div>
+      `;
+
+      const marker = L.marker([item.lat, item.lng], { icon: customIcon }).bindPopup(popupContent).addTo(mapRestaurantes);
+      marker.category = item.cat;
+      allMarkers.push(marker);
+    });
+  }
+
+  function filterMap(selectedCategory, clickedBtn) {
+    const buttons = document.querySelectorAll('#mapFilters .filter-btn');
+    buttons.forEach(btn => {
+      btn.className = "filter-btn px-4 py-1.5 rounded-full text-olive-900 bg-olive-100 hover:bg-olive-200 transition border border-olive-300";
+    });
+    clickedBtn.className = "filter-btn px-4 py-1.5 rounded-full bg-olive-900 text-gold font-bold transition shadow-sm border border-gold/40";
+
+    allMarkers.forEach(marker => {
+      if (selectedCategory === 'todos' || marker.category === selectedCategory) {
+        mapRestaurantes.addLayer(marker);
+      } else {
+        mapRestaurantes.removeLayer(marker);
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    personalizarInvitacion();
+    initAlicanteMap();
+  });
+</script>
+</body>
+</html>
