@@ -1094,7 +1094,7 @@
   let currentGuestId = "general";
   let currentGuestData = null;
 
-  // Lector de parámetros URL universal
+ // Lector de parámetros URL universal
   function obtenerParametroInvitado() {
     try {
       let urlParams = new URLSearchParams(window.location.search);
@@ -1118,6 +1118,13 @@
   function personalizarInvitacion() {
     const guestKey = obtenerParametroInvitado();
 
+    // 👉 SOLO SE AÑADE ESTO (si son Gretchen & Jan, abre en.html):
+    if (guestKey === "gretchen-jan" || guestKey === "gretchen" || guestKey === "jan") {
+      window.location.replace("en.html?inv=" + guestKey);
+      return;
+    }
+
+    // A partir de aquí sigue EXACTAMENTE TODO lo que ya tenías:
     if (guestKey && INVITADOS[guestKey]) {
       currentGuestId = guestKey;
       currentGuestData = INVITADOS[guestKey];
@@ -1143,7 +1150,6 @@
       renderAttendanceOptions({ tipo: "individual_plus", nombre: "" });
     }
   }
-
   // Renderizar las opciones exactas según el tipo de invitado
   function renderAttendanceOptions(gData) {
     const container = document.getElementById('attendanceOptionsContainer');
