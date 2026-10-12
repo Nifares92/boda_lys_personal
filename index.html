@@ -269,7 +269,7 @@
       <a href="#rsvp" class="bg-gold/90 hover:bg-gold text-olive-950 px-3.5 py-1.5 rounded-full font-semibold transition-all shadow-sm">Confirmar Asistencia</a>
       <a href="#guia" class="hover:text-gold transition-colors">Dónde Comer</a>
       <a href="#faq" class="hover:text-gold transition-colors">Dudas</a>
-      <a href="#regalo" class="hover:text-gold transition-colors">Regalo</a>
+      <a href="#regalo" id="navLinkRegalo" class="hover:text-gold transition-colors">Regalo</a>
     </div>
 
     <button id="mobileMenuBtn" aria-label="Abrir menú" class="md:hidden text-gold focus:outline-none p-2">
@@ -286,7 +286,7 @@
     <a href="#rsvp" class="nav-mobile-link py-1 text-gold font-bold">Confirmar Asistencia (RSVP)</a>
     <a href="#guia" class="nav-mobile-link py-1 hover:text-gold">Dónde Comer en Alicante</a>
     <a href="#faq" class="nav-mobile-link py-1 hover:text-gold">Preguntas y Dudas</a>
-    <a href="#regalo" class="nav-mobile-link py-1 hover:text-gold">Regalo de Boda</a>
+    <a href="#regalo" id="navMobileLinkRegalo" class="nav-mobile-link py-1 hover:text-gold">Regalo de Boda</a>
   </div>
 </nav>
 
@@ -821,6 +821,7 @@
   </div>
 </section>
 
+<!-- SECCIÓN REGALO -->
 <section id="regalo" class="py-24 px-4 md:px-8 bg-parchment-pattern relative">
   <div class="max-w-3xl mx-auto text-center">
     <span class="font-serif italic text-gold-dark text-lg md:text-xl block mb-2">Un detalle para nuestro futuro</span>
@@ -979,6 +980,11 @@
 
     "padres-elena": { tipo: "pareja", p1: "Mari Carmen", p2: "José Manuel", nombre: "Mari Carmen & José Manuel", saludo: "Queridos Mari Carmen y José Manuel", parte: "Serafín" },
 
+    // Irene y Daniel (con ocultación de regalo y cuenta bancaria)
+    "irene-daniel": { tipo: "pareja", p1: "Irene", p2: "Daniel", nombre: "Irene & Daniel", saludo: "Queridos Irene y Daniel", parte: "Serafín", ocultarRegalo: true },
+    "irene": { tipo: "pareja", p1: "Irene", p2: "Daniel", nombre: "Irene & Daniel", saludo: "Queridos Irene y Daniel", parte: "Serafín", ocultarRegalo: true },
+    "daniel": { tipo: "pareja", p1: "Irene", p2: "Daniel", nombre: "Irene & Daniel", saludo: "Queridos Irene y Daniel", parte: "Serafín", ocultarRegalo: true },
+
     // === INDIVIDUAL + ACOMPAÑANTE (SERAFÍN) ===
     "isa-buendia": { tipo: "individual_plus", nombre: "Isa Buendía", saludo: "Estimada Isa Buendía", parte: "Serafín", acompananteNombre: "Acompañante Isa" },
     "elena": { tipo: "individual_plus", nombre: "Elena", saludo: "Estimada Elena", parte: "Serafín", acompananteNombre: "Novio Elena" },
@@ -1063,7 +1069,6 @@
     "carlos-espinilla": { tipo: "individual_plus", nombre: "Carlos Espinilla", saludo: "Estimado Carlos", parte: "Lestter", acompananteNombre: "Acompañante Carlos" },
     "ana-alameda": { tipo: "individual_plus", nombre: "Ana Alameda", saludo: "Estimada Ana Alameda", parte: "Lestter", acompananteNombre: "Acompañante Ana" },
     "ana-a": { tipo: "individual_plus", nombre: "Ana Alameda", saludo: "Estimada Ana Alameda", parte: "Lestter", acompananteNombre: "Acompañante Ana" },
-    // NUEVA INVITADA AÑADIDA: LUZ (Lestter - con acompañante)
     "luz": { tipo: "individual_plus", nombre: "Luz", saludo: "Estimada Luz", parte: "Lestter", acompananteNombre: "Acompañante Luz" },
 
     // === INDIVIDUALES ESTRICTOS (LESTTER) ===
@@ -1137,6 +1142,18 @@
         fullNameInput.value = currentGuestData.nombre;
         fullNameInput.readOnly = true;
         fullNameInput.classList.add('bg-olive-200/50', 'text-olive-900', 'cursor-not-allowed');
+      }
+
+      // Ocultar sección de regalo y enlaces si está configurado para el invitado
+      if (currentGuestData.ocultarRegalo) {
+        const regaloSec = document.getElementById('regalo');
+        if (regaloSec) regaloSec.style.display = 'none';
+
+        const navRegalo = document.getElementById('navLinkRegalo');
+        if (navRegalo) navRegalo.style.display = 'none';
+
+        const navMobileRegalo = document.getElementById('navMobileLinkRegalo');
+        if (navMobileRegalo) navMobileRegalo.style.display = 'none';
       }
 
       renderAttendanceOptions(currentGuestData);
@@ -1389,9 +1406,9 @@
 
     if (difference > 0) {
       const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60));
+      const minutes = Math.floor((difference % (1000 * 60)) / 1000);
+      const seconds = Math.floor((difference % 1000) / 1000);
 
       const dEl = document.getElementById('countdownDays');
       const hEl = document.getElementById('countdownHours');
